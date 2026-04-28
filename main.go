@@ -1,10 +1,10 @@
 package main
 
 import (
-    //"net/http"
+    "net/http"
     //"chess-project/backend/idk"
     "chess-project/backend/board"
-    //"fmt"
+    "fmt"
 )
 
 const (
@@ -12,31 +12,40 @@ const (
 )
 
 func main() {
-    b := [][]string {
-        {"Color: White"},
-        {"rook", "horse", "bishop", "queen", "king", "bishop", "horse", "rook"},
-        {"pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn"},
-        {"...", "...", "...", "...", "...", "...", "...", "..."},
-        {"...", "...", "...", "...", "...", "...", "...", "..."},
-        {"...", "...", "...", "...", "...", "...", "...", "..."},
-        {"...", "...", "...", "...", "...", "...", "...", "..."},
-        {"rook", "horse", "bishop", "queen", "king", "bishop", "horse", "rook"},
-        {"pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn"},
-        {"Color: Black"},
-    }
+    //~ b := [][]string {
+        //~ {"Color: White"},
+        //~ {"rook", "horse", "bishop", "queen", "king", "bishop", "horse", "rook"},
+        //~ {"pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn"},
+        //~ {"...", "...", "...", "...", "...", "...", "...", "..."},
+        //~ {"...", "...", "...", "...", "...", "...", "...", "..."},
+        //~ {"...", "...", "...", "...", "...", "...", "...", "..."},
+        //~ {"...", "...", "...", "...", "...", "...", "...", "..."},
+        //~ {"rook", "horse", "bishop", "queen", "king", "bishop", "horse", "rook"},
+        //~ {"pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn"},
+        //~ {"Color: Black"},
+    //~ }
 
-    rows := make([][]string, BOARDSIZE)
+    //rows := make([][]string, BOARDSIZE)
+
+
 
     //~ for cols := range rows {
         //~ cols[rows] = make([]int, 8)
     //~ }
 
-    for i := 0; i < BOARDSIZE; i++ {
-        rows[i] = make([]string, BOARDSIZE)
-    }
 
-    board.CreateBoard2(b)
-    board.CreateBoard2(rows)
+
+    //~ for i := 0; i < BOARDSIZE; i++ {
+        //~ rows[i] = make([]string, BOARDSIZE)
+    //~ }
+
+
+    http.HandleFunc("/", board.CreateBoard2)
+    fmt.Println("My App is running on: http://localhost:8080")
+    http.ListenAndServe(":8080", nil)
+
+    //board.CreateBoard2("/board", b)
+    //board.CreateBoard2("/board2", rows)
     
     //~ http.HandleFunc("/", idk.Init)
     //~ fmt.Println("My App is running on: http://localhost:8080")
