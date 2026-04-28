@@ -54,12 +54,26 @@ Have a look at my kanban board: https://github.com/users/KyleKinsella/projects/5
 - Go
 
 ## Frontend
+- JavaScript
 - React
 - HTML
 - CSS
 
 ## Version Control
 - Git
+
+# Why Go ?
+I chose to use Go for this project mainly because I really enjoy coding in Go and Go code is very easy to read and understand. But another reason I chose Go is for the concurreny aspect of Go. We all know the basics of chess and one of the most important things is raw speed for chess and Go's concurrency model is very good, so that is another reason to why I chose Go.
+
+    For example,  
+    Chess is a 2d array with Rows and Cols so for a lot of the project i'm going to be iterating twice like this:
+        for i := 0; i < ROWS; i++ {
+            for j := 0; j < COLS; j++  {
+                // process here...
+            }
+        }
+
+        so if I do this sequentially this will be quite slow but if I use Go's builtin Concurrency features, such as: Goroutines, Channels, Waitgroups, etc, I will be able to process the chess game a good bit faster!
 
 # Might happen or might not
 Have a database either, MySql, NoSql or possibly Redis, if I don't use a database, I might use local-storage. But as the project is early doors, this won't happen for a while.
