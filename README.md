@@ -19,9 +19,7 @@ If I'm forgetting anything these features will also more than likly be added in 
     
 # Tech Stack
 ## Backend
-- Java
-- Spring Boot
-- Postman - for testing the REST API endpoints
+- Go
 
 ## Frontend
 - React
