@@ -42,7 +42,7 @@ This board was printed to my terminal
 
 Now I've put the board on a endpoint as JSON and I can just pull this data down and map over it via React
 
-![alt text](https://github.com/KyleKinsella/Chess-Game-Engine/blob/main/images/Screenshot%20From%202026-04-28%2019-26-28.png)
+![Chess Project Kanban Board](https://github.com/KyleKinsella/Chess-Game-Engine/blob/main/images/Screenshot%20From%202026-04-28%2019-26-28.png)
 
 # Kanban Board
 As I am building this project I am going to be using a kanban board to keep track of what I need to do and what has been complete and so much more!
@@ -54,21 +54,25 @@ Have a look at my kanban board: https://github.com/users/KyleKinsella/projects/5
 - Go
 
 ## Frontend
-- JavaScript
-- React
 - HTML
 - CSS
+- JavaScript
+- React
 
 ## Version Control
 - Git
 
 # Why Go ?
-I chose to use Go for this project mainly because I really enjoy coding in Go and Go code is very easy to read and understand. But another reason I chose Go is for the concurreny aspect of Go. We all know the basics of chess and one of the most important things is raw speed for chess and Go's concurrency model is very good, so that is another reason to why I chose Go.
+I chose to use Go for this project mainly because I really enjoy coding in Go and Go code is very easy to read and understand.
+
+But another reason I chose Go is for the concurreny aspect of Go.
+
+We all know the basics of chess and one of the most important things is raw speed for chess and Go's concurrency model is very good, so that is another reason to why I chose Go.
 
     For example,  
     Chess is a 2d array with Rows and Cols so for a lot of the project i'm going to be iterating twice like this:
         for i := 0; i < ROWS; i++ {
-            for j := 0; j < COLS; j++  {
+            for j := 0; j < COLS; j++ {
                 // process here...
             }
         }
