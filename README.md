@@ -16,6 +16,20 @@ Most of the core features of chess... such as:
 - winning, lossing, drawing - game over...
 
 If I'm forgetting anything these features will also more than likly be added in also!
+
+# Have a look at the project so far:
+
+kylekinsella@fedora:~/Documents/Chess-Game-Engine$ go run main.go
+My App is running on: http://localhost:8080
+[rook| horse| bishop| queen| king| bishop| horse| rook|]
+[pawn| pawn| pawn| pawn| pawn| pawn| pawn| pawn| pawn|]
+[______| ______| ______| ______| ______| ______| ______| ______|]
+[______| ______| ______| ______| ______| ______| ______| ______|]
+[______| ______| ______| ______| ______| ______| ______| ______|]
+[______| ______| ______| ______| ______| ______| ______| ______|]
+[pawn| pawn| pawn| pawn| pawn| pawn| pawn| pawn| pawn|]
+[rook| horse| bishop| queen| king| bishop| horse| rook|]
+
     
 # Tech Stack
 ## Backend

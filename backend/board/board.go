@@ -1,7 +1,7 @@
 package board
 
 import (
-    //"fmt"
+    "fmt"
     "net/http"
     "encoding/json"
 )
@@ -10,26 +10,36 @@ import (
     //~ BOARD = [...]string{}
 //~ )
 
-var (
-    board [][]string
-)
+//~ var (
+    //~ board [][]string
+//~ )
 
 const (
-    ROWS = 9
-    COLS = 9
+    //ROWS = 9
+    //COLS = 9
+
+    BAR = "|"    
+    ROOK = "rook" + BAR
+    HORSE = "horse" + BAR
+    BISHOP = "bishop" + BAR
+    QUEEN = "queen" + BAR
+    KING = "king" + BAR
+    PAWN = "pawn" + BAR
+    FREE_SPOT = "______" + BAR
 )
 
 var b = [][]string {
-        {"Color: White"},
-        {"rook", "horse", "bishop", "queen", "king", "bishop", "horse", "rook"},
-        {"pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn"},
-        {"...", "...", "...", "...", "...", "...", "...", "..."},
-        {"...", "...", "...", "...", "...", "...", "...", "..."},
-        {"...", "...", "...", "...", "...", "...", "...", "..."},
-        {"...", "...", "...", "...", "...", "...", "...", "..."},
-        {"pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn"},
-        {"rook", "horse", "bishop", "queen", "king", "bishop", "horse", "rook"},
-        {"Color: Black"},
+        //{"Color: White"},
+        {ROOK, HORSE, BISHOP, QUEEN, KING, BISHOP, HORSE, ROOK},
+        {PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN},
+        {FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT},
+        {FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT},
+        {FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT},
+        {FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT, FREE_SPOT},
+        {PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN, PAWN},
+        {ROOK, HORSE, BISHOP, QUEEN, KING, BISHOP, HORSE, ROOK},
+        //{"a ", " b ", " c ", " d ", " e ", " f ", " g ", " h"},
+        //{"Color: Black"},
     }
 
 //~ type Board struct {
@@ -55,42 +65,46 @@ var b = [][]string {
 //~ }
 
 // create an empty board
-func initBoard() {
-}
+//~ func initBoard() {
+//~ }
 
 // update each part of the board with each piece 
-func createBoard() {
-}
+//~ func createBoard() {
+//~ }
 
 // this will be the board for the start of the game (this is where the json will be encoded and put on an endpoint for my react to pull down!)
 //~ func board() {
 //~ }
 
-func printBoard(w http.ResponseWriter) { //, board [][]string) {
+//func printBoard(w http.ResponseWriter) { //, board [][]string) {
 
-    json.NewEncoder(w).Encode(b)
+    //json.NewEncoder(w).Encode(b)
 
     //~ for _, n := range board {
         //~ fmt.Println(n)
     //~ }
-} 
+//} 
 
 func CreateBoard2(w http.ResponseWriter, r *http.Request) {
     //var board [][]int
 
-    //~ for _, n := range board {
-        //~ fmt.Println(n)
-    //~ }
+    for _, n := range b {
+        fmt.Println(n)
+    }
     
     //bb := printBoard(w, b)
 
     w.Header().Set("Access-Control-Allow-Origin", "*")
     w.Header().Set("Content-Type", "application/json")
 
+    json.NewEncoder(w).Encode(b)    
 
-    if len(board) == 0 {
-        json.NewEncoder(w).Encode(b)    
-    }
+
+    //~ if len(board) == 0 {
+        //~ json.NewEncoder(w).Encode(b)    
+    //~ }
+
+            //json.NewEncoder(w).Encode(b)    
 
     //~ json.NewEncoder(w).Encode()     //(printBoard(w, b))
     

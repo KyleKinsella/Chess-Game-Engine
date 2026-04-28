@@ -1,4 +1,13 @@
 import { useState, useEffect } from "react";
+//import "./main.css"
+
+const countDown = (max) => {
+    var data = [];
+    for (var i = max; i > 0; i--) {
+        data.push(i);
+        console.log(i);
+    }
+}
 
 function App() {
     const [board, setBoard] = useState([]);
@@ -14,14 +23,14 @@ function App() {
     return (
         <div>
           {board.map((b, i) => (       
-            <div key={i}>
+            <div key={i} className="board">
                 <>
-                    <div>
-                        <p>{b + ""}</p>
+                    <div className="square">
+                        <p>{b}</p>
                     </div>
                 </>
             </div>
-          ))}       
+          ))}
         </div>
     )
 }
