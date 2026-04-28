@@ -19,9 +19,10 @@ If I'm forgetting anything these features will also more than likly be added in 
 
 # Have a look at the project so far:
 
-kylekinsella@fedora:~/Documents/Chess-Game-Engine$ go run main.go
+This board was printed to my terminal 
 
-    This board was printed to my terminal 
+    kylekinsella@fedora:~/Documents/Chess-Game-Engine$ go run main.go
+
     [rook| horse| bishop| queen| king| bishop| horse| rook|]
 
     [pawn| pawn| pawn| pawn| pawn| pawn| pawn| pawn| pawn|]
@@ -37,6 +38,7 @@ kylekinsella@fedora:~/Documents/Chess-Game-Engine$ go run main.go
     [pawn| pawn| pawn| pawn| pawn| pawn| pawn| pawn| pawn|]
 
     [rook| horse| bishop| queen| king| bishop| horse| rook|]
+
 
 Now I've put the board on a endpoint as JSON and I can just pull this data down and map over it via React
 
