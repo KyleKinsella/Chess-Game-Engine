@@ -39,6 +39,8 @@ My App is running on: http://localhost:8080
 
 [rook| horse| bishop| queen| king| bishop| horse| rook|]
 
+
+![alt text](https://github.com/KyleKinsella/Chess-Game-Engine/blob/main/images/Screenshot%20From%202026-04-28%2019-26-28.png)
     
 # Tech Stack
 ## Backend
