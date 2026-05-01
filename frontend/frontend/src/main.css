@@ -1,14 +1,50 @@
-.square {
+.square, #piece {
+    /*
     width: 130px;
     height: 130px;
     background: #cd5454;
-    display: block;
+    display: grid;
+    */
+
+    /*
     margin-left: auto;
     margin-right: auto;
+    */
+
+    
+    /*
+    text-align: center;
+    font-size: 25px;
+    */
+    
 }
 
+/*
 .board {
-    /*display: block;*/
+    display: block;
    margin: auto;
    width: 500px;
+}
+*/
+
+
+/* .................................................. */
+
+.chessboard {
+  display: grid;
+  grid-template-columns: repeat(8, 100px);
+  grid-template-rows: repeat(8, 100px);
+  width: 800px;
+}
+
+.white {
+  background-color: #f0d9b5;
+  width: 100px;
+  height: 100px;
+}
+
+.black {
+  background-color: #b58863;
+  width: 100px;
+  height: 100px;
 }
