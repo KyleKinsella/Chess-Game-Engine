@@ -1,0 +1,2 @@
+## This GitHub Actions WorkFlow is for building the Front End
+## Front End build will utilise Docker to create a build artifiact
