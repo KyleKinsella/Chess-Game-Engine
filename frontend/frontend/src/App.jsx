@@ -1,11 +1,34 @@
-//import Board from "./board/Board.jsx";
 import Utils from "./utils.jsx";
-import { initGameBoard } from "./board/Board.jsx";
-import { movePiece } from "./board/Board.jsx";
+import { initGameBoard, movePiece, resetBoard } from "./board/Board.jsx";
 
 function App() {
-	const b = initGameBoard(Utils.board, Utils.pieces, Utils.ROWS, Utils.COLS);
-	var move = movePiece(b, 0, 1, 2, 2);
+	const rows = Utils.ROWS;
+	const cols = Utils.COLS;
+	
+	const b = initGameBoard(Utils.board, Utils.pieces, rows, cols);
+
+	// i know this is hard-coded... we need to change / update this... // 
+	var pieceToMove = Utils.PAWN;
+	
+	var pawn1 = movePiece(b, pieceToMove, 1, 0, 2, 0);
+	var pawn2 = movePiece(b, pieceToMove, 1, 1, 2, 1);
+	var pawn3 = movePiece(b, pieceToMove, 1, 2, 2, 2);
+	var pawn4 = movePiece(b, pieceToMove, 1, 3, 2, 3);
+	var pawn5 = movePiece(b, pieceToMove, 1, 4, 2, 4);
+	var pawn6 = movePiece(b, pieceToMove, 1, 5, 2, 5);
+	var pawn7 = movePiece(b, pieceToMove, 1, 6, 2, 6);
+	var pawn8 = movePiece(b, pieceToMove, 1, 7, 2, 7);
+	
+	var pawn9 = movePiece(b, pieceToMove, 6, 0, 5, 0);
+	var pawn10 = movePiece(b, pieceToMove, 6, 1, 5, 1);
+	var pawn11 = movePiece(b, pieceToMove, 6, 2, 5, 2);
+	var pawn12 = movePiece(b, pieceToMove, 6, 3, 5, 3);
+	var pawn13 = movePiece(b, pieceToMove, 6, 4, 5, 4);
+	var pawn14 = movePiece(b, pieceToMove, 6, 5, 5, 5);
+	var pawn15 = movePiece(b, pieceToMove, 6, 6, 5, 6);
+	var pawn16 = movePiece(b, pieceToMove, 6, 7, 5, 7);
+	
+	var reset = resetBoard(b);
 	
     return (  
 		<div>
@@ -16,10 +39,6 @@ function App() {
 					))}
 				</div>
 			))}       
-		
-			{/*
-			<Board />	
-			*/}
 		</div>
 	)
 }

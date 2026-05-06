@@ -1,5 +1,4 @@
 import Utils from "../utils.jsx";
-//import { initGameBoard } from "../board/Board.jsx";
 
 // TODO: have - "a,b,c,d,e,f,g,h" at the bottom of the board and at the left hand side of the board have - "8 7 6 5 4 3 2 1"
 export function initGameBoard(board, pieces, rows, cols) {
@@ -26,8 +25,32 @@ export function initGameBoard(board, pieces, rows, cols) {
     return board;
 } 
 
+export function resetBoard(board) {
+	return initGameBoard(board, Utils.pieces, Utils.ROWS, Utils.COLS);
+}
+
 // TODO: this function moves any piece anywhere on the board - need to make this more strict!
-export function movePiece(board, oldRow, oldCol, newRow, newCol) {
+export function movePiece(board, piece, oldRow, oldCol, newRow, newCol) { //piece	
+	switch (piece) {
+		case Utils.PAWN:
+			break;
+			
+		case Utils.ROOK:
+			break;
+			
+		case Utils.KNIGHT:
+			break;
+			
+		case Utils.BISHOP:
+			break;
+			
+		case Utils.QUEEN:
+			break;
+			
+		case Utils.KING:
+			break;
+	}
+		
 	const b = board[oldRow][oldCol];
 	
 	board[newRow][newCol] = b;
