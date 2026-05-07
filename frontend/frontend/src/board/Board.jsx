@@ -30,29 +30,56 @@ export function resetBoard(board) {
 }
 
 // TODO: this function moves any piece anywhere on the board - need to make this more strict!
-export function movePiece(board, piece, oldRow, oldCol, newRow, newCol) { //piece	
-	switch (piece) {
-		case Utils.PAWN:
-			break;
+//~ export function movePiece(board, piece, oldRow, oldCol, newRow, newCol) { //piece	
+	//~ switch (piece) {
+		//~ case Utils.PAWN:
+			//~ break;
 			
-		case Utils.ROOK:
-			break;
+		//~ case Utils.ROOK:
+			//~ break;
 			
-		case Utils.KNIGHT:
-			break;
+		//~ case Utils.KNIGHT:
+			//~ break;
 			
-		case Utils.BISHOP:
-			break;
+		//~ case Utils.BISHOP:
+			//~ break;
 			
-		case Utils.QUEEN:
-			break;
+		//~ case Utils.QUEEN:
+			//~ break;
 			
-		case Utils.KING:
-			break;
-	}
+		//~ case Utils.KING:
+			//~ break;
+	//~ }
 		
-	const b = board[oldRow][oldCol];
+	//~ const b = board[oldRow][oldCol];
 	
+	//~ board[newRow][newCol] = b;
+	//~ board[oldRow][oldCol] = Utils.freeSpace + " ";
+	
+	//~ return board;
+//~ }
+
+export function findPieceInBoard(board, pieceToFind) {
+	const pieces = [];
+	for (var i = 0; i < board.length; i++) {
+		for (var j = 0; j < board[i].length; j++) {			
+			if (board[i][j] === pieceToFind + " ") {
+				pieces.push([i, j]);
+			}
+		}
+	}
+	return pieces;
+}
+
+// need to add edge cases to this function... (kinda doing this: a2 -> a3)
+export function movePiece(board, oldLoc, newLoc) {		
+	const oldRow = oldLoc[0];
+	const oldCol = oldLoc[1];
+	
+	const newRow = newLoc[0];
+	const newCol = newLoc[1]; 
+	
+	const b = board[oldRow][oldCol];	
 	board[newRow][newCol] = b;
 	board[oldRow][oldCol] = Utils.freeSpace + " ";
 	
