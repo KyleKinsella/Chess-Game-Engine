@@ -29,36 +29,6 @@ export function resetBoard(board) {
 	return initGameBoard(board, Utils.pieces, Utils.ROWS, Utils.COLS);
 }
 
-// TODO: this function moves any piece anywhere on the board - need to make this more strict!
-//~ export function movePiece(board, piece, oldRow, oldCol, newRow, newCol) { //piece	
-	//~ switch (piece) {
-		//~ case Utils.PAWN:
-			//~ break;
-			
-		//~ case Utils.ROOK:
-			//~ break;
-			
-		//~ case Utils.KNIGHT:
-			//~ break;
-			
-		//~ case Utils.BISHOP:
-			//~ break;
-			
-		//~ case Utils.QUEEN:
-			//~ break;
-			
-		//~ case Utils.KING:
-			//~ break;
-	//~ }
-		
-	//~ const b = board[oldRow][oldCol];
-	
-	//~ board[newRow][newCol] = b;
-	//~ board[oldRow][oldCol] = Utils.freeSpace + " ";
-	
-	//~ return board;
-//~ }
-
 export function findPieceInBoard(board, pieceToFind) {
 	const pieces = [];
 	for (var i = 0; i < board.length; i++) {
@@ -71,7 +41,6 @@ export function findPieceInBoard(board, pieceToFind) {
 	return pieces;
 }
 
-// need to add edge cases to this function... (kinda doing this: a2 -> a3)
 export function movePiece(board, oldLoc, newLoc) {		
 	const oldRow = oldLoc[0];
 	const oldCol = oldLoc[1];
@@ -86,11 +55,58 @@ export function movePiece(board, oldLoc, newLoc) {
 	return board;
 }
 
-//~ function Board() {
-	//~ var board = initGameBoard(Utils.board, Utils.pieces, Utils.ROWS, Utils.COLS);
-	//~ var move = movePiece(board, 0, 1, 1, 3);
-	
-	//return move;
-//~ }
+// this is not being used as of right now, but it will be...
+export function pieceToProcess(board, oldPieceLoc, pieceType) {	
+	switch (pieceType) {
+		case Utils.ROOK:
+			break
+			
+		case Utils.KNIGHT:
+			return whereCanKnightMoveTo(board, oldPieceLoc);
+			//break;
+			
+		case Utils.BISHOP:
+			break;
+		
+		case Utils.QUEEN:
+			break;
+			
+		case Utils.KING:
+			break;
+			
+		case Utils.PAWN:
+			break;
+	}
+}
 
-//~ export default Board;
+export function whereCanKnightMoveTo(board, oldKnightLoc) {
+
+    const row = oldKnightLoc[0];
+    const col = oldKnightLoc[1];
+
+    const knightMoves = [
+        [-2, -1], // up 2, left 1
+        [-2,  1], // up 2, right 1
+        [-1, -2], // up 1, left 2
+        [-1, 2], // up 1, right 2
+        
+        [1, -2], // down 1, left 2
+        [1, 2], // down 1, right 2
+        [2, -1], // down 2, left 1
+        [2, 1] // down 2, right 1
+    ];
+
+    const legalMoves = [];
+
+    for (const move of knightMoves) {
+
+        const newRow = row + move[0];
+        const newCol = col + move[1];
+
+        if (newRow >= 0 && newRow < Utils.ROWS && newCol >= 0 && newCol < Utils.COLS) {
+            legalMoves.push([newRow, newCol]);
+        }
+    }
+
+	return legalMoves;
+}
