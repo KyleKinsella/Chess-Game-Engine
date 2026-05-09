@@ -25,6 +25,7 @@ export function initGameBoard(board, pieces, rows, cols) {
     return board;
 } 
 
+// will need later on in the project...
 export function resetBoard(board) {
 	return initGameBoard(board, Utils.pieces, Utils.ROWS, Utils.COLS);
 }
@@ -62,9 +63,8 @@ export function pieceToProcess(board, oldPieceLoc, pieceType) {
 			break
 			
 		case Utils.KNIGHT:
-			return whereCanKnightMoveTo(board, oldPieceLoc);
-			//break;
-			
+			break;
+						
 		case Utils.BISHOP:
 			break;
 		
@@ -77,36 +77,4 @@ export function pieceToProcess(board, oldPieceLoc, pieceType) {
 		case Utils.PAWN:
 			break;
 	}
-}
-
-export function whereCanKnightMoveTo(board, oldKnightLoc) {
-
-    const row = oldKnightLoc[0];
-    const col = oldKnightLoc[1];
-
-    const knightMoves = [
-        [-2, -1], // up 2, left 1
-        [-2,  1], // up 2, right 1
-        [-1, -2], // up 1, left 2
-        [-1, 2], // up 1, right 2
-        
-        [1, -2], // down 1, left 2
-        [1, 2], // down 1, right 2
-        [2, -1], // down 2, left 1
-        [2, 1] // down 2, right 1
-    ];
-
-    const legalMoves = [];
-
-    for (const move of knightMoves) {
-
-        const newRow = row + move[0];
-        const newCol = col + move[1];
-
-        if (newRow >= 0 && newRow < Utils.ROWS && newCol >= 0 && newCol < Utils.COLS) {
-            legalMoves.push([newRow, newCol]);
-        }
-    }
-
-	return legalMoves;
 }

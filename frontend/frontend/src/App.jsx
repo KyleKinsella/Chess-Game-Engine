@@ -1,5 +1,6 @@
 import Utils from "./utils.jsx";
-import { initGameBoard, findPieceInBoard, movePiece, resetBoard, pieceToProcess, whereCanKnightMoveTo } from "./board/Board.jsx";
+import { initGameBoard, findPieceInBoard, movePiece } from "./board/Board.jsx";
+import knight from "./knight/knight.jsx";
 
 function App() {
 	const b = initGameBoard(Utils.board, Utils.pieces, Utils.ROWS, Utils.COLS);
@@ -20,21 +21,23 @@ function App() {
 	//~ resetBoard(b);
 	
 	// shows all of the spots of the knights on the chess board
-	console.log(knights);
+	console.log("init knights: ", knights);
 	 
 	// this returns all of the locations that the knight at knights[1] can move to 
-	const process = pieceToProcess(b, knights[1], Utils.KNIGHT);
-	console.log(process);
+	//~ const process = pieceToProcess(b, knights[1], Utils.KNIGHT);
+	//~ console.log(process);
 	
 	// move the knight
 	var moveP = movePiece(b, knights[0], freeSpace[0]);
 	
 	// find the new location(s) for the moved knight piece
 	var newLocs = findPieceInBoard(moveP, Utils.KNIGHT);
+	console.log(newLocs[1]);
 	
 	// now we have all of the moves that the knight at knights[1] can do
-	var legalKnightMoves = whereCanKnightMoveTo(newLocs, newLocs[1]);
-	console.log(legalKnightMoves);
+	const k = new knight(0, 0, "white", Utils.KNIGHT, false);
+	var legalKnightMoves = k.getLegalMoves(newLocs[1]);
+	console.log("legal moves: ", legalKnightMoves);
 	
     return (  
 		<div>
