@@ -8,7 +8,7 @@ class ChessPiece {
 	}
 	
 	getLegalMoves(board) {throw new Error("TODO"); }
-	makeMove(move, board) {} 
+	makeMove(move, legalMoves, board) {} 
 	getCaptured() {}
 }
 

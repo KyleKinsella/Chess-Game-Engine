@@ -32,12 +32,18 @@ function App() {
 	
 	// find the new location(s) for the moved knight piece
 	var newLocs = findPieceInBoard(moveP, Utils.KNIGHT);
-	console.log(newLocs[1]);
+	console.log("new locs: ", newLocs);
+	console.log(newLocs[1]); //this is ->   2 | 0
 	
 	// now we have all of the moves that the knight at knights[1] can do
 	const k = new knight(0, 0, "white", Utils.KNIGHT, false);
-	var legalKnightMoves = k.getLegalMoves(newLocs[1]);
-	console.log("legal moves: ", legalKnightMoves);
+	const loc = newLocs[1];
+	
+	var legalKnightMoves = k.getLegalMoves(loc);
+	console.log("here are the legal moves that can be done from this location: ", loc, ":\n", legalKnightMoves);
+	
+	const isValid = k.makeMove(legalKnightMoves[3], legalKnightMoves, newLocs);
+	console.log(isValid);
 	
     return (  
 		<div>

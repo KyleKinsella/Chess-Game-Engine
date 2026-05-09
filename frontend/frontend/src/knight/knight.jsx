@@ -40,8 +40,19 @@ class knight extends ChessPiece {
 
 		return legalMoves;
 	}
-	
-	makeMove(move, board) {
+
+	//
+	// i think we should pass in the legal moves, in order to find out if a given move is legal or not...
+	// TODO: process board...
+	makeMove(move, legalMoves, board) {	
+		
+		for (const mv of legalMoves) {
+			if (move === mv) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	getCaptured() {
