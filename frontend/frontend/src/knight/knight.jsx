@@ -33,14 +33,6 @@ class knight extends ChessPiece {
 			const newRow = row + move[0];
 			const newCol = col + move[1];
 			
-			//~ if (board[newRow][newCol] != Utils.KNIGHT) {
-				//~ continue;
-			//~ } 
-			
-			//~ else if (board[newRow][newCol] != Utils.KNIGHT) {
-				//~ return;
-			//~ }
-			
 			// TODO: you cannot move to a postion that is occupied by another piece!
 			if (newRow >= 0 && newRow < Utils.ROWS && newCol >= 0 && newCol < Utils.COLS) {
 				if (board[newRow][newCol] === Utils.freeSpace + " ") {
