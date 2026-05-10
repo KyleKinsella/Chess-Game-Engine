@@ -10,7 +10,7 @@ class knight extends ChessPiece {
 	// you mentioned to only pass in the board, i belive that we should pass in the oldlocation of the knight that we want to find where that knight can move to, we should not need the board for this i believe....
 	// this is javascripts way of over-riding the parent function of "getLegalMoves(...)".
 	//
-	getLegalMoves(oldKnightLocation) {	
+	getLegalMoves(board, oldKnightLocation) {	
 		const row = oldKnightLocation[0];
 		const col = oldKnightLocation[1];
 
@@ -32,9 +32,20 @@ class knight extends ChessPiece {
 
 			const newRow = row + move[0];
 			const newCol = col + move[1];
-					
+			
+			//~ if (board[newRow][newCol] != Utils.KNIGHT) {
+				//~ continue;
+			//~ } 
+			
+			//~ else if (board[newRow][newCol] != Utils.KNIGHT) {
+				//~ return;
+			//~ }
+			
+			// TODO: you cannot move to a postion that is occupied by another piece!
 			if (newRow >= 0 && newRow < Utils.ROWS && newCol >= 0 && newCol < Utils.COLS) {
-				legalMoves.push([newRow, newCol]);
+				if (board[newRow][newCol] === Utils.freeSpace + " ") {
+					legalMoves.push([newRow, newCol]);
+				} 
 			}
 		}
 
@@ -44,6 +55,7 @@ class knight extends ChessPiece {
 	//
 	// i think we should pass in the legal moves, in order to find out if a given move is legal or not...
 	// TODO: process board...
+	//
 	makeMove(move, legalMoves, board) {	
 		
 		for (const mv of legalMoves) {

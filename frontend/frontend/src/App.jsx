@@ -1,6 +1,7 @@
 import Utils from "./utils.jsx";
 import { initGameBoard, findPieceInBoard, movePiece } from "./board/Board.jsx";
 import knight from "./knight/knight.jsx";
+import rook from "./rook/rook.jsx";
 
 function App() {
 	const b = initGameBoard(Utils.board, Utils.pieces, Utils.ROWS, Utils.COLS);
@@ -39,17 +40,64 @@ function App() {
 	const k = new knight(0, 0, "white", Utils.KNIGHT, false);
 	const loc = newLocs[1];
 	
-	var legalKnightMoves = k.getLegalMoves(loc);
+	var legalKnightMoves = k.getLegalMoves(moveP, loc);
 	console.log("here are the legal moves that can be done from this location: ", loc, ":\n", legalKnightMoves);
 	
-	const isValid = k.makeMove(legalKnightMoves[3], legalKnightMoves, newLocs);
-	//~ console.log(isValid);
+	//~ if (legalKnightMoves === 0) {
+		//~ console.log("there were no legal moves computed...");
+		//~ return;
+	//~ }
+	
+	const isValid = k.makeMove(legalKnightMoves[2], legalKnightMoves, newLocs);
+	console.log(isValid);
 	
 	if (isValid) {
 		console.log("this is a legal move !");
 	} else {
 		console.log("this is an illegal move, you cannot do this move...");
 	}
+
+	//~ const k = new knight(0, 0, "white", Utils.KNIGHT, false);
+	console.log(k.getLegalMoves(b, knights[0]));
+	
+	//
+	// rook section 
+	// 
+	
+	//~ console.log("\n\n\nhere are all of the rook locations on the chess board (init): ", rooks);	//, " /", newLocs);
+	
+	//~ console.log(freeSpace);
+	//~ var moveRook = movePiece(b, rooks[0], );
+	
+	
+	
+	
+	
+	console.log("\n\n\n");
+	
+	// this is the current chess game board
+	console.log(moveP);
+	
+	console.log("init rooks: ", rooks);
+	
+	var updatedFreeSpaces = findPieceInBoard(moveP, Utils.freeSpace);
+	
+	var moveRook = movePiece(moveP, rooks[0], updatedFreeSpaces[0]);
+	
+	var newLocsForRooks = findPieceInBoard(moveP, Utils.ROOK);
+	console.log(newLocsForRooks);
+	
+	const rookLocation = newLocsForRooks[0];
+	
+	const r = new rook(0, 0, "white", Utils.ROOK, false);
+	var legalRookMoves = r.getLegalMoves(moveP, rookLocation);
+	console.log("here are the legal moves that can be done from this location: ", rookLocation, ":\n", legalRookMoves);
+		
+		
+	//~ console.log(updatedFreeSpaces);
+		
+	//~ var newRooksLocs = findPieceInBoard(b, Utils.ROOK);
+	//~ console.log(newRooksLocs);
 	
     return (  
 		<div>

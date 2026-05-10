@@ -7,7 +7,7 @@ class ChessPiece {
 		this.isCaptured = isCaptured;
 	}
 	
-	getLegalMoves(board) {throw new Error("TODO"); }
+	getLegalMoves(board, oldLocation) {throw new Error("TODO"); }
 	makeMove(move, legalMoves, board) {} 
 	getCaptured() {}
 }
