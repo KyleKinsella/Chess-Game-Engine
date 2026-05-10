@@ -45,7 +45,19 @@ Now I've put the board on a endpoint as JSON and I can just pull this data down 
 ![Chess Project Image-1](https://github.com/KyleKinsella/Chess-Game-Engine/blob/main/images/Screenshot%20From%202026-04-28%2019-26-28.png)
 
 Processing the first piece to move: Knight.
+
 ![Knight movement](https://github.com/KyleKinsella/Chess-Game-Engine/blob/main/images/Screenshot%20From%202026-05-10%2012-45-39.png)
+
+explanation of the above image: 
+	
+	- the first array shows each row and column that has a knight.
+	- the second array does the exact same thing as the first one but, as the knight has moved we need to find all of the knights again (notice that only index 0 and 1 has changed!).
+	- the third array outputs: "2, 0" this is where we have moved to (in a L shape, that is how the knight moves).
+	- the last array in the image shows all of the legal moves that the knight can do from the location "2, 0" on the chess board.
+	- the string: "this is a legal move !", this means:
+		- we pass in a move that we wish to do, the move we wish to do, must be a legal move.
+		- i have a function that takes in the move we wish to do, all of the legal moves for that move and the board.
+		- the output of the function is either "true" or "false". if we get back "true", this means that the passed in move is in the legal moves... so we can then move that piece. otherwise it's "false", so the passed in move is not in the legal moves so we stop processing that move due to it being an invalid move! (the return type of the function could change later on in the project). 
 
 # Kanban Board
 As I am building this project I am going to be using a kanban board to keep track of what I need to do and what has been complete and so much more!
