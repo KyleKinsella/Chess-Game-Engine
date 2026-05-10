@@ -21,7 +21,7 @@ function App() {
 	//~ resetBoard(b);
 	
 	// shows all of the spots of the knights on the chess board
-	console.log("init knights: ", knights);
+	console.log("this is all of the locations of the knights on the initial chess board: ", knights);
 	 
 	// this returns all of the locations that the knight at knights[1] can move to 
 	//~ const process = pieceToProcess(b, knights[1], Utils.KNIGHT);
@@ -32,8 +32,8 @@ function App() {
 	
 	// find the new location(s) for the moved knight piece
 	var newLocs = findPieceInBoard(moveP, Utils.KNIGHT);
-	console.log("new locs: ", newLocs);
-	console.log(newLocs[1]); //this is ->   2 | 0
+	console.log("new locations of all of the knights on the chess board: ", newLocs);
+	console.log("this is the knight we have moved: ", newLocs[1]); //this is ->   2 | 0
 	
 	// now we have all of the moves that the knight at knights[1] can do
 	const k = new knight(0, 0, "white", Utils.KNIGHT, false);
@@ -43,7 +43,13 @@ function App() {
 	console.log("here are the legal moves that can be done from this location: ", loc, ":\n", legalKnightMoves);
 	
 	const isValid = k.makeMove(legalKnightMoves[3], legalKnightMoves, newLocs);
-	console.log(isValid);
+	//~ console.log(isValid);
+	
+	if (isValid) {
+		console.log("this is a legal move !");
+	} else {
+		console.log("this is an illegal move, you cannot do this move...");
+	}
 	
     return (  
 		<div>

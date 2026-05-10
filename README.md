@@ -44,6 +44,9 @@ Now I've put the board on a endpoint as JSON and I can just pull this data down 
 
 ![Chess Project Kanban Board](https://github.com/KyleKinsella/Chess-Game-Engine/blob/main/images/Screenshot%20From%202026-04-28%2019-26-28.png)
 
+Processing the first piece to move: Knight.
+![Knight movement](https://github.com/KyleKinsella/Chess-Game-Engine/blob/main/images/Screenshot%From%2026-05-10%12-45-39.png)
+
 # Kanban Board
 As I am building this project I am going to be using a kanban board to keep track of what I need to do and what has been complete and so much more!
 
