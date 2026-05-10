@@ -59,19 +59,16 @@ export function movePiece(board, oldLoc, newLoc) {
 }
 
 // this is not being used as of right now, but it will be...
-export function pieceToProcess(board, oldPieceLoc, pieceType) {	
+export function pieceToProcess(board, oldPieceLocation, pieceType) {	
 	const freeSpace = findPieceInBoard(board, Utils.freeSpace);	
 	
 	switch (pieceType) {
 		case Utils.KNIGHT:
 			// create a knight object, from the knight class
 			const k = new knight(0, 0, "white", Utils.KNIGHT, false);
-	
-			// all of the knights on the chess board, at the very start of the game
-			const knights = findPieceInBoard(board, Utils.KNIGHT);
 			
 			// move a knight
-			var moveKnight = movePiece(board, knights[0], freeSpace[0]);
+			var moveKnight = movePiece(board, oldPieceLocation, freeSpace[0]);
 
 			// find the new locations of the knights, since we moved a knight, see above ^^^^
 			var newKnightLocations = findPieceInBoard(moveKnight, Utils.KNIGHT);
@@ -86,7 +83,8 @@ export function pieceToProcess(board, oldPieceLoc, pieceType) {
 			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, newKnightLocations);
 			
 			// print everything to make sure all data is correct!
-			console.log("init knights: ", knights, "updated knight locations: ", newKnightLocations, "you can do the following legal moves: ", legalKnightMoves, " from this location: ", computeKnight, "\n\n", (isValid) ? "this is a legal move !" : "this is an illegal move, you cannot do this move...");
+			//console.log("init knights: ", knights, 
+			console.log("Legal Moves: (for " + pieceType + ")", legalKnightMoves, " from this location: ", computeKnight, (isValid) ? "this is a legal move !" : "this is an illegal move, you cannot do this move...");
 			
 			break;
 		
@@ -94,14 +92,11 @@ export function pieceToProcess(board, oldPieceLoc, pieceType) {
 			// create a rook object, from the rook class
 			const r = new rook(0, 0, "white", Utils.ROOK, false);
 	
-			// all of the rooks on the chess board, at the very start of the game
-			const rooks = findPieceInBoard(board, Utils.ROOK);
-			
 			// this contains all of the free spaces on the updated board
 			var updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);
 
 			// move a rook
-			var moveRook = movePiece(board, rooks[0], updatedFreeSpaces[0]);
+			var moveRook = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
 			
 			// find the new locations of the rooks, since we moved a rook, see above ^^^^
 			var newRookLocations = findPieceInBoard(board, Utils.ROOK);
@@ -115,7 +110,7 @@ export function pieceToProcess(board, oldPieceLoc, pieceType) {
 			// TODO: is a move legal or not !?
 			
 			// print everything to make sure all data is correct!
-			console.log("\ninit rooks: ", rooks, "updated rook locations: ", newRookLocations, " you can do the following legal moves: ", legalRookMoves, " from this location: ", computeRook);	//, "\n\n" , (isValid) ? "this is a legal move !" : "this is an illegal move, you cannot do this move...");
+			console.log("Legal Moves: (for " + pieceType + ")", legalRookMoves, "from this location:", computeRook);
 			
 			break
 						
@@ -129,6 +124,10 @@ export function pieceToProcess(board, oldPieceLoc, pieceType) {
 			break;
 			
 		case Utils.PAWN:
+			break;
+		
+		default:
+			console.log("Invalid piece input");
 			break;
 	}
 }
