@@ -59,6 +59,10 @@ explanation of the above image:
 		- i have a function that takes in the move we wish to do, all of the legal moves for that move and the board.
 		- the output of the function is either "true" or "false". if we get back "true", this means that the passed in move is in the legal moves... so we can then move that piece. otherwise it's "false", so the passed in move is not in the legal moves so we stop processing that move due to it being an invalid move! (the return type of the function could change later on in the project). 
 
+Processing the second piece to move: Rook.
+
+![Knight movement](https://github.com/KyleKinsella/Chess-Game-Engine/blob/main/images/Screenshot%20From%202026-05-10%2019-51-48.png)
+
 # Kanban Board
 As I am building this project I am going to be using a kanban board to keep track of what I need to do and what has been complete and so much more!
 
