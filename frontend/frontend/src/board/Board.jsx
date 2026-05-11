@@ -84,7 +84,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, newKnightLocations);
 			
 			// print everything to make sure all data is correct!
-			console.log("Legal Moves: (for " + pieceType + ")", legalKnightMoves, " from this location: ", computeKnight, (isValid) ? "this is a legal move !" : "this is an illegal move, you cannot do this move...");
+			//~ console.log("Legal Moves: (for " + pieceType + ")", legalKnightMoves, " from this location: ", computeKnight, (isValid) ? "this is a legal move !" : "this is an illegal move, you cannot do this move...");
 			
 			break;
 		
@@ -124,7 +124,9 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			var updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);
 			
 			// move the bishop
-			const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[4]);
+			//~ const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[4]);
+			
+			const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[10]);
 			
 			// find the new locations of the bishops, since we moved a bishop, see above ^^^^
 			var newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
@@ -154,7 +156,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			// this contains all of the free spaces on the updated board
 			var updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);
 			
-			const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[4]);
+			//~ const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[4]);
 			
 			board[1][1] = Utils.freeSpace + " ";
 			

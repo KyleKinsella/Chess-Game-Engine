@@ -18,7 +18,7 @@ function App() {
 	
 	
 	//~ console.log("init bishops: ", bishops);
-	const processBishop = pieceToProcess(b, bishops[0], Utils.BISHOP);
+	const processBishop = pieceToProcess(b, bishops[1], Utils.BISHOP);
 	
 	//~ console.log(pawns);
 	const processPawn = pieceToProcess(b, pawns[3], Utils.PAWN);

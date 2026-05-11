@@ -13,7 +13,7 @@ class knight extends ChessPiece {
 	getLegalMoves(board, oldKnightLocation) {	
 		const row = oldKnightLocation[0];
 		const col = oldKnightLocation[1];
-
+		
 		const knightMoves = [
 			[-2, -1], // up 2, left 1
 			[-2, 1], // up 2, right 1
@@ -35,16 +35,12 @@ class knight extends ChessPiece {
 			
 			// TODO: you cannot move to a postion that is occupied by another piece!
 			if (newRow >= 0 && newRow < Utils.ROWS && newCol >= 0 && newCol < Utils.COLS) {
-				legalMoves.push([newRow, newCol]);
-				
-				//
-				// this if statement works but it also causes some (major) problems !
-				//
-				if (board[newRow][newCol] === Utils.freeSpace + " ") {
-				} 
+				if (board[newRow][newCol] === Utils.freeSpace + " ") {	
+					//~ board[newRow][newCol] = "#####";
+					legalMoves.push([newRow, newCol]);
+				}		
 			}
 		}
-
 		return legalMoves;
 	}
 

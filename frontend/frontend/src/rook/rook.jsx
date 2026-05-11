@@ -24,16 +24,12 @@ class rook extends ChessPiece {
 			var newY = col + move[1];
 			
 			if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
-				legalMoves.push([newX, newY]);
-				
-				//
-				// this if statement works but it also causes some (major) problems !
-				//
 				if (board[newX][newY] === Utils.freeSpace + " ") {
+					//~ board[newX][newY] = "#####";
+					legalMoves.push([newX, newY]);
 				}
 			}
 		}
-		
 		return legalMoves;
 	}
 	
