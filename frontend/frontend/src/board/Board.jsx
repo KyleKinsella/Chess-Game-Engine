@@ -1,6 +1,7 @@
 import Utils from "../utils.jsx";
 import knight from "../knight/knight.jsx";
 import rook from "../rook/rook.jsx";
+import bishop from "../bishop/bishop.jsx";
 
 // TODO: have - "a,b,c,d,e,f,g,h" at the bottom of the board and at the left hand side of the board have - "8 7 6 5 4 3 2 1"
 export function initGameBoard(board, pieces, rows, cols) {
@@ -76,14 +77,13 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			// this is the spot that we want to find all of the legal moves for
 			const computeKnight = newKnightLocations[1];
 			
-			// this returns an array of all of the legal moves that "spotToCompute" can do
+			// this returns an array of all of the legal moves that "computeKnight" can do
 			var legalKnightMoves = k.getLegalMoves(moveKnight, computeKnight);
 
 			// this will return true if the move is legal and false if it's illegal
 			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, newKnightLocations);
 			
 			// print everything to make sure all data is correct!
-			//console.log("init knights: ", knights, 
 			console.log("Legal Moves: (for " + pieceType + ")", legalKnightMoves, " from this location: ", computeKnight, (isValid) ? "this is a legal move !" : "this is an illegal move, you cannot do this move...");
 			
 			break;
@@ -97,15 +97,17 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 
 			// move a rook
 			var moveRook = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
+			//~ console.log("a rook has been moved: ", moveRook);
 			
 			// find the new locations of the rooks, since we moved a rook, see above ^^^^
-			var newRookLocations = findPieceInBoard(board, Utils.ROOK);
+			var newRookLocations = findPieceInBoard(moveRook, Utils.ROOK);
+			//~ console.log(newRookLocations);
 			
 			// this is the spot that we want to find all of the legal moves for
 			const computeRook = newRookLocations[0];
 			
-			// this returns an array of all of the legal moves that "spotToCompute" can do
-			var legalRookMoves = r.getLegalMoves(board, computeRook);
+			// this returns an array of all of the legal moves that "computeRook" can do
+			var legalRookMoves = r.getLegalMoves(moveRook, computeRook);
 			
 			// TODO: is a move legal or not !?
 			
@@ -115,6 +117,29 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			break
 						
 		case Utils.BISHOP:
+			// create a bishop object, from the bishop class
+			const b = new bishop(0, 0, "white", Utils.BISHOP, false);
+			
+			// this contains all of the free spaces on the updated board
+			var updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);
+			
+			// move the bishop
+			const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[4]);
+			
+			// find the new locations of the bishops, since we moved a bishop, see above ^^^^
+			var newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
+			
+			// this is the spot that we want to find all of the legal moves for
+			const computeBishop = newBishopLocations[1];
+			
+			// this returns an array of all of the legal moves that "computeBishop" can do
+			const legalBishopMoves = b.getLegalMoves(moveBishop, computeBishop);
+			
+			// TODO: is a move legal or not !?
+			
+			// print everything to make sure all data is correct!
+			console.log("Legal Moves: (for " + pieceType + ")", legalBishopMoves, "from this location:", computeBishop);
+			
 			break;
 		
 		case Utils.QUEEN:
@@ -124,6 +149,15 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			break;
 			
 		case Utils.PAWN:
+			//
+		
+			// this contains all of the free spaces on the updated board
+			var updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);
+			
+			const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[4]);
+			
+			board[1][1] = Utils.freeSpace + " ";
+			
 			break;
 		
 		default:

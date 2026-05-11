@@ -1,39 +1,38 @@
 import ChessPiece from "../ChessPiece/ChessPiece.jsx";
 import Utils from "../utils.jsx";
 
-class rook extends ChessPiece {
+class bishop extends ChessPiece {
 	constructor() {
 		super();
 	}
 	
-	getLegalMoves(board, oldRookLocation) {
-		const row = oldRookLocation[0];
-		const col = oldRookLocation[1];
+	getLegalMoves(board, oldBishopLocation) {
+		const row = oldBishopLocation[0];
+		const col = oldBishopLocation[1];
 		
-		const rookMoves = [
-			[-1, 0], // left
-			[1, 0], // right
-			[0, -1], // down
- 			[0, 1] // up
+		const bishopMoves = [
+			[-1, -1], // down, left
+			[-1, 1], // up, left
+			[1, -1], // down, right
+			[1, 1] // up, right
 		];
 		
 		const legalMoves = [];
 		
-		for (const move of rookMoves) {
+		for (const move of bishopMoves) {
 			var newX = row + move[0];
 			var newY = col + move[1];
 			
 			if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
-				legalMoves.push([newX, newY]);
+				legalMoves.push([newX, newY]);				
 				
 				//
 				// this if statement works but it also causes some (major) problems !
 				//
 				if (board[newX][newY] === Utils.freeSpace + " ") {
-				}
+				}				
 			}
 		}
-		
 		return legalMoves;
 	}
 	
@@ -44,4 +43,4 @@ class rook extends ChessPiece {
 	}
 }
 
-export default rook;
+export default bishop;
