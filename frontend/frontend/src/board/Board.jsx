@@ -20,6 +20,7 @@ export function initGameBoard(board, pieces, rows, cols) {
                 for (var pawn = 0; pawn < Utils.pieces.length; pawn++) {
                      if (pieces[pawn] === Utils.PAWN) {
 						 board[i][j] = Utils.pieces[pawn] + " ";
+						 //~ board[i][j] = Utils.freeSpace + " ";
 					 }
                 }
             }
@@ -84,7 +85,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, newKnightLocations);
 			
 			// print everything to make sure all data is correct!
-			//~ console.log("Legal Moves: (for " + pieceType + ")", legalKnightMoves, " from this location: ", computeKnight, (isValid) ? "this is a legal move !" : "this is an illegal move, you cannot do this move...");
+			console.log("Legal Moves: (for " + pieceType + ")", legalKnightMoves, " from this location: ", computeKnight, (isValid) ? "this is a legal move !" : "this is an illegal move, you cannot do this move...");
 			
 			break;
 		
@@ -93,10 +94,10 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			const r = new rook(0, 0, "white", Utils.ROOK, false);
 	
 			// this contains all of the free spaces on the updated board
-			var updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);
+			//~ var updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);
 
 			// move a rook
-			var moveRook = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
+			var moveRook = movePiece(board, oldPieceLocation, freeSpace[0]);
 			//~ console.log("a rook has been moved: ", moveRook);
 			
 			// find the new locations of the rooks, since we moved a rook, see above ^^^^
@@ -126,7 +127,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			// move the bishop
 			//~ const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[4]);
 			
-			const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[10]);
+			const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[12]);
 			
 			// find the new locations of the bishops, since we moved a bishop, see above ^^^^
 			var newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
@@ -156,9 +157,11 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			// this contains all of the free spaces on the updated board
 			var updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);
 			
-			//~ const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[4]);
+			const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[3]);
 			
-			board[1][1] = Utils.freeSpace + " ";
+			//~ board[1][0] = Utils.freeSpace + " ";
+			//~ board[1][1] = Utils.freeSpace + " ";
+			//~ board[1][2] = Utils.freeSpace + " ";
 			
 			break;
 		

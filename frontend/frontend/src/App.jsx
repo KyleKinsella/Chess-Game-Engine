@@ -12,18 +12,10 @@ function App() {
 	const kings = findPieceInBoard(b, Utils.KING);
 	const freeSpace = findPieceInBoard(b, Utils.freeSpace);	
 	
-	// these work!!! //
 	const processKnight = pieceToProcess(b, knights[0], Utils.KNIGHT);
 	const processRook = pieceToProcess(b, rooks[0], Utils.ROOK);
-	
-	
-	//~ console.log("init bishops: ", bishops);
-	const processBishop = pieceToProcess(b, bishops[1], Utils.BISHOP);
-	
-	//~ console.log(pawns);
-	const processPawn = pieceToProcess(b, pawns[3], Utils.PAWN);
-	
-	//~ const removePawn = b[1][1];
+	const processBishop = pieceToProcess(b, bishops[0], Utils.BISHOP);
+	//~ const processPawn = pieceToProcess(b, pawns[2], Utils.PAWN);
 	
     return (  
 		<div>

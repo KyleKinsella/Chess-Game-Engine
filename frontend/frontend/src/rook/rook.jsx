@@ -1,5 +1,5 @@
 import ChessPiece from "../ChessPiece/ChessPiece.jsx";
-import Utils from "../utils.jsx";
+import Utils from ".././utils.jsx";
 
 class rook extends ChessPiece {
 	constructor() {
@@ -23,10 +23,17 @@ class rook extends ChessPiece {
 			var newX = row + move[0];
 			var newY = col + move[1];
 			
-			if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
-				if (board[newX][newY] === Utils.freeSpace + " ") {
-					//~ board[newX][newY] = "#####";
-					legalMoves.push([newX, newY]);
+			for (var i = 0; i < board.length; i++) {
+				if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
+					if (board[newX][newY] === Utils.freeSpace + " ") {
+						//~ board[newX][newY] = "#####" + " ";
+						legalMoves.push([newX, newY]);
+					} else {
+						break;
+					}
+					
+					newX += move[0];
+					newY += move[1];
 				}
 			}
 		}
@@ -34,9 +41,11 @@ class rook extends ChessPiece {
 	}
 	
 	makeMove(move, legalMoves, board) {
+		// WILL THIS BE THE EXACT SAME AS THE KNIGHT !?
 	}
 	
 	getCaptured() {
+		// TODO
 	}
 }
 
