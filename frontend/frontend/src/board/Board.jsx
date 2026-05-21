@@ -19,8 +19,8 @@ export function initGameBoard(board, pieces, rows, cols) {
             if (i === 1 || i === 6) {                
                 for (var pawn = 0; pawn < Utils.pieces.length; pawn++) {
                      if (pieces[pawn] === Utils.PAWN) {
-						 board[i][j] = Utils.pieces[pawn] + " ";
-						 //~ board[i][j] = Utils.freeSpace + " ";
+						 //~ board[i][j] = Utils.pieces[pawn] + " ";
+						 board[i][j] = Utils.freeSpace + " ";
 					 }
                 }
             }
