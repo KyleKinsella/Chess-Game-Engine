@@ -1,8 +1,7 @@
 # Chess Game & Engine
 
-# Project Contributors & the Brains Behind the Project
-Christopher Byrne
-Kyle Kinsella  
+# Project Contributors & Brains Behind the Project
+Christopher Byrne | Kyle Kinsella  
 
 # Project Details
 If you wish to see more information about the project, see here: https://kylekinsella.github.io/chess_project_motive.htm
