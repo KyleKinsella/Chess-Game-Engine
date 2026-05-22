@@ -2,6 +2,9 @@ import Utils from "../utils.jsx";
 import knight from "../knight/knight.jsx";
 import rook from "../rook/rook.jsx";
 import bishop from "../bishop/bishop.jsx";
+import queen from "../queen/queen.jsx";
+import king from "../king/king.jsx";
+import pawn from "../pawn/pawn.jsx";
 
 // TODO: have - "a,b,c,d,e,f,g,h" at the bottom of the board and at the left hand side of the board have - "8 7 6 5 4 3 2 1"
 export function initGameBoard(board, pieces, rows, cols) {
@@ -125,12 +128,15 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			break;
 			
 		case Utils.QUEEN:
+			const q = new queen(0, 0, "white", Utils.QUEEN, false);
 			break;
 			
 		case Utils.KING:
+			const ki = new king(0, 0, "white", Utils.KING, false);
 			break;
 			
 		case Utils.PAWN:
+			const pa = new king(0, 0, "white", Utils.PAWN, false);
 			break;
 		
 		default:

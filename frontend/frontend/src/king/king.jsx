@@ -1,12 +1,12 @@
-import Utils from "../utils.jsx";
+import "../utils.jsx";
 import ChessPiece from "../ChessPiece/ChessPiece.jsx";
 
-class pawn extends ChessPiece {
+class king extends ChessPiece {
 	constructor() {
 		super();
 	}
 	
-	getLegalMoves(board, oldPawnLocation) {
+	getLegalMoves(board, oldKingLocation) {
 	}
 	
 	makeMove(move, legalMoves, board) {
@@ -16,4 +16,4 @@ class pawn extends ChessPiece {
 	}
 }
 
-export default pawn;
+export default king;
