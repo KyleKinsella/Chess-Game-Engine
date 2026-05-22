@@ -1,4 +1,4 @@
-import "../utils.jsx";
+import Utils from "../utils.jsx";
 import ChessPiece from "../ChessPiece/ChessPiece.jsx";
 
 class king extends ChessPiece {

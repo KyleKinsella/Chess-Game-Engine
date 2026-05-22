@@ -70,12 +70,12 @@ export function movePiece(board, oldLoc, newLoc) {
 // Step 8: print some of the data to ensure correct output
 
 export function pieceToProcess(board, oldPieceLocation, pieceType) {		
+	const updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);	
+	
 	switch (pieceType) {
 		case Utils.KNIGHT:
 			const k = new knight(0, 0, "white", Utils.KNIGHT, false);
-			
-			const updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);	
-			
+						
 			const moveKnight = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
 			
 			const newKnightLocations = findPieceInBoard(moveKnight, Utils.KNIGHT);
@@ -92,10 +92,8 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 		
 		case Utils.ROOK:
 			const r = new rook(0, 0, "white", Utils.ROOK, false);
-			
-			const updatedFreeSpaces2 = findPieceInBoard(board, Utils.freeSpace);
-			
-			const moveRook = movePiece(board, oldPieceLocation, updatedFreeSpaces2[0]);
+						
+			const moveRook = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
 			
 			const newRookLocations = findPieceInBoard(moveRook, Utils.ROOK);
 			
@@ -111,10 +109,8 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 						
 		case Utils.BISHOP:
 			const b = new bishop(0, 0, "white", Utils.BISHOP, false);
-			
-			const updatedFreeSpaces3 = findPieceInBoard(board, Utils.freeSpace);	
-			
-			const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces3[13]);
+						
+			const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[13]);
 			
 			const newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
 			
@@ -129,6 +125,18 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 		case Utils.QUEEN:
 			const q = new queen(0, 0, "white", Utils.QUEEN, false);
+									
+			const moveQueen = movePiece(board, oldPieceLocation, updatedFreeSpaces[12]);
+			
+			const newQueenLocations = findPieceInBoard(moveQueen, Utils.QUEEN);
+			
+			const computeQueen = newQueenLocations[0];
+			
+			const legalQueenMoves = q.getLegalMoves(moveQueen, computeQueen);
+			
+			// TODO: is a move legal or not !?
+			
+			console.log("Legal Moves: (for " + pieceType + ")", legalQueenMoves, "from this location:", computeQueen);
 			break;
 			
 		case Utils.KING:
@@ -136,7 +144,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			break;
 			
 		case Utils.PAWN:
-			const pa = new king(0, 0, "white", Utils.PAWN, false);
+			const pa = new pawn(0, 0, "white", Utils.PAWN, false);
 			break;
 		
 		default:

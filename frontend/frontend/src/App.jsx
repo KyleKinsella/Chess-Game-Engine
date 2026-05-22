@@ -19,8 +19,10 @@ function App() {
 	// TODO: this should be in the rook section in the "pieceToProcess" function...
 	var findMe = findPieceInBoard(b, Utils.freeSpace);	
 	processRook = pieceToProcess(b, findMe[0], Utils.ROOK);
-		
+	
 	const processQueen = pieceToProcess(b, queens[0], Utils.QUEEN);
+	
+	// TODO:
 	const processKing = pieceToProcess(b, kings[0], Utils.KING);
 	const processPawn = pieceToProcess(b, pawns[0], Utils.PAWN);
 	
