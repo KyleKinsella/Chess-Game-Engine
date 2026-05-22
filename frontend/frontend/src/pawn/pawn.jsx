@@ -14,6 +14,14 @@ class pawn extends ChessPiece {
 	
 	getCaptured() {
 	}
+	
+	enPassant(board) {
+		// TODO - https://www.chess.com/terms/en-passant
+	}
+	
+	promotePawn(board) {
+		// TODO - any pawn that gets into the other teams end part of the board, can promote their pawn to be either: a queen, rook, bishop or a knight!
+	}
 }
 
 export default pawn;

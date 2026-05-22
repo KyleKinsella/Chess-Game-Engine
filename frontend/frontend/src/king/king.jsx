@@ -14,6 +14,14 @@ class king extends ChessPiece {
 	
 	getCaptured() {
 	}
+	
+	isKingInCheck(board, kingCurrentLocation) {
+		// TODO - https://www.chess.com/terms/chess-king
+	}
+	
+	castleKingWithRook(board, kingCurrentLocation, rookCurrentLocation) {
+		// TODO - https://www.chess.com/article/view/how-to-castle-in-chess
+	}
 }
 
 export default king;
