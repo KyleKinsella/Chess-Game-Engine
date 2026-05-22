@@ -16,13 +16,8 @@ export function initGameBoard(board, pieces, rows, cols) {
                 board[i][j] = Utils.freeSpace + " ";
             }
                 
-            if (i === 1 || i === 6) {                
-                for (var pawn = 0; pawn < Utils.pieces.length; pawn++) {
-                     if (pieces[pawn] === Utils.PAWN) {
-						 //~ board[i][j] = Utils.pieces[pawn] + " ";
-						 board[i][j] = Utils.freeSpace + " ";
-					 }
-                }
+            if (i === 1 || i === 6) {       
+				board[i][j] = Utils.PAWN + " ";
             }
         }
     }   
@@ -60,91 +55,75 @@ export function movePiece(board, oldLoc, newLoc) {
 	return board;
 }
 
-// this is not being used as of right now, but it will be...
-export function pieceToProcess(board, oldPieceLocation, pieceType) {	
-	const freeSpace = findPieceInBoard(board, Utils.freeSpace);	
-	
+// pieceToProcess function usage:
+// Steps for each piece (how do we process each piece) ?
+// Step 1: create a piece object (whatever piece you want to process)
+// Step 2: find all of the updated free spots on the board
+// Step 3: move your piece
+// Step 4: find all of the updated piece locations, since you have just moved a piece
+// Step 5: pick a spot that you want to compute the legal moves for
+// Step 6: now you have all of the legal moves from Step 5
+// Step 7: check if the move is a valid or invalid move
+// Step 8: print some of the data to ensure correct output
+
+export function pieceToProcess(board, oldPieceLocation, pieceType) {		
 	switch (pieceType) {
 		case Utils.KNIGHT:
-			// create a knight object, from the knight class
 			const k = new knight(0, 0, "white", Utils.KNIGHT, false);
 			
-			// move a knight
-			var moveKnight = movePiece(board, oldPieceLocation, freeSpace[0]);
-
-			// find the new locations of the knights, since we moved a knight, see above ^^^^
-			var newKnightLocations = findPieceInBoard(moveKnight, Utils.KNIGHT);
-	
-			// this is the spot that we want to find all of the legal moves for
+			const updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);	
+			
+			const moveKnight = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
+			
+			const newKnightLocations = findPieceInBoard(moveKnight, Utils.KNIGHT);
+			
 			const computeKnight = newKnightLocations[1];
 			
-			// this returns an array of all of the legal moves that "computeKnight" can do
-			var legalKnightMoves = k.getLegalMoves(moveKnight, computeKnight);
-
-			// this will return true if the move is legal and false if it's illegal
+			const legalKnightMoves = k.getLegalMoves(moveKnight, computeKnight);
+			
 			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, newKnightLocations);
 			
-			// print everything to make sure all data is correct!
 			console.log("Legal Moves: (for " + pieceType + ")", legalKnightMoves, " from this location: ", computeKnight, (isValid) ? "this is a legal move !" : "this is an illegal move, you cannot do this move...");
 			
 			break;
 		
 		case Utils.ROOK:
-			// create a rook object, from the rook class
 			const r = new rook(0, 0, "white", Utils.ROOK, false);
-	
-			// this contains all of the free spaces on the updated board
-			//~ var updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);
-
-			// move a rook
-			var moveRook = movePiece(board, oldPieceLocation, freeSpace[0]);
-			//~ console.log("a rook has been moved: ", moveRook);
 			
-			// find the new locations of the rooks, since we moved a rook, see above ^^^^
-			var newRookLocations = findPieceInBoard(moveRook, Utils.ROOK);
-			//~ console.log(newRookLocations);
+			const updatedFreeSpaces2 = findPieceInBoard(board, Utils.freeSpace);
 			
-			// this is the spot that we want to find all of the legal moves for
+			const moveRook = movePiece(board, oldPieceLocation, updatedFreeSpaces2[0]);
+			
+			const newRookLocations = findPieceInBoard(moveRook, Utils.ROOK);
+			
 			const computeRook = newRookLocations[0];
 			
-			// this returns an array of all of the legal moves that "computeRook" can do
-			var legalRookMoves = r.getLegalMoves(moveRook, computeRook);
+			const legalRookMoves = r.getLegalMoves(moveRook, computeRook);
 			
 			// TODO: is a move legal or not !?
 			
-			// print everything to make sure all data is correct!
 			console.log("Legal Moves: (for " + pieceType + ")", legalRookMoves, "from this location:", computeRook);
 			
-			break
+			break;
 						
 		case Utils.BISHOP:
-			// create a bishop object, from the bishop class
 			const b = new bishop(0, 0, "white", Utils.BISHOP, false);
 			
-			// this contains all of the free spaces on the updated board
-			var updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);
+			const updatedFreeSpaces3 = findPieceInBoard(board, Utils.freeSpace);	
 			
-			// move the bishop
-			//~ const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[4]);
+			const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces3[13]);
 			
-			const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[12]);
+			const newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
 			
-			// find the new locations of the bishops, since we moved a bishop, see above ^^^^
-			var newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
-			
-			// this is the spot that we want to find all of the legal moves for
 			const computeBishop = newBishopLocations[1];
 			
-			// this returns an array of all of the legal moves that "computeBishop" can do
 			const legalBishopMoves = b.getLegalMoves(moveBishop, computeBishop);
 			
 			// TODO: is a move legal or not !?
 			
-			// print everything to make sure all data is correct!
 			console.log("Legal Moves: (for " + pieceType + ")", legalBishopMoves, "from this location:", computeBishop);
-			
 			break;
-		
+			
 		case Utils.QUEEN:
 			break;
 			
@@ -152,17 +131,6 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			break;
 			
 		case Utils.PAWN:
-			//
-		
-			// this contains all of the free spaces on the updated board
-			var updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);
-			
-			const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[3]);
-			
-			//~ board[1][0] = Utils.freeSpace + " ";
-			//~ board[1][1] = Utils.freeSpace + " ";
-			//~ board[1][2] = Utils.freeSpace + " ";
-			
 			break;
 		
 		default:

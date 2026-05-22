@@ -10,12 +10,19 @@ function App() {
 	const bishops = findPieceInBoard(b, Utils.BISHOP);
 	const queens = findPieceInBoard(b, Utils.QUEEN);
 	const kings = findPieceInBoard(b, Utils.KING);
-	const freeSpace = findPieceInBoard(b, Utils.freeSpace);	
+	//~ const freeSpace = findPieceInBoard(b, Utils.freeSpace);	
 	
 	const processKnight = pieceToProcess(b, knights[0], Utils.KNIGHT);
-	const processRook = pieceToProcess(b, rooks[0], Utils.ROOK);
+	
+	var processRook = pieceToProcess(b, rooks[0], Utils.ROOK);
+	
 	const processBishop = pieceToProcess(b, bishops[0], Utils.BISHOP);
-	//~ const processPawn = pieceToProcess(b, pawns[2], Utils.PAWN);
+	
+	// TODO: this should be in the rook section in the "pieceToProcess" function...
+	var findMe = findPieceInBoard(b, Utils.freeSpace);	
+	processRook = pieceToProcess(b, findMe[0], Utils.ROOK);
+	
+	const processPawn = pieceToProcess(b, pawns[1], Utils.PAWN);
 	
     return (  
 		<div>

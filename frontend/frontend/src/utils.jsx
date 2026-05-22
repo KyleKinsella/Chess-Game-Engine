@@ -17,7 +17,7 @@ class Utils {
 	static letters = "a b c d e f g";
 	static nums = "8 7 6 5 4 3 2 1";
 	
-	static pieces = [this.ROOK, this.KNIGHT, this.BISHOP, this.QUEEN, this.KING, this.BISHOP2, this.KNIGHT2, this.ROOK2, this.PAWN];
+	static pieces = [this.ROOK, this.KNIGHT, this.BISHOP, this.QUEEN, this.KING, this.BISHOP2, this.KNIGHT2, this.ROOK2];
 	static board = [[], [], [], [], [], [], [], []];
 }
 
