@@ -86,10 +86,8 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, newKnightLocations);
 			
-			console.log("Legal Moves: (for " + pieceType + ")", legalKnightMoves, " from this location: ", computeKnight, (isValid) ? "this is a legal move !" : "this is an illegal move, you cannot do this move...");
+			return legalKnightMoves;
 			
-			break;
-		
 		case Utils.ROOK:
 			const r = new rook(0, 0, "white", Utils.ROOK, false);
 						
@@ -103,9 +101,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 			// TODO: is a move legal or not !?
 			
-			console.log("Legal Moves: (for " + pieceType + ")", legalRookMoves, "from this location:", computeRook);
-			
-			break;
+			return legalRookMoves;
 						
 		case Utils.BISHOP:
 			const b = new bishop(0, 0, "white", Utils.BISHOP, false);
@@ -120,8 +116,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 			// TODO: is a move legal or not !?
 			
-			console.log("Legal Moves: (for " + pieceType + ")", legalBishopMoves, "from this location:", computeBishop);
-			break;
+			return legalBishopMoves;
 			
 		case Utils.QUEEN:
 			const q = new queen(0, 0, "white", Utils.QUEEN, false);
@@ -136,8 +131,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 			// TODO: is a move legal or not !?
 			
-			console.log("Legal Moves: (for " + pieceType + ")", legalQueenMoves, "from this location:", computeQueen);
-			break;
+			return legalQueenMoves;
 			
 		case Utils.KING:
 			const ki = new king(0, 0, "white", Utils.KING, false);

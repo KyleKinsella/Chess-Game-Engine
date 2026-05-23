@@ -43,10 +43,11 @@ class queen extends ChessPiece {
 						legalMoves.push([newX, newY]);
 					}
 					
+					// not an ideal check but it works for now
 					if (board[newX][newY] === Utils.BISHOP + " " || board[newX][newY] === Utils.PAWN + " ") {
 						break;
 					} 
-					
+							
 					newX += move[0];
 					newY += move[1];
 				}
