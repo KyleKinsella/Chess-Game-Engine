@@ -17,17 +17,26 @@ class queen extends ChessPiece {
 		const col = oldQueenLocation[1];
 		
 		const queenMoves = [
-			// bishop moves
-			[-1, -1], // down, left
-			[-1, 1], // up, left
-			[1, -1], // down, right
-			[1, 1] // up, right
+			//~ // bishop moves
+			//~ [-1, -1], // down, left
+			//~ [-1, 1], // up, left
+			//~ [1, -1], // down, right // issue!
+			//~ [1, 1] // up, right
 			
-			// rook moves
-			[-1, 0], // left
-			[1, 0], // right
-			[0, -1], // down
- 			[0, 1] // up
+			//~ // rook moves
+			//~ [-1, 0], // left
+			//~ [1, 0], // right
+			//~ [0, -1], // down
+ 			//~ [0, 1] // up  // issue!
+ 			
+ 			[-1, -1],
+			[-1, 0],
+			[-1, 1],
+			[0, -1],
+			[0, 1],
+			[1, -1],
+			[1, 0],
+			[1, 1]
 		];
 		
 		const legalMoves = [];
@@ -41,7 +50,7 @@ class queen extends ChessPiece {
 					if (board[newX][newY] === Utils.freeSpace + " ") {
 						board[newX][newY] = "#####" + " ";
 						legalMoves.push([newX, newY]);
-					}
+					} 
 					
 					// not an ideal check but it works for now
 					if (board[newX][newY] === Utils.BISHOP + " " || board[newX][newY] === Utils.PAWN + " ") {
@@ -50,7 +59,7 @@ class queen extends ChessPiece {
 							
 					newX += move[0];
 					newY += move[1];
-				}
+				} 
 			}
 		}
 		return legalMoves;

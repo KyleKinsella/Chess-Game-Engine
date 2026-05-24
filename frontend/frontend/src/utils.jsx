@@ -14,7 +14,7 @@ class Utils {
 	static PAWN = "pawn";
 	static freeSpace = "...........";
 	
-	static letters = "a b c d e f g";
+	static letters = "a b c d e f g h";
 	static nums = "8 7 6 5 4 3 2 1";
 	
 	static pieces = [this.ROOK, this.KNIGHT, this.BISHOP, this.QUEEN, this.KING, this.BISHOP2, this.KNIGHT2, this.ROOK2];

@@ -38,7 +38,7 @@ class knight extends ChessPiece {
 				if (board[newRow][newCol] === Utils.freeSpace + " ") {		
 					//~ board[newRow][newCol] = "#####" + " ";
 					legalMoves.push([newRow, newCol]);
-				}		
+				}	
 			}
 		}
 		return legalMoves;

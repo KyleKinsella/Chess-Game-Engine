@@ -18,24 +18,22 @@ function App() {
 	const kings = findPieceInBoard(b, Utils.KING);	
 	const pawns = findPieceInBoard(b, Utils.PAWN);
 	
-	const processKnight = pieceToProcess(b, knights[0], Utils.KNIGHT);
-	var processRook = pieceToProcess(b, rooks[0], Utils.ROOK);
-	const processBishop = pieceToProcess(b, bishops[0], Utils.BISHOP);
+	//~ const processKnight = pieceToProcess(b, knights[0], Utils.KNIGHT);
+	//~ var processRook = pieceToProcess(b, rooks[0], Utils.ROOK);
+	//~ const processBishop = pieceToProcess(b, bishops[0], Utils.BISHOP);
 	
 	// TODO: this should be in the rook section in the "pieceToProcess" function...
-	var findMe = findPieceInBoard(b, Utils.freeSpace);	
-	processRook = pieceToProcess(b, findMe[0], Utils.ROOK);
+	//~ var findMe = findPieceInBoard(b, Utils.freeSpace);	
+	//~ processRook = pieceToProcess(b, findMe[0], Utils.ROOK);
 	
 	const processQueen = pieceToProcess(b, queens[0], Utils.QUEEN);
-	
-	// TODO:
 	//~ const processKing = pieceToProcess(b, kings[0], Utils.KING);
 	//~ const processPawn = pieceToProcess(b, pawns[0], Utils.PAWN);
 	
-	const chessPiecesNames = [Utils.KNIGHT, Utils.ROOK, Utils.BISHOP, Utils.QUEEN];
-	const chessPieces = [processKnight, processRook, processBishop, processQueen];
-	p(chessPiecesNames, chessPieces);
-	
+	//~ const chessPiecesNames = [Utils.KNIGHT, Utils.ROOK, Utils.BISHOP, Utils.QUEEN, Utils.KING, Utils.PAWN];
+	//~ const chessPieces = [processKnight, processRook, processBishop, processQueen, processKing, processPawn];	
+	//~ p(chessPiecesNames, chessPieces);
+		
     return (  
 		<div>
 			<div>

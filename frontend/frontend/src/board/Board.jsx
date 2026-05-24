@@ -71,12 +71,14 @@ export function movePiece(board, oldLoc, newLoc) {
 
 export function pieceToProcess(board, oldPieceLocation, pieceType) {		
 	const updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);	
+	const randomElement = updatedFreeSpaces[Math.floor(Math.random() * updatedFreeSpaces.length)];
+	// randomElement is for testing purposes only! // 
 	
 	switch (pieceType) {
 		case Utils.KNIGHT:
 			const k = new knight(0, 0, "white", Utils.KNIGHT, false);
 						
-			const moveKnight = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
+			const moveKnight = movePiece(board, oldPieceLocation, randomElement);
 			
 			const newKnightLocations = findPieceInBoard(moveKnight, Utils.KNIGHT);
 			
@@ -91,7 +93,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 		case Utils.ROOK:
 			const r = new rook(0, 0, "white", Utils.ROOK, false);
 						
-			const moveRook = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
+			const moveRook = movePiece(board, oldPieceLocation, randomElement);
 			
 			const newRookLocations = findPieceInBoard(moveRook, Utils.ROOK);
 			
@@ -106,7 +108,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 		case Utils.BISHOP:
 			const b = new bishop(0, 0, "white", Utils.BISHOP, false);
 						
-			const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[13]);
+			const moveBishop = movePiece(board, oldPieceLocation, randomElement);
 			
 			const newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
 			
@@ -121,7 +123,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 		case Utils.QUEEN:
 			const q = new queen(0, 0, "white", Utils.QUEEN, false);
 									
-			const moveQueen = movePiece(board, oldPieceLocation, updatedFreeSpaces[12]);
+			const moveQueen = movePiece(board, oldPieceLocation, randomElement);
 			
 			const newQueenLocations = findPieceInBoard(moveQueen, Utils.QUEEN);
 			
