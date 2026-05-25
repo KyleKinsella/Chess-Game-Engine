@@ -82,6 +82,8 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 			const newKnightLocations = findPieceInBoard(moveKnight, Utils.KNIGHT);
 			
+			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
+			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
 			const computeKnight = newKnightLocations[1];
 			
 			const legalKnightMoves = k.getLegalMoves(moveKnight, computeKnight);
@@ -97,7 +99,12 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 			const newRookLocations = findPieceInBoard(moveRook, Utils.ROOK);
 			
-			const computeRook = newRookLocations[0];
+			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
+			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
+			
+			// for example, if oldPieceLocation = rooks[0], and computeRook = newRookLocations[0] -- this depends on the ouput of newRookLocations, we won't see the "#####". But if the "oldPieceLocation" = rooks[0], and 
+			// computeRook = newRookLocations[1] -- this depends on the ouput of newRookLocations, and we will see the "#####"!
+			const computeRook = newRookLocations[1];
 			
 			const legalRookMoves = r.getLegalMoves(moveRook, computeRook);
 			
@@ -112,6 +119,8 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 			const newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
 			
+			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
+			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
 			const computeBishop = newBishopLocations[1];
 			
 			const legalBishopMoves = b.getLegalMoves(moveBishop, computeBishop);
@@ -127,6 +136,8 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 			const newQueenLocations = findPieceInBoard(moveQueen, Utils.QUEEN);
 			
+			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
+			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
 			const computeQueen = newQueenLocations[0];
 			
 			const legalQueenMoves = q.getLegalMoves(moveQueen, computeQueen);

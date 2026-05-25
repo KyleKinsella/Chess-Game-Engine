@@ -36,7 +36,7 @@ class knight extends ChessPiece {
 			// TODO: you cannot move to a postion that is occupied by another piece!
 			if (newRow >= 0 && newRow < Utils.ROWS && newCol >= 0 && newCol < Utils.COLS) {
 				if (board[newRow][newCol] === Utils.freeSpace + " ") {		
-					//~ board[newRow][newCol] = "#####" + " ";
+					board[newRow][newCol] = "#####" + " ";
 					legalMoves.push([newRow, newCol]);
 				}	
 			}

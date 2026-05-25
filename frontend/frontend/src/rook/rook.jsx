@@ -27,7 +27,7 @@ class rook extends ChessPiece {
 			for (var i = 0; i < board.length; i++) {
 				if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
 					if (board[newX][newY] === Utils.freeSpace + " ") {
-						//~ board[newX][newY] = "#####" + " ";
+						board[newX][newY] = "#####" + " ";
 						legalMoves.push([newX, newY]);
 					} 
 					
