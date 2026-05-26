@@ -1,15 +1,27 @@
-// imports //
+import Utils from "../utils.jsx";
+import ChessPiece from "../ChessPiece/ChessPiece.jsx";
 
-// TODO: make a pawn move from one location to another 
-function movePawn(currentBoard, currentPawnLocation, newPawnLocation, rows, cols) {
+class pawn extends ChessPiece {
+	constructor() {
+		super();
+	}
+	
+	getLegalMoves(board, oldPawnLocation) {
+	}
+	
+	makeMove(move, legalMoves, board) {
+	}
+	
+	getCaptured() {
+	}
+	
+	enPassant(board) {
+		// TODO - https://www.chess.com/terms/en-passant
+	}
+	
+	promotePawn(board) {
+		// TODO - any pawn that gets into the other teams end part of the board, can promote their pawn to be either: a queen, rook, bishop or a knight!
+	}
 }
 
-function Pawn() {
-	return (
-		<div>
-		
-		</div>
-	)
-}
-
-export default Pawn;
+export default pawn;
