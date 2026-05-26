@@ -6,7 +6,6 @@ class rook extends ChessPiece {
 		super();
 	}
 	
-	// TODO: when a pawn moves forward the rook should be able to go into that spot where the pawn previously was...
 	getLegalMoves(board, oldRookLocation) {
 		const row = oldRookLocation[0];
 		const col = oldRookLocation[1];
@@ -24,18 +23,16 @@ class rook extends ChessPiece {
 			var newX = row + move[0];
 			var newY = col + move[1];
 			
+			// i am not using the value of i here, i know LOL.......
 			for (var i = 0; i < board.length; i++) {
 				if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
 					if (board[newX][newY] === Utils.freeSpace + " ") {
 						board[newX][newY] = "#####" + " ";
 						legalMoves.push([newX, newY]);
-					} 
-					
-					// not an ideal check but it works for now
-					if (board[newX][newY] === Utils.PAWN + " ") {
+					} else {
 						break;
-					} 
-								
+					}
+													
 					newX += move[0];
 					newY += move[1];
 				}

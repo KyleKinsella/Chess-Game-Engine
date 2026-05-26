@@ -19,8 +19,11 @@ export function initGameBoard(board, pieces, rows, cols) {
                 board[i][j] = Utils.freeSpace + " ";
             }
                 
-            if (i === 1 || i === 6) {       
+            if (i === 1 || i === 6) {  
+				// i am stupid (Charles Leclerc - Ferrari Driver) -- when i remove all of the pawns off the board 
+				// i as not replacing it with anything, so i was removing 2 rows!   
 				board[i][j] = Utils.PAWN + " ";
+				//~ board[i][j] = Utils.freeSpace + " ";
             }
         }
     }   
@@ -94,8 +97,8 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 		case Utils.ROOK:
 			const r = new rook(0, 0, "white", Utils.ROOK, false);
-						
-			const moveRook = movePiece(board, oldPieceLocation, randomElement);
+			
+			const moveRook = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
 			
 			const newRookLocations = findPieceInBoard(moveRook, Utils.ROOK);
 			
@@ -104,7 +107,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 			// for example, if oldPieceLocation = rooks[0], and computeRook = newRookLocations[0] -- this depends on the ouput of newRookLocations, we won't see the "#####". But if the "oldPieceLocation" = rooks[0], and 
 			// computeRook = newRookLocations[1] -- this depends on the ouput of newRookLocations, and we will see the "#####"!
-			const computeRook = newRookLocations[1];
+			const computeRook = newRookLocations[0];
 			
 			const legalRookMoves = r.getLegalMoves(moveRook, computeRook);
 			
@@ -152,8 +155,11 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 		case Utils.PAWN:
 			const pa = new pawn(0, 0, "white", Utils.PAWN, false);
-			break;
-		
+			
+			//~ const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[0])
+			board[1][1] = Utils.freeSpace + " ";
+			return board;
+				
 		default:
 			console.log("Invalid piece input");
 			break;
