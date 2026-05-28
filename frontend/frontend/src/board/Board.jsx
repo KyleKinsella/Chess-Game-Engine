@@ -22,8 +22,8 @@ export function initGameBoard(board, pieces, rows, cols) {
             if (i === 1 || i === 6) {  
 				// i am stupid (Charles Leclerc - Ferrari Driver) -- when i remove all of the pawns off the board 
 				// i as not replacing it with anything, so i was removing 2 rows!   
-				board[i][j] = Utils.PAWN + " ";
-				//~ board[i][j] = Utils.freeSpace + " ";
+				//~ board[i][j] = Utils.PAWN + " ";
+				board[i][j] = Utils.freeSpace + " ";
             }
         }
     }   
@@ -98,7 +98,8 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 		case Utils.ROOK:
 			const r = new rook(0, 0, "white", Utils.ROOK, false);
 			
-			const moveRook = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
+			//~ updatedFreeSpaces[0]
+			const moveRook = movePiece(board, oldPieceLocation, randomElement);
 			
 			const newRookLocations = findPieceInBoard(moveRook, Utils.ROOK);
 			
@@ -107,7 +108,7 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 			// for example, if oldPieceLocation = rooks[0], and computeRook = newRookLocations[0] -- this depends on the ouput of newRookLocations, we won't see the "#####". But if the "oldPieceLocation" = rooks[0], and 
 			// computeRook = newRookLocations[1] -- this depends on the ouput of newRookLocations, and we will see the "#####"!
-			const computeRook = newRookLocations[0];
+			const computeRook = newRookLocations[1];
 			
 			const legalRookMoves = r.getLegalMoves(moveRook, computeRook);
 			
@@ -118,14 +119,18 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 		case Utils.BISHOP:
 			const b = new bishop(0, 0, "white", Utils.BISHOP, false);
 						
-			const moveBishop = movePiece(board, oldPieceLocation, randomElement);
+			// this is not an ideal thing to do, but it works for now!
+			board[0][0] = Utils.freeSpace + " ";
 			
+			//~ const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[46]); // only do this if you have removed the pawns off of the board! (otherwise, it will break...)
+			const moveBishop = movePiece(board, oldPieceLocation, randomElement);		
+				
 			const newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
 			
 			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
 			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
 			const computeBishop = newBishopLocations[1];
-			
+				
 			const legalBishopMoves = b.getLegalMoves(moveBishop, computeBishop);
 			
 			// TODO: is a move legal or not !?
@@ -134,6 +139,9 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 		case Utils.QUEEN:
 			const q = new queen(0, 0, "white", Utils.QUEEN, false);
+			
+			// this is not an ideal thing to do, but it works for now!
+			board[0][0] = Utils.freeSpace + " ";
 									
 			const moveQueen = movePiece(board, oldPieceLocation, randomElement);
 			
@@ -154,11 +162,11 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			break;
 			
 		case Utils.PAWN:
-			const pa = new pawn(0, 0, "white", Utils.PAWN, false);
-			
-			//~ const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[0])
-			board[1][1] = Utils.freeSpace + " ";
-			return board;
+			const p = new pawn(0, 0, "white", Utils.PAWN, false);
+			//~ const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[3]);
+			//~ board[1][3] = Utils.freeSpace + " ";
+			//~ board[1][4] = Utils.freeSpace + " ";
+			break;
 				
 		default:
 			console.log("Invalid piece input");
