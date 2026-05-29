@@ -20,10 +20,9 @@ function App() {
 	// 
 	// legal moves for each piece - this updates the board to contain "#####" this is the legal moves for that piece
 	//
-	const values = ["k", "r", "b", "q"]
+	const values = ["k", "r", "b", "q", "p"];
 	const rand = values[Math.floor(Math.random() * values.length)];
-
-	const processPawn = pieceToProcess(b, pawns[3], Utils.PAWN);
+	
 	switch (rand) {
 		case "k":
 			const processKnight = pieceToProcess(b, knights[0], Utils.KNIGHT);
@@ -43,6 +42,11 @@ function App() {
 		case "q":
 			const processQueen = pieceToProcess(b, queens[0], Utils.QUEEN);
 			console.log(processQueen);
+			break;
+			
+		case "p":
+			const processPawn = pieceToProcess(b, pawns[11], Utils.PAWN);
+			console.log(processPawn);
 			break;
 	}
 	

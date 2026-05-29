@@ -22,8 +22,8 @@ export function initGameBoard(board, pieces, rows, cols) {
             if (i === 1 || i === 6) {  
 				// i am stupid (Charles Leclerc - Ferrari Driver) -- when i remove all of the pawns off the board 
 				// i as not replacing it with anything, so i was removing 2 rows!   
-				//~ board[i][j] = Utils.PAWN + " ";
-				board[i][j] = Utils.freeSpace + " ";
+				board[i][j] = Utils.PAWN + " ";
+				//~ board[i][j] = Utils.freeSpace + " ";
             }
         }
     }   
@@ -163,11 +163,21 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 		case Utils.PAWN:
 			const p = new pawn(0, 0, "white", Utils.PAWN, false);
-			//~ const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[3]);
-			//~ board[1][3] = Utils.freeSpace + " ";
-			//~ board[1][4] = Utils.freeSpace + " ";
-			break;
-				
+			
+			//~ const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
+			
+			const newPawnLocations = findPieceInBoard(board, Utils.PAWN);
+			
+			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
+			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
+			const computePawn = newPawnLocations[11];
+			
+			const legalPawnMoves = p.getLegalMoves(board, computePawn);
+			
+			// TODO: is a move legal or not !?
+			
+			return legalPawnMoves;
+			
 		default:
 			console.log("Invalid piece input");
 			break;
