@@ -28,7 +28,7 @@ function App() {
 	//
 	const values = ["knight", "rook", "bishop", "queen", "pawn", "king"];
 	const rand = values[Math.floor(Math.random() * values.length)];
-		
+				
 	switch (rand) {
 		case "knight":
 			freeSpot(b);
