@@ -159,8 +159,25 @@ export function pieceToProcess(board, oldPieceLocation, pieceType) {
 			
 		case Utils.KING:
 			const ki = new king(0, 0, "white", Utils.KING, false);
-			break;
 			
+			const moveKing = movePiece(board, oldPieceLocation, updatedFreeSpaces[27]);
+			
+			const newKingLocations = findPieceInBoard(moveKing, Utils.KING);
+			//~ console.log(newKingLocations);
+			
+			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
+			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
+			
+			// for example, if oldPieceLocation = rooks[0], and computeRook = newRookLocations[0] -- this depends on the ouput of newRookLocations, we won't see the "#####". But if the "oldPieceLocation" = rooks[0], and 
+			// computeRook = newRookLocations[1] -- this depends on the ouput of newRookLocations, and we will see the "#####"!
+			const computeKing = newKingLocations[0];
+			
+			const legalKingMoves = ki.getLegalMoves(moveKing, computeKing);
+			
+			// TODO: is a move legal or not !?
+			
+			return legalKingMoves;
+					
 		case Utils.PAWN:
 			const p = new pawn(0, 0, "white", Utils.PAWN, false);
 			
