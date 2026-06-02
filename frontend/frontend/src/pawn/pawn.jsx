@@ -1,30 +1,21 @@
 import Utils from "../utils.jsx";
 import ChessPiece from "../ChessPiece/ChessPiece.jsx";
 
-function randomSpot() {
-	// pawns can move either one or two postions on there opening move...
-	const opening = [1, 2];
-	
-	const randomElement = opening[Math.floor(Math.random() * opening.length)];
-	// randomElement is for testing purposes only! // 
-	
-	return randomElement;
-}
-
 function goDown(board, row, col) {
 	const legalMoves = [];
+	const goDown = [0, -1];
+	var goDownTwice = 2;
 	
-	const down = [0, -1]; // go down
+	var newRow = row + goDown[0]+goDownTwice; // this brings me down!
+	const newCol = col + goDown[1]+1; // this brings me to the other column! (this will be incredibly useful for when we get to capturing pieces)
+		
+	// have you moved your pawn down? if so, you only have one legal move to continue forward
+	if (board[newRow-2][newCol-1] === Utils.freeSpace + " ") { //|| board[1][0] === board[newRow][newCol] || board[1][0] === Utils.freeSpace + " ") {
+		newRow = row + goDown[0]+1;
+		goDownTwice = 1;
+	} 
 	
-	//~ const newRow = row + down[0]+1+1; // this brings me down!
-	//~ const newCol = col + down[1]+1+1; // this brings me to the other column!
-
-	var rand = randomSpot();
-
-	const newRow = row + down[0]+rand; // this brings me down!
-	const newCol = col + down[1]+1; // this brings me to the other column! (this will be incredibly useful for when we get to capturing pieces!)...
-	
-	if (rand === 2) {
+	if (goDownTwice === 2) {
 		board[newRow-1][newCol] = "#####" + " ";					
 		legalMoves.push([newRow-1, newCol]);		
 	}
@@ -39,18 +30,21 @@ function goDown(board, row, col) {
 
 function goUp(board, row, col) {
 	const legalMoves = [];
-
-	const up = [0, 1]; // go up
+	const goUp = [0, 1];
+	var goUpTwice = 2;
 	
-	const rand = randomSpot();
+	var newRow = row + goUp[0]+goUpTwice-3; // this brings me up!
+	const newCol = col + goUp[0]; // this brings me to the other column! (this will be incredibly useful for when we get to capturing pieces)
 	
-	const newRow = row + up[0]+rand-3; // this brings me up!
-	//~ const newCol2 = col + up[1]+2; // this brings me to the other column! 
-	const newCol = col + up[0]; // this brings me to the other column! 
+	// have you moved your pawn up? if so, you only have one legal move to continue forward
+	//~ if (board[newRow+2][newCol+1] === Utils.freeSpace + " " || board[5][6] === board[newRow+2][newCol+1] || board[5][6] === Utils.freeSpace + " ") {
+		//~ newRow = row + goUp[0]+1; // this brings me up!
+		//~ goUpTwice = 1;
+	//~ } 
 	
-	if (rand === 2) {
-		board[newRow-1][newCol] = "#####" + " ";					
-		legalMoves.push([newRow-1, newCol]);		
+	if (goUpTwice === 2) {
+		board[newRow+1][newCol] = "#####" + " ";					
+		legalMoves.push([newRow+1, newCol]);		
 	}
 	
 	if (board[newRow][newCol] === Utils.freeSpace + " ") {
@@ -77,9 +71,9 @@ class pawn extends ChessPiece {
 		// Note: you need to be very careful on what way you want to move your pawn!
 		// for example: if "oldPawnLocation" is any of the pawns in row 1 you MUST call goDown(...), otherwise you MUST call goUp(...) if you dont follow this, the pawns will break!
 		//
-		
-		//~ return goDown(board, row, col);
-		return goUp(board, row, col);
+				
+		return goDown(board, row, col);
+		//~ return goUp(board, row, col);
 	}
 	
 	makeMove(move, legalMoves, board) {

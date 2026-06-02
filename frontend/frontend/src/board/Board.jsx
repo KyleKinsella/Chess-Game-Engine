@@ -61,140 +61,142 @@ export function movePiece(board, oldLoc, newLoc) {
 	return board;
 }
 
-// pieceToProcess function usage:
-// Steps for each piece (how do we process each piece) ?
-// Step 1: create a piece object (whatever piece you want to process)
-// Step 2: find all of the updated free spots on the board
-// Step 3: move your piece
-// Step 4: find all of the updated piece locations, since you have just moved a piece
-// Step 5: pick a spot that you want to compute the legal moves for
-// Step 6: now you have all of the legal moves from Step 5
-// Step 7: check if the move is a valid or invalid move
-// Step 8: print some of the data to ensure correct output
-
-export function pieceToProcess(board, oldPieceLocation, pieceType) {		
+export function pieceToProcess(board, oldPieceLocation, index, pieceType) {		
 	const updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);	
 	const randomElement = updatedFreeSpaces[Math.floor(Math.random() * updatedFreeSpaces.length)];
 	// randomElement is for testing purposes only! // 
 	
 	switch (pieceType) {
-		case Utils.KNIGHT:
-			const k = new knight(0, 0, "white", Utils.KNIGHT, false);
-						
+		case Utils.KNIGHT:						
 			const moveKnight = movePiece(board, oldPieceLocation, randomElement);
 			
 			const newKnightLocations = findPieceInBoard(moveKnight, Utils.KNIGHT);
 			
-			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
-			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
-			const computeKnight = newKnightLocations[1];
+			const computeKnight = newKnightLocations[index];
 			
+			const k = new knight(0, 0, "white", Utils.KNIGHT, false);
 			const legalKnightMoves = k.getLegalMoves(moveKnight, computeKnight);
 			
 			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, newKnightLocations);
 			
 			return legalKnightMoves;
 			
-		case Utils.ROOK:
-			const r = new rook(0, 0, "white", Utils.ROOK, false);
-			
-			//~ updatedFreeSpaces[0]
+		case Utils.ROOK:			
 			const moveRook = movePiece(board, oldPieceLocation, randomElement);
 			
 			const newRookLocations = findPieceInBoard(moveRook, Utils.ROOK);
 			
-			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
-			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
+			const computeRook = newRookLocations[index];
 			
-			// for example, if oldPieceLocation = rooks[0], and computeRook = newRookLocations[0] -- this depends on the ouput of newRookLocations, we won't see the "#####". But if the "oldPieceLocation" = rooks[0], and 
-			// computeRook = newRookLocations[1] -- this depends on the ouput of newRookLocations, and we will see the "#####"!
-			const computeRook = newRookLocations[1];
-			
+			const r = new rook(0, 0, "white", Utils.ROOK, false);
 			const legalRookMoves = r.getLegalMoves(moveRook, computeRook);
 			
 			// TODO: is a move legal or not !?
 			
 			return legalRookMoves;
 						
-		case Utils.BISHOP:
-			const b = new bishop(0, 0, "white", Utils.BISHOP, false);
-						
-			// this is not an ideal thing to do, but it works for now!
-			board[0][0] = Utils.freeSpace + " ";
-			
-			//~ const moveBishop = movePiece(board, oldPieceLocation, updatedFreeSpaces[46]); // only do this if you have removed the pawns off of the board! (otherwise, it will break...)
+		case Utils.BISHOP:			
 			const moveBishop = movePiece(board, oldPieceLocation, randomElement);		
 				
 			const newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
 			
-			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
-			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
-			const computeBishop = newBishopLocations[1];
+			const computeBishop = newBishopLocations[index];
 				
+			const b = new bishop(0, 0, "white", Utils.BISHOP, false);
 			const legalBishopMoves = b.getLegalMoves(moveBishop, computeBishop);
 			
 			// TODO: is a move legal or not !?
 			
 			return legalBishopMoves;
 			
-		case Utils.QUEEN:
-			const q = new queen(0, 0, "white", Utils.QUEEN, false);
-			
-			// this is not an ideal thing to do, but it works for now!
-			board[0][0] = Utils.freeSpace + " ";
-									
+		case Utils.QUEEN:						
 			const moveQueen = movePiece(board, oldPieceLocation, randomElement);
 			
 			const newQueenLocations = findPieceInBoard(moveQueen, Utils.QUEEN);
 			
-			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
-			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
-			const computeQueen = newQueenLocations[0];
+			const computeQueen = newQueenLocations[index];
 			
+			const q = new queen(0, 0, "white", Utils.QUEEN, false);
 			const legalQueenMoves = q.getLegalMoves(moveQueen, computeQueen);
 			
 			// TODO: is a move legal or not !?
 			
 			return legalQueenMoves;
+		
+		case Utils.PAWN:			
+			//~ const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
 			
-		case Utils.KING:
-			const ki = new king(0, 0, "white", Utils.KING, false);
+			const pawns = findPieceInBoard(board, Utils.PAWN);
 			
-			const moveKing = movePiece(board, oldPieceLocation, updatedFreeSpaces[27]);
+			const computePawn = pawns[index];
+			
+			const p = new pawn(0, 0, "white", Utils.PAWN, false);
+			var legalPawnMoves = p.getLegalMoves(board, computePawn);
+			
+			// TODO: is a move legal or not !?
+			
+			const down = [0, 1, 2, 3, 4, 5, 6, 7];
+			for (var i = 0; i < down.length; i++) {
+				if (index === down[i]) {
+					var movePawn = movePiece(board, oldPieceLocation, legalPawnMoves[1]);
+			
+					for (var i = 0; i < board.length; i++) {
+						for (var j = 0; j < board[i].length; j++) {
+							if (board[i][j-1] === "#####" + " " || board[i][j-1] === Utils.freeSpace + " ") { // || board[1][7] === Utils.freeSpace + " ") {
+								board[i][j-1] = Utils.freeSpace + " ";
+								board[2][7] = Utils.freeSpace + " "; // this WILL be an issue...
+							}
+						}
+					}
+				
+					const newPawnLocations = findPieceInBoard(board, Utils.PAWN);
+					
+					movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[3]);
+					
+					legalPawnMoves = p.getLegalMoves(board, newPawnLocations[7]);
+					break;
+				}
+			}
+			
+			const up = [8, 9, 10, 11, 12, 13, 14, 15];
+			for (var i = 0; i < up.length; i++) {
+				if (index === up[i]) {
+					var movePawn = movePiece(board, oldPieceLocation, legalPawnMoves[1]);
+			
+					for (var i = 0; i < board.length; i++) {
+						for (var j = 0; j < board[i].length; j++) {
+							if (board[i][j+1] === "#####" + " " || board[i][j+1] === Utils.freeSpace + " ") { // || board[1][7] === Utils.freeSpace + " ") {
+								board[i][j+1] = Utils.freeSpace + " ";
+								//~ board[2][7] = Utils.freeSpace + " "; // this WILL be an issue...
+							}
+						}
+					}
+				
+					const newPawnLocations = findPieceInBoard(board, Utils.PAWN);
+					
+					movePawn = movePiece(board, newPawnLocations[8], updatedFreeSpaces[32]);
+					
+					//~ legalPawnMoves = p.getLegalMoves(board, newPawnLocations[7]);
+					break;
+				}
+			}
+			
+			return legalPawnMoves;	
+		
+		case Utils.KING:			
+			const moveKing = movePiece(board, oldPieceLocation, randomElement);
 			
 			const newKingLocations = findPieceInBoard(moveKing, Utils.KING);
-			//~ console.log(newKingLocations);
 			
-			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
-			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
+			const computeKing = newKingLocations[index];
 			
-			// for example, if oldPieceLocation = rooks[0], and computeRook = newRookLocations[0] -- this depends on the ouput of newRookLocations, we won't see the "#####". But if the "oldPieceLocation" = rooks[0], and 
-			// computeRook = newRookLocations[1] -- this depends on the ouput of newRookLocations, and we will see the "#####"!
-			const computeKing = newKingLocations[0];
-			
+			const ki = new king(0, 0, "white", Utils.KING, false);
 			const legalKingMoves = ki.getLegalMoves(moveKing, computeKing);
 			
 			// TODO: is a move legal or not !?
 			
 			return legalKingMoves;
-					
-		case Utils.PAWN:
-			const p = new pawn(0, 0, "white", Utils.PAWN, false);
-			
-			//~ const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
-			
-			const newPawnLocations = findPieceInBoard(board, Utils.PAWN);
-			
-			// you need to be careful of the value of "oldPieceLocation" that is passed to this function, because depending on the location on the passed in piece, that will affect the output of "newRookLocations", 
-			// and if the "oldPieceLocation" is the same as the "newRookLocations" at a certain index it won't show the "#####"....
-			const computePawn = newPawnLocations[11];
-			
-			const legalPawnMoves = p.getLegalMoves(board, computePawn);
-			
-			// TODO: is a move legal or not !?
-			
-			return legalPawnMoves;
-			
+				
 		default:
 			console.log("Invalid piece input");
 			break;

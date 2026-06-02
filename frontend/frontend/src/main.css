@@ -48,3 +48,9 @@
   width: 100px;
   height: 100px;
 }
+
+.board {
+	width: 50%; /* or any specific width */
+	margin: auto;
+	font-size: 25px;
+}

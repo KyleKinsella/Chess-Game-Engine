@@ -6,6 +6,7 @@ import bishop from "../bishop/bishop.jsx";
 import queen from "../queen/queen.jsx";
 import { findPieceInBoard } from "../board/Board.jsx";
 
+// i am really not happy with this code, this is not good (duplication)!!
 function canKingMove(board, pieceType) {
 	var moves = [];
 	
@@ -102,12 +103,17 @@ class king extends ChessPiece {
 			const newY = col + move[1];
 			
 			if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
-				const dontMoveToCheck = canKingMove(board, randomElement);
-				if (dontMoveToCheck) {
-					if (board[newX][newY] === Utils.freeSpace + " ") {
-						board[newX][newY] = "$$$$$" + " ";
-						legalMoves.push([newX, newY]);
-					} 
+				//~ const dontMoveToCheck = canKingMove(board, randomElement);
+				//~ if (dontMoveToCheck) {
+					//~ if (board[newX][newY] === Utils.freeSpace + " ") {
+						//~ board[newX][newY] = "_____" + " ";
+						//~ legalMoves.push([newX, newY]);
+					//~ } 
+				//~ } 
+								
+				if (board[newX][newY] === Utils.freeSpace + " ") {
+					board[newX][newY] = "_____" + " ";
+					legalMoves.push([newX, newY]);
 				} 
 			}
 		}
