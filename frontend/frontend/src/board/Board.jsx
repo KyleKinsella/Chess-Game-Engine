@@ -135,52 +135,6 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType) {
 			
 			// TODO: is a move legal or not !?
 			
-			const down = [0, 1, 2, 3, 4, 5, 6, 7];
-			for (var i = 0; i < down.length; i++) {
-				if (index === down[i]) {
-					var movePawn = movePiece(board, oldPieceLocation, legalPawnMoves[1]);
-			
-					for (var i = 0; i < board.length; i++) {
-						for (var j = 0; j < board[i].length; j++) {
-							if (board[i][j-1] === "#####" + " " || board[i][j-1] === Utils.freeSpace + " ") { // || board[1][7] === Utils.freeSpace + " ") {
-								board[i][j-1] = Utils.freeSpace + " ";
-								board[2][7] = Utils.freeSpace + " "; // this WILL be an issue...
-							}
-						}
-					}
-				
-					const newPawnLocations = findPieceInBoard(board, Utils.PAWN);
-					
-					movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[3]);
-					
-					legalPawnMoves = p.getLegalMoves(board, newPawnLocations[7]);
-					break;
-				}
-			}
-			
-			const up = [8, 9, 10, 11, 12, 13, 14, 15];
-			for (var i = 0; i < up.length; i++) {
-				if (index === up[i]) {
-					var movePawn = movePiece(board, oldPieceLocation, legalPawnMoves[1]);
-			
-					for (var i = 0; i < board.length; i++) {
-						for (var j = 0; j < board[i].length; j++) {
-							if (board[i][j+1] === "#####" + " " || board[i][j+1] === Utils.freeSpace + " ") { // || board[1][7] === Utils.freeSpace + " ") {
-								board[i][j+1] = Utils.freeSpace + " ";
-								//~ board[2][7] = Utils.freeSpace + " "; // this WILL be an issue...
-							}
-						}
-					}
-				
-					const newPawnLocations = findPieceInBoard(board, Utils.PAWN);
-					
-					movePawn = movePiece(board, newPawnLocations[8], updatedFreeSpaces[32]);
-					
-					//~ legalPawnMoves = p.getLegalMoves(board, newPawnLocations[7]);
-					break;
-				}
-			}
-			
 			return legalPawnMoves;	
 		
 		case Utils.KING:			
