@@ -124,15 +124,13 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType) {
 			return legalQueenMoves;
 		
 		case Utils.PAWN:			
-			//~ const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
-			
 			const pawns = findPieceInBoard(board, Utils.PAWN);
 			
 			const computePawn = pawns[index];
 			
 			const p = new pawn(0, 0, "white", Utils.PAWN, false);
 			var legalPawnMoves = p.getLegalMoves(board, computePawn);
-			
+						
 			// TODO: is a move legal or not !?
 			
 			return legalPawnMoves;	

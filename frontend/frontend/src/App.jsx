@@ -62,17 +62,19 @@ function App() {
 			break;
 			
 		case "pawn":
-			const n = 10;
+			const n = 4;
 			const processMe = pawns[n];
 			
 			const processPawn = pieceToProcess(b, processMe, n, Utils.PAWN);
 			console.log(processPawn);
-			
+						
 			const down = [0, 1, 2, 3, 4, 5, 6, 7];
 			for (var i = 0; i < down.length; i++) {
 				if (n === down[i]) {
 					var movePawn = movePiece(b, processMe, processPawn[0]);
-					//~ var movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[5]);
+					//~ var movePawn = movePiece(b, processMe, free[4]);
+					
+					//~ var movePawn = movePiece(b, processMe, processPawn[0]);
 					
 					//~ const newPawnLocations = findPieceInBoard(board, Utils.PAWN);
 					//~ movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[3]);
@@ -83,7 +85,7 @@ function App() {
 			const up = [8, 9, 10, 11, 12, 13, 14, 15];
 			for (var i = 0; i < up.length; i++) {
 				if (n === up[i]) {
-					var movePawn = movePiece(b, processMe, processPawn[1]);
+					//~ var movePawn = movePiece(b, processMe, processPawn[1]);
 					//~ var movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[29]);
 					
 					

@@ -4,20 +4,14 @@ import ChessPiece from "../ChessPiece/ChessPiece.jsx";
 function goDown(board, row, col) {
 	const legalMoves = [];
 	const goDown = [0, -1];
-	var goDownTwice = 2;
+	const goDownTwice = 2;
 	
-	var newRow = row + goDown[0]+goDownTwice; // this brings me down!
+	const newRow = row + goDown[0]+goDownTwice; // this brings me down!
 	const newCol = col + goDown[1]+1; // this brings me to the other column! (this will be incredibly useful for when we get to capturing pieces)
 		
-	// have you moved your pawn down? if so, you only have one legal move to continue forward
-	if (board[newRow-2][newCol-1] === Utils.freeSpace + " ") {//} || board[newRow-2][newCol-1] === Utils.PAWN + " ") { //|| board[1][0] === board[newRow][newCol] || board[1][0] === Utils.freeSpace + " ") {
-		newRow = row + goDown[0]+1;
-		goDownTwice = 1;
-	} 
-	
 	if (goDownTwice === 2) {
 		board[newRow-1][newCol] = "#####" + " ";					
-		legalMoves.push([newRow-1, newCol]);		
+		legalMoves.push([newRow-1, newCol]);
 	}
 	
 	if (board[newRow][newCol] === Utils.freeSpace + " ") {
@@ -31,9 +25,9 @@ function goDown(board, row, col) {
 function goUp(board, row, col) {
 	const legalMoves = [];
 	const goUp = [0, 1];
-	var goUpTwice = 2;
+	const goUpTwice = 2;
 	
-	var newRow = row + goUp[0]+goUpTwice-4; // this brings me up!
+	const newRow = row + goUp[0]+goUpTwice-3; // this brings me up!
 	const newCol = col + goUp[0]; // this brings me to the other column! (this will be incredibly useful for when we get to capturing pieces)
 	
 	if (goUpTwice === 2) {
@@ -63,9 +57,9 @@ class pawn extends ChessPiece {
 		// for example: if "oldPawnLocation" is any of the pawns in row 1 you MUST call goDown(...), otherwise you MUST call goUp(...) if you dont follow this, the pawns will break!
 		// the fix to this problem is TEAM COLORS! 				
 		//
-		
-		//~ return goDown(board, row, col);
-		return goUp(board, row, col);
+				
+		return goDown(board, row, col);
+		//~ return goUp(board, row, col);
 	}
 	
 	makeMove(move, legalMoves, board) {
