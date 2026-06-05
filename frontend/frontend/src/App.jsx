@@ -1,7 +1,8 @@
 import Utils from "./utils.jsx";
 import { initGameBoard, findPieceInBoard, pieceToProcess, movePiece } from "./board/Board.jsx";
-import "./main.css";
+//~ import "./main.css";
 
+// for testing purposes:
 function freeSpot(board) {
 	board[1][4] = Utils.freeSpace + " ";
 	board[1][1] = Utils.freeSpace + " ";
@@ -30,7 +31,7 @@ function App() {
 	const values = ["knight", "rook", "bishop", "queen", "pawn", "king"];
 	var rand = values[Math.floor(Math.random() * values.length)];
 	
-	rand = "pawn";
+	rand = "king";
 	
 	switch (rand) {
 		case "knight":
@@ -97,8 +98,9 @@ function App() {
 			break;
 			
 		case "king":
+			// TODO: don't move the king into check (aka, danger!) - not an issue for now - due to no team colors, just yet...
 			const processKing = pieceToProcess(b, kings[0], 0, Utils.KING);
-			console.log(processKing);
+			console.log(processKing);			
 			break;
 	}
 				
