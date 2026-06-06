@@ -1,6 +1,6 @@
 import Utils from "./utils.jsx";
 import { initGameBoard, findPieceInBoard, pieceToProcess, movePiece } from "./board/Board.jsx";
-//~ import "./main.css";
+import "./main.css";
 
 // for testing purposes:
 function freeSpot(board) {
@@ -29,10 +29,8 @@ function App() {
 	// legal moves for each piece - this updates the board to contain "#####" this is the legal moves for that piece
 	//
 	const values = ["knight", "rook", "bishop", "queen", "pawn", "king"];
-	var rand = values[Math.floor(Math.random() * values.length)];
-	
-	rand = "king";
-	
+	const rand = values[Math.floor(Math.random() * values.length)];
+		
 	switch (rand) {
 		case "knight":
 			freeSpot(b);
@@ -63,38 +61,28 @@ function App() {
 			break;
 			
 		case "pawn":
-			const n = 4;
+			const n = 3;
 			const processMe = pawns[n];
 			
 			const processPawn = pieceToProcess(b, processMe, n, Utils.PAWN);
 			console.log(processPawn);
-						
-			const down = [0, 1, 2, 3, 4, 5, 6, 7];
+			
+			const down = [0, 1, 2, 3, 4, 5, 6, 7];				
 			for (var i = 0; i < down.length; i++) {
 				if (n === down[i]) {
 					var movePawn = movePiece(b, processMe, processPawn[0]);
-					//~ var movePawn = movePiece(b, processMe, free[4]);
-					
-					//~ var movePawn = movePiece(b, processMe, processPawn[0]);
-					
-					//~ const newPawnLocations = findPieceInBoard(board, Utils.PAWN);
-					//~ movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[3]);
-					//~ legalPawnMoves = p.getLegalMoves(movePawn, newPawnLocations[7]);
+					// TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it
+				} else {
+					const up = [8, 9, 10, 11, 12, 13, 14, 15];
+					for (var i = 0; i < up.length; i++) {
+						if (n === up[i]) {
+							var movePawn = movePiece(b, processMe, processPawn[1]);
+							// TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it
+						}
+					}
 				}
 			}
 			
-			const up = [8, 9, 10, 11, 12, 13, 14, 15];
-			for (var i = 0; i < up.length; i++) {
-				if (n === up[i]) {
-					//~ var movePawn = movePiece(b, processMe, processPawn[1]);
-					//~ var movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[29]);
-					
-					
-					//~ const newPawnLocations = findPieceInBoard(board, Utils.PAWN);
-					//~ movePawn = movePiece(board, oldPieceLocation, legalPawnMoves[0]);
-					//~ legalPawnMoves = p.getLegalMoves(board, newPawnLocations[8]);
-				}
-			}
 			break;
 			
 		case "king":
@@ -103,8 +91,8 @@ function App() {
 			console.log(processKing);			
 			break;
 	}
-				
-    return (  
+		
+    return (      
 		<div>
 			<div className="board">
 				{b.map((row, i) => (
