@@ -1,6 +1,7 @@
 import Utils from "./utils.jsx";
 import { initGameBoard, findPieceInBoard, pieceToProcess, resetBoard, movePiece } from "./board/Board.jsx";
 import "./main.css";
+import Square from './board/Square.jsx'
 
 function freeSpot(board) {
 	board[1][4] = Utils.freeSpace + " ";
@@ -73,19 +74,27 @@ function App() {
 			break;
 	}
 			
-    return (  
-		<div>
-			<div className="board">
-				{b.map((row, i) => (
-					<div key={i}>
-						{row.map((cell, j) => (
-							<span key={j}>{cell}</span>
-						))}
-					</div>
-				))}       
-			</div>
-		</div>
-	)
+    // return (  
+	// 	<div>
+	// 		<div className="board">
+	// 			{b.map((row, i) => (
+	// 				<div key={i}>
+	// 					{row.map((cell, j) => (
+	// 						<span key={j}>{cell}</span>
+	// 					))}
+	// 				</div>
+	// 			))}       
+	// 		</div>
+	// 	</div>
+	// )
+	return (
+        <Square
+            coords={[1, 1]}
+            isFree={true}
+            piece="rook"
+            highlight={false}
+        />
+    );
 }
 
 export default App;

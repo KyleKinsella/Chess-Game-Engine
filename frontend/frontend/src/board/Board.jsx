@@ -5,7 +5,6 @@ import bishop from "../bishop/bishop.jsx";
 import queen from "../queen/queen.jsx";
 import king from "../king/king.jsx";
 import pawn from "../pawn/pawn.jsx";
-
 // TODO: have - "a,b,c,d,e,f,g,h" at the bottom of the board and at the left hand side of the board have - "8 7 6 5 4 3 2 1"
 export function initGameBoard(board, pieces, rows, cols) {
     for (var i = 0; i < rows; i++) {
@@ -28,7 +27,7 @@ export function initGameBoard(board, pieces, rows, cols) {
         }
     }   
     return board;
-} 
+}
 
 // will need later on in the project...
 export function resetBoard(board) {
