@@ -24,6 +24,15 @@ function App() {
 	const queens = findPieceInBoard(b, Utils.QUEEN);
 	const pawns = findPieceInBoard(b, Utils.PAWN);
 	const kings = findPieceInBoard(b, Utils.KING);
+
+	const knights = {
+		wk_l: [2, 0],
+		wk_r: [2, 7],
+		bk_l: [7, 0],
+		bk_r: [7, 7]
+	}
+	
+
 	
 	// 
 	// legal moves for each piece - this updates the board to contain "#####" this is the legal moves for that piece
@@ -87,13 +96,19 @@ function App() {
 	// 		</div>
 	// 	</div>
 	// )
+	var b_arr = [];
+	for (var i = 0; i < 8; i++) {
+		for (var j = 0; j < 8; j++) {
+			const sqr = new Square({ coords: [i, j], isFree: true, piece: "", highlight: false });
+			b_arr.push(sqr);
+		}
+	};
 	return (
-        <Square
-            coords={[1, 1]}
-            isFree={true}
-            piece="rook"
-            highlight={false}
-        />
+		<div className="board">
+			{b_arr.map((sq, i) => (
+				<div key={i}>{sq}</div>
+			))}
+		</div>
     );
 }
 
