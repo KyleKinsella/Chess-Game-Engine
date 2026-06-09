@@ -50,7 +50,7 @@
 }
 
 .board {
-	width: 50%; /* or any specific width */
+	width: 75%; /* or any specific width */
 	margin: auto;
 	font-size: 25px;
 }
@@ -65,6 +65,20 @@
 
 }
 
+.square is_white{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #b3b3b3; /* default to white */
+    width: 100px;
+    height: 100px;
+
+}
+
 .square:hover {
     background-color: #f0d9b5; /* lighter color on hover */
+}
+
+span {
+    display: inline-block;
 }

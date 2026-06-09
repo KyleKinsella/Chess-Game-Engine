@@ -5,24 +5,25 @@ import bishop from "../bishop/bishop.jsx";
 import queen from "../queen/queen.jsx";
 import king from "../king/king.jsx";
 import pawn from "../pawn/pawn.jsx";
+import Square from "./Square.jsx";
 // TODO: have - "a,b,c,d,e,f,g,h" at the bottom of the board and at the left hand side of the board have - "8 7 6 5 4 3 2 1"
 export function initGameBoard(board, pieces, rows, cols) {
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
             
             if (i === 0 || i === 7) {
-                board[i][j] = Utils.pieces[j] + " ";
+                board[i][j] = new Square({ coords: [i, j], isFree: false, piece: Utils.pieces[j], highlight: false });
             }
              
 			if (i === 2 || i === 3 || i === 4 || i === 5) {
-                board[i][j] = Utils.freeSpace + " ";
+                board[i][j] = new Square({ coords: [i, j], isFree: true, piece: "", highlight: false });
             }
                 
             if (i === 1 || i === 6) {  
 				// i am stupid (Charles Leclerc - Ferrari Driver) -- when i remove all of the pawns off the board 
 				// i as not replacing it with anything, so i was removing 2 rows!   
-				board[i][j] = Utils.PAWN + " ";
-				//~ board[i][j] = Utils.freeSpace + " ";
+				//board[i][j] = new Square({ coords: [i, j], isFree: false, piece: Utils.PAWN, highlight: false });
+				board[i][j] = new Square({ coords: [i, j], isFree: true, piece: "", highlight: false });
             }
         }
     }   

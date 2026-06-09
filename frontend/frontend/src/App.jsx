@@ -24,92 +24,85 @@ function App() {
 	const queens = findPieceInBoard(b, Utils.QUEEN);
 	const pawns = findPieceInBoard(b, Utils.PAWN);
 	const kings = findPieceInBoard(b, Utils.KING);
-
-	const knights = {
-		wk_l: [2, 0],
-		wk_r: [2, 7],
-		bk_l: [7, 0],
-		bk_r: [7, 7]
-	}
 	
 
 	
 	// 
 	// legal moves for each piece - this updates the board to contain "#####" this is the legal moves for that piece
 	//
-	const values = ["knight", "rook", "bishop", "queen", "pawn", "king"];
-	var rand = values[Math.floor(Math.random() * values.length)];
+	// const values = ["knight", "rook", "bishop", "queen", "pawn", "king"];
+	// var rand = values[Math.floor(Math.random() * values.length)];
 	
-	rand = "pawn";
+	// rand = "pawn";
 	
-	switch (rand) {
-		case "knight":
-			freeSpot(b);
+	// switch (rand) {
+	// 	case "knight":
+	// 		freeSpot(b);
 			
-			const processKnight = pieceToProcess(b, knights[0], 1, Utils.KNIGHT);
-			console.log(processKnight);
-			break;
+	// 		const processKnight = pieceToProcess(b, knights[0], 1, Utils.KNIGHT);
+	// 		console.log(processKnight);
+	// 		break;
 			
-		case "rook":
-			freeSpot(b);
+	// 	case "rook":
+	// 		freeSpot(b);
 			
-			const processRook = pieceToProcess(b, rooks[0], 1, Utils.ROOK);
-			console.log(processRook);
-			break;
+	// 		const processRook = pieceToProcess(b, rooks[0], 1, Utils.ROOK);
+	// 		console.log(processRook);
+	// 		break;
 
-		case "bishop":
-			freeSpot(b);
+	// 	case "bishop":
+	// 		freeSpot(b);
 			
-			const processBishop = pieceToProcess(b, bishops[0], 1, Utils.BISHOP);
-			console.log(processBishop);
-			break;
+	// 		const processBishop = pieceToProcess(b, bishops[0], 1, Utils.BISHOP);
+	// 		console.log(processBishop);
+	// 		break;
 		
-		case "queen":
-			freeSpot(b);
+	// 	case "queen":
+	// 		freeSpot(b);
 			
-			const processQueen = pieceToProcess(b, queens[0], 0, Utils.QUEEN);
-			console.log(processQueen);
-			break;
+	// 		const processQueen = pieceToProcess(b, queens[0], 0, Utils.QUEEN);
+	// 		console.log(processQueen);
+	// 		break;
 			
-		case "pawn":
-			const n = 4; // dont pass 7 or anything above 7!
-			const processPawn = pieceToProcess(b, pawns[n], n, Utils.PAWN);
-			console.log(processPawn);
-			break;
+	// 	case "pawn":
+	// 		const n = 4; // dont pass 7 or anything above 7!
+	// 		const processPawn = pieceToProcess(b, pawns[n], n, Utils.PAWN);
+	// 		console.log(processPawn);
+	// 		break;
 			
-		case "king":
-			const processKing = pieceToProcess(b, kings[0], 0, Utils.KING);
-			console.log(processKing);
-			break;
-	}
+	// 	case "king":
+	// 		const processKing = pieceToProcess(b, kings[0], 0, Utils.KING);
+	// 		console.log(processKing);
+	// 		break;
+	// }
 			
-    // return (  
-	// 	<div>
-	// 		<div className="board">
-	// 			{b.map((row, i) => (
-	// 				<div key={i}>
-	// 					{row.map((cell, j) => (
-	// 						<span key={j}>{cell}</span>
-	// 					))}
-	// 				</div>
-	// 			))}       
-	// 		</div>
-	// 	</div>
-	// )
-	var b_arr = [];
-	for (var i = 0; i < 8; i++) {
-		for (var j = 0; j < 8; j++) {
-			const sqr = new Square({ coords: [i, j], isFree: true, piece: "", highlight: false });
-			b_arr.push(sqr);
-		}
-	};
-	return (
-		<div className="board">
-			{b_arr.map((sq, i) => (
-				<div key={i}>{sq}</div>
-			))}
+    return (  
+		<div>
+			<div className="board">
+				{b.map((row, i) => (
+					<div key={i}>
+						{row.map((cell, j) => (
+							<span key={j}>{cell}</span>
+						))}
+					</div>
+				))}       
+			</div>
 		</div>
-    );
+	)
+	// var b_arr = [];
+	// for (var i = 0; i < 8; i++) {
+	// 	for (var j = 0; j < 8; j++) {
+	// 		const sqr = new Square({ coords: [i, j], isFree: true, piece: "", highlight: false });
+	// 		b_arr.push(sqr);
+	// 	}
+	// };
+	// return (
+	// 	<div className="board">
+	// 		{b_arr.map((sq, i) => (
+	// 			<div key={i}>{sq}</div>
+	// 		))}
+	// 	</div>
+    // );
 }
 
 export default App;
