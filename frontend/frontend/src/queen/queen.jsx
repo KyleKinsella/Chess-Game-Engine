@@ -1,5 +1,6 @@
 import Utils from "../utils.jsx";
 import ChessPiece from "../ChessPiece/ChessPiece.jsx";
+import { legalMoves } from "../board/Board.jsx";
 
 class queen extends ChessPiece {
 	constructor() {
@@ -11,50 +12,28 @@ class queen extends ChessPiece {
 		const col = oldQueenLocation[1];
 		
 		const queenMoves = [
-			//~ // bishop moves
-			//~ [-1, -1], // down, left
-			//~ [-1, 1], // up, left
-			//~ [1, -1], // down, right // issue!
-			//~ [1, 1] // up, right
-			
-			//~ // rook moves
-			//~ [-1, 0], // left
-			//~ [1, 0], // right
-			//~ [0, -1], // down
- 			//~ [0, 1] // up  // issue!
- 			
- 			[-1, -1],
-			[-1, 0],
-			[-1, 1],
-			[0, -1],
-			[0, 1],
-			[1, -1],
-			[1, 0],
-			[1, 1]
+ 			[-1, -1], // down, left
+			[-1, 0], // left
+			[-1, 1], // up, left
+			[0, -1], // down
+			[0, 1], // up 
+			[1, -1], // down, right
+			[1, 0], // right
+			[1, 1] // up, right
 		];
 		
-		const legalMoves = [];
+		const legal_Moves = [];
 		
 		for (const move of queenMoves) {
 			var newX = row + move[0];
 			var newY = col + move[1];
 			
-			// i am not using the value of i here, i know LOL.......
-			for (var i = 0; i < board.length; i++) {
-				if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
-					if (board[newX][newY] === Utils.NULL) {
-						board[newX][newY] = Utils.iCanMoveToHere;
-						legalMoves.push([newX, newY]);
-					} else {
-						break;
-					}
-												
-					newX += move[0];
-					newY += move[1];
-				} 
+			const moves = legalMoves(board, newX, newY, move[0], move[1]);
+			for (var i = 0; i < moves.length; i++) {
+				legal_Moves.push(moves[i]);
 			}
 		}
-		return legalMoves;
+		return legal_Moves;
 	}
 	
 	makeMove(move, legalMoves, board) {

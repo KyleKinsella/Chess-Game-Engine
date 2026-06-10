@@ -1,5 +1,6 @@
 import ChessPiece from "../ChessPiece/ChessPiece.jsx";
 import Utils from "../utils.jsx";
+import { legalMoves } from "../board/Board.jsx";
 
 class bishop extends ChessPiece {
 	constructor() {
@@ -17,28 +18,18 @@ class bishop extends ChessPiece {
 			[1, 1] // up, right
 		];
 		
-		const legalMoves = [];
+		const legal_Moves = [];
 			
 		for (const move of bishopMoves) {
 			var newX = row + move[0];
 			var newY = col + move[1];
 			
-			// i am not using the value of i here, i know LOL.......
-			for (var i = 0; i < board.length; i++) {
-				if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
-					if (board[newX][newY] === Utils.NULL) {						
-						board[newX][newY] = Utils.iCanMoveToHere;
-						legalMoves.push([newX, newY]);			
-					} else {
-						break;
-					}
-													
-					newX += move[0];
-					newY += move[1];
-				}					
+			const moves = legalMoves(board, newX, newY, move[0], move[1]);
+			for (var i = 0; i < moves.length; i++) {
+				legal_Moves.push(moves[i]);
 			}
 		}
-		return legalMoves;
+		return legal_Moves;
 	}
 	
 	makeMove(move, legalMoves, board) {

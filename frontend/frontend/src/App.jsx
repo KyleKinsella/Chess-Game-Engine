@@ -29,7 +29,9 @@ function App() {
 	// legal moves for each piece - this updates the board to contain "#####" this is the legal moves for that piece
 	//
 	const values = ["knight", "rook", "bishop", "queen", "pawn", "king"];
-	const rand = values[Math.floor(Math.random() * values.length)];
+	var rand = values[Math.floor(Math.random() * values.length)];
+	
+	//~ rand = "queen";
 	
 	switch (rand) {
 	 	case "knight":
