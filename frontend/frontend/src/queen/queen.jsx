@@ -42,8 +42,8 @@ class queen extends ChessPiece {
 			// i am not using the value of i here, i know LOL.......
 			for (var i = 0; i < board.length; i++) {
 				if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
-					if (board[newX][newY] === Utils.freeSpace + " ") {
-						board[newX][newY] = "#####" + " ";
+					if (board[newX][newY] === Utils.NULL) {
+						board[newX][newY] = Utils.iCanMoveToHere;
 						legalMoves.push([newX, newY]);
 					} else {
 						break;

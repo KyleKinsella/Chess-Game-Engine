@@ -3,27 +3,27 @@ import knight from "../knight/knight.jsx";
 import rook from "../rook/rook.jsx";
 import bishop from "../bishop/bishop.jsx";
 import queen from "../queen/queen.jsx";
-import king from "../king/king.jsx";
 import pawn from "../pawn/pawn.jsx";
-import Square from "./Square.jsx";
+import king from "../king/king.jsx";
+
 // TODO: have - "a,b,c,d,e,f,g,h" at the bottom of the board and at the left hand side of the board have - "8 7 6 5 4 3 2 1"
 export function initGameBoard(board, pieces, rows, cols) {
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
             
             if (i === 0 || i === 7) {
-                board[i][j] = new Square({ coords: [i, j], isFree: false, piece: Utils.pieces[j], highlight: false });
-            }
-             
+				board[j][i] = Utils.pieces[j];
+			}
+			             
 			if (i === 2 || i === 3 || i === 4 || i === 5) {
-                board[i][j] = new Square({ coords: [i, j], isFree: true, piece: "", highlight: false });
+				board[j][i] = Utils.NULL;
             }
                 
             if (i === 1 || i === 6) {  
-				// i am stupid (Charles Leclerc - Ferrari Driver) -- when i remove all of the pawns off the board 
-				// i as not replacing it with anything, so i was removing 2 rows!   
-				//board[i][j] = new Square({ coords: [i, j], isFree: false, piece: Utils.PAWN, highlight: false });
-				board[i][j] = new Square({ coords: [i, j], isFree: true, piece: "", highlight: false });
+				// i made a mistake - when i remove all of the pawns off the board, i as not replacing it with anything, so i was removing 2 rows!   
+				
+				board[j][i] = Utils.PAWN;
+				//~ board[j][i] = Utils.NULL;
             }
         }
     }   
@@ -38,9 +38,9 @@ export function resetBoard(board) {
 export function findPieceInBoard(board, pieceToFind) {
 	const pieces = [];
 	for (var i = 0; i < board.length; i++) {
-		for (var j = 0; j < board[i].length; j++) {			
-			if (board[i][j] === pieceToFind + " ") {
-				pieces.push([i, j]);
+		for (var j = 0; j < board[i].length; j++) {					
+			if (board[j][i] === pieceToFind) {
+				pieces.push([j, i]);
 			}
 		}
 	}
@@ -52,22 +52,22 @@ export function movePiece(board, oldLoc, newLoc) {
 	const oldCol = oldLoc[1];
 	
 	const newRow = newLoc[0];
-	const newCol = newLoc[1]; 
+	const newCol = newLoc[1];
 	
-	const b = board[oldRow][oldCol];	
+	const b = board[oldRow][oldCol];		
 	board[newRow][newCol] = b;
-	board[oldRow][oldCol] = Utils.freeSpace + " ";
+	board[oldRow][oldCol] = Utils.NULL;
 	
 	return board;
 }
 
 export function pieceToProcess(board, oldPieceLocation, index, pieceType) {		
-	const updatedFreeSpaces = findPieceInBoard(board, Utils.freeSpace);	
+	const updatedFreeSpaces = findPieceInBoard(board, Utils.NULL);
 	const randomElement = updatedFreeSpaces[Math.floor(Math.random() * updatedFreeSpaces.length)];
 	// randomElement is for testing purposes only! // 
 	
 	switch (pieceType) {
-		case Utils.KNIGHT:						
+		case Utils.KNIGHT:			
 			const moveKnight = movePiece(board, oldPieceLocation, randomElement);
 			
 			const newKnightLocations = findPieceInBoard(moveKnight, Utils.KNIGHT);
@@ -92,11 +92,11 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType) {
 			const legalRookMoves = r.getLegalMoves(moveRook, computeRook);
 			
 			// TODO: is a move legal or not !?
-			
+						
 			return legalRookMoves;
 						
 		case Utils.BISHOP:			
-			const moveBishop = movePiece(board, oldPieceLocation, randomElement);		
+			const moveBishop = movePiece(board, oldPieceLocation, randomElement);	
 				
 			const newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
 			
@@ -123,9 +123,7 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType) {
 			
 			return legalQueenMoves;
 		
-		case Utils.PAWN:			
-			//~ const movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[0]);
-			
+		case Utils.PAWN:		
 			const pawns = findPieceInBoard(board, Utils.PAWN);
 			
 			const computePawn = pawns[index];
@@ -134,52 +132,6 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType) {
 			var legalPawnMoves = p.getLegalMoves(board, computePawn);
 			
 			// TODO: is a move legal or not !?
-			
-			const down = [0, 1, 2, 3, 4, 5, 6, 7];
-			for (var i = 0; i < down.length; i++) {
-				if (index === down[i]) {
-					var movePawn = movePiece(board, oldPieceLocation, legalPawnMoves[1]);
-			
-					for (var i = 0; i < board.length; i++) {
-						for (var j = 0; j < board[i].length; j++) {
-							if (board[i][j-1] === "#####" + " " || board[i][j-1] === Utils.freeSpace + " ") { // || board[1][7] === Utils.freeSpace + " ") {
-								board[i][j-1] = Utils.freeSpace + " ";
-								board[2][7] = Utils.freeSpace + " "; // this WILL be an issue...
-							}
-						}
-					}
-				
-					const newPawnLocations = findPieceInBoard(board, Utils.PAWN);
-					
-					movePawn = movePiece(board, oldPieceLocation, updatedFreeSpaces[3]);
-					
-					legalPawnMoves = p.getLegalMoves(board, newPawnLocations[7]);
-					break;
-				}
-			}
-			
-			const up = [8, 9, 10, 11, 12, 13, 14, 15];
-			for (var i = 0; i < up.length; i++) {
-				if (index === up[i]) {
-					var movePawn = movePiece(board, oldPieceLocation, legalPawnMoves[1]);
-			
-					for (var i = 0; i < board.length; i++) {
-						for (var j = 0; j < board[i].length; j++) {
-							if (board[i][j+1] === "#####" + " " || board[i][j+1] === Utils.freeSpace + " ") { // || board[1][7] === Utils.freeSpace + " ") {
-								board[i][j+1] = Utils.freeSpace + " ";
-								//~ board[2][7] = Utils.freeSpace + " "; // this WILL be an issue...
-							}
-						}
-					}
-				
-					const newPawnLocations = findPieceInBoard(board, Utils.PAWN);
-					
-					movePawn = movePiece(board, newPawnLocations[8], updatedFreeSpaces[32]);
-					
-					//~ legalPawnMoves = p.getLegalMoves(board, newPawnLocations[7]);
-					break;
-				}
-			}
 			
 			return legalPawnMoves;	
 		
