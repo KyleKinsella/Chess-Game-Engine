@@ -25,6 +25,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 17px;
 }
 
 .is_white {
@@ -33,4 +34,8 @@
 
 .is_black {
 	background-color: #b58863;
+}
+
+.rand {
+	text-align: center;
 }
