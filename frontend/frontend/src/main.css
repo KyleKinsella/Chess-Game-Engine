@@ -39,3 +39,15 @@
 .rand {
 	text-align: center;
 }
+
+.white, .black {
+	font-family: Courier, monospace;
+}
+
+.white {
+	color: #fffafa;
+}
+
+.black {
+	color: #000000;
+}

@@ -39,17 +39,16 @@ function App() {
 	//
 	const values = ["knight", "rook", "bishop", "queen", "pawn", "king"];
 	var rand = values[Math.floor(Math.random() * values.length)];
-	rand = "pawn";
+	rand = "";
 	
 	const colors = [Utils.WHITE, Utils.BLACK];
 	const whiteOrBlack = colors[Math.floor(Math.random() * colors.length)];
-	const color = whiteOrBlack;
-	
+		
 	switch (rand) {
 	 	case "knight":
 	 		freeSpot(b);
 			
-			switch (color) {
+			switch (whiteOrBlack) {
 				case Utils.WHITE:
 					const whiteProcessKnight = pieceToProcess(b, whiteKnights[0], 1, Utils.WHITE_KNIGHT, color);
 					console.log(whiteProcessKnight);
@@ -66,7 +65,7 @@ function App() {
 	 	case "rook":
 	 		freeSpot(b);
 	 		
-			switch (color) {
+			switch (whiteOrBlack) {
 				case Utils.WHITE:
 					const whiteProcessRook = pieceToProcess(b, whiteRooks[0], 1, Utils.WHITE_ROOK, color);
 					console.log(whiteProcessRook);
@@ -83,7 +82,7 @@ function App() {
 	 	case "bishop":
 	 		freeSpot(b);
 	 		
-	 		switch (color) {
+	 		switch (whiteOrBlack) {
 				case Utils.WHITE:
 					const whiteProcessBishop = pieceToProcess(b, whiteBishops[0], 1, Utils.WHITE_BISHOP, color);
 					console.log(whiteProcessBishop);
@@ -100,7 +99,7 @@ function App() {
 	 	case "queen":
 	 		freeSpot(b);
 	 		
-	 		switch (color) {
+	 		switch (whiteOrBlack) {
 				case Utils.WHITE:
 					const whiteProcessQueen = pieceToProcess(b, whiteQueen[0], 0, Utils.WHITE_QUEEN, color);
 					console.log(whiteProcessQueen);
@@ -121,7 +120,7 @@ function App() {
 			const down = [0, 1, 2, 3, 4, 5, 6, 7];	
 			const up = [8, 9, 10, 11, 12, 13, 14, 15];
 
-			switch (color) {
+			switch (whiteOrBlack) {
 				case Utils.WHITE:
 					processMe = whitePawns[n];
 					const whiteProcessPawn = pieceToProcess(b, processMe, n, Utils.WHITE_PAWN, color);
@@ -170,7 +169,7 @@ function App() {
 	 	case "king":
 	 		// TODO: don't move the king into check (aka, danger!) - not an issue for now - due to no team colors, just yet...
 	 		
-	 		switch (color) {
+	 		switch (whiteOrBlack) {
 				case Utils.WHITE:
 					const whiteProcessKing = pieceToProcess(b, whiteKing[0], 0, Utils.WHITE_KING, color);
 					console.log(whiteProcessKing);
@@ -187,13 +186,13 @@ function App() {
 	  
 	return (  
 		<div>			
-			<h3 className="rand">We are processing a <u> {color} {rand}</u></h3>
+			<h3 className="rand">We are processing a <u> {whiteOrBlack} {rand}</u></h3>
 				
 			<div className="board">
 				{b.map((row, i) => (
 					<div key={i}>
 						{row.map((cell, j) => (
-							<div key={j} className={`square ${(i + j) % 2 === 0 ? 'is_white' : 'is_black'}`}>
+							<div key={j} className={`square ${(i + j) % 2 === 0 ? 'is_white' : 'is_black'} ${(j === 0 || j === 1) ? 'white' : 'black'}`}>
 								<span>{cell}</span>
 							</div>
 						))}
