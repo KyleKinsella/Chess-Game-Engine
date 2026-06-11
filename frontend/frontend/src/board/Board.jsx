@@ -10,21 +10,32 @@ import king from "../king/king.jsx";
 export function initGameBoard(board, pieces, rows, cols) {
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
-            
-            if (i === 0 || i === 7) {
-				board[j][i] = Utils.pieces[j];
+			         
+			if (i === 0) {
+				board[j][i] = Utils.white_pieces[j];
 			}
-			             
+
+			//
+			// Note: if you want to remove the pawns off the board, comment the code for the pawn creation, when i is 1 & 6 and uncomment the other line of code.
+			// BUT, if you have removed all pawns off of the board and you try and process a pawn (when rand = pawn, in App.jsx) the project will break. 
+			//
+			if (i === 1) {
+				//~ board[j][i] = Utils.NULL;
+				board[j][i] = Utils.WHITE_PAWN;
+			}
+			
 			if (i === 2 || i === 3 || i === 4 || i === 5) {
 				board[j][i] = Utils.NULL;
             }
                 
-            if (i === 1 || i === 6) {  
-				// i made a mistake - when i remove all of the pawns off the board, i as not replacing it with anything, so i was removing 2 rows!   
-				
-				board[j][i] = Utils.PAWN;
+			if (i === 6) {
 				//~ board[j][i] = Utils.NULL;
-            }
+				board[j][i] = Utils.BLACK_PAWN;
+			}
+			
+			if (i === 7) {
+				board[j][i] = Utils.black_pieces[j];
+			}
         }
     }   
     return board;
@@ -61,88 +72,94 @@ export function movePiece(board, oldLoc, newLoc) {
 	return board;
 }
 
-export function pieceToProcess(board, oldPieceLocation, index, pieceType) {		
+export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceColor) {	
 	const updatedFreeSpaces = findPieceInBoard(board, Utils.NULL);
 	const randomElement = updatedFreeSpaces[Math.floor(Math.random() * updatedFreeSpaces.length)];
 	// randomElement is for testing purposes only! // 
 	
 	switch (pieceType) {
-		case Utils.KNIGHT:			
+		case Utils.WHITE_KNIGHT:
+		case Utils.BLACK_KNIGHT:
 			const moveKnight = movePiece(board, oldPieceLocation, randomElement);
 			
-			const newKnightLocations = findPieceInBoard(moveKnight, Utils.KNIGHT);
+			const newKnightLocations = findPieceInBoard(moveKnight, pieceType);
 			
 			const computeKnight = newKnightLocations[index];
 			
-			const k = new knight(0, 0, "white", Utils.KNIGHT, false);
+			const k = new knight(0, 0, pieceColor, pieceType, false);
 			const legalKnightMoves = k.getLegalMoves(moveKnight, computeKnight);
 			
 			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, newKnightLocations);
 			
 			return legalKnightMoves;
 			
-		case Utils.ROOK:			
+		case Utils.WHITE_ROOK:
+		case Utils.BLACK_ROOK:
 			const moveRook = movePiece(board, oldPieceLocation, randomElement);
 			
-			const newRookLocations = findPieceInBoard(moveRook, Utils.ROOK);
+			const newRookLocations = findPieceInBoard(moveRook, pieceType);
 			
 			const computeRook = newRookLocations[index];
 			
-			const r = new rook(0, 0, "white", Utils.ROOK, false);
+			const r = new rook(0, 0, pieceColor, pieceType, false);
 			const legalRookMoves = r.getLegalMoves(moveRook, computeRook);
 			
 			// TODO: is a move legal or not !?
 						
 			return legalRookMoves;
 						
-		case Utils.BISHOP:			
+		case Utils.WHITE_BISHOP:
+		case Utils.BLACK_BISHOP:	
 			const moveBishop = movePiece(board, oldPieceLocation, randomElement);	
 				
-			const newBishopLocations = findPieceInBoard(moveBishop, Utils.BISHOP);
+			const newBishopLocations = findPieceInBoard(moveBishop, pieceType);
 			
 			const computeBishop = newBishopLocations[index];
 				
-			const b = new bishop(0, 0, "white", Utils.BISHOP, false);
+			const b = new bishop(0, 0, pieceColor, pieceType, false);
 			const legalBishopMoves = b.getLegalMoves(moveBishop, computeBishop);
 			
 			// TODO: is a move legal or not !?
 			
 			return legalBishopMoves;
 			
-		case Utils.QUEEN:						
+		case Utils.WHITE_QUEEN:		
+		case Utils.BLACK_QUEEN:				
 			const moveQueen = movePiece(board, oldPieceLocation, randomElement);
 			
-			const newQueenLocations = findPieceInBoard(moveQueen, Utils.QUEEN);
+			const newQueenLocations = findPieceInBoard(moveQueen, pieceType);
 			
 			const computeQueen = newQueenLocations[index];
 			
-			const q = new queen(0, 0, "white", Utils.QUEEN, false);
+			const q = new queen(0, 0, pieceColor, pieceType, false);
 			const legalQueenMoves = q.getLegalMoves(moveQueen, computeQueen);
 			
 			// TODO: is a move legal or not !?
 			
 			return legalQueenMoves;
 		
-		case Utils.PAWN:		
-			const pawns = findPieceInBoard(board, Utils.PAWN);
+		case Utils.WHITE_PAWN:		
+		case Utils.BLACK_PAWN:
+			const pawns = findPieceInBoard(board, pieceType);
 			
 			const computePawn = pawns[index];
 			
-			const p = new pawn(0, 0, "white", Utils.PAWN, false);
-			var legalPawnMoves = p.getLegalMoves(board, computePawn);
+			const p = new pawn(0, 0, pieceColor, pieceType, false);
+			var legalPawnMoves = p.getLegalMoves(board, computePawn, pieceColor);
 			
 			// TODO: is a move legal or not !?
 			
 			return legalPawnMoves;	
 		
-		case Utils.KING:			
+		case Utils.WHITE_KING:			
+		case Utils.BLACK_KING:
 			const moveKing = movePiece(board, oldPieceLocation, randomElement);
 			
-			const newKingLocations = findPieceInBoard(moveKing, Utils.KING);
+			const newKingLocations = findPieceInBoard(moveKing, pieceType);
 			
 			const computeKing = newKingLocations[index];
 			
-			const ki = new king(0, 0, "white", Utils.KING, false);
+			const ki = new king(0, 0, pieceColor, pieceType, false);
 			const legalKingMoves = ki.getLegalMoves(moveKing, computeKing);
 			
 			// TODO: is a move legal or not !?
