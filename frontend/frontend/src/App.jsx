@@ -18,84 +18,177 @@ function App() {
 	// 
 	// find all of the pieces on the board, once the board is created
 	//
-	const knights = findPieceInBoard(b, Utils.KNIGHT);
-	const rooks = findPieceInBoard(b, Utils.ROOK);
-	const bishops = findPieceInBoard(b, Utils.BISHOP);
-	const queens = findPieceInBoard(b, Utils.QUEEN);
-	const pawns = findPieceInBoard(b, Utils.PAWN);
-	const kings = findPieceInBoard(b, Utils.KING);
+	// WHITE //
+	const whiteKnights = findPieceInBoard(b, Utils.WHITE_KNIGHT);
+	const whiteRooks = findPieceInBoard(b, Utils.WHITE_ROOK);
+	const whiteBishops = findPieceInBoard(b, Utils.WHITE_BISHOP);
+	const whiteQueen = findPieceInBoard(b, Utils.WHITE_QUEEN);
+	const whitePawns = findPieceInBoard(b, Utils.WHITE_PAWN);
+	const whiteKing = findPieceInBoard(b, Utils.WHITE_KING);
+	
+	// BLACK //
+	const blackKnights = findPieceInBoard(b, Utils.BLACK_KNIGHT);
+	const blackRooks = findPieceInBoard(b, Utils.BLACK_ROOK);
+	const blackBishops = findPieceInBoard(b, Utils.BLACK_BISHOP);
+	const blackQueen = findPieceInBoard(b, Utils.BLACK_QUEEN);
+	const blackPawns = findPieceInBoard(b, Utils.BLACK_PAWN);
+	const blackKing = findPieceInBoard(b, Utils.BLACK_KING);
 	
 	// 
 	// legal moves for each piece - this updates the board to contain "#####" this is the legal moves for that piece
 	//
 	const values = ["knight", "rook", "bishop", "queen", "pawn", "king"];
 	var rand = values[Math.floor(Math.random() * values.length)];
+	rand = "pawn";
 	
-	//~ rand = "queen";
+	const colors = [Utils.WHITE, Utils.BLACK];
+	const whiteOrBlack = colors[Math.floor(Math.random() * colors.length)];
+	const color = whiteOrBlack;
 	
 	switch (rand) {
 	 	case "knight":
 	 		freeSpot(b);
 			
-	 		const processKnight = pieceToProcess(b, knights[0], 1, Utils.KNIGHT);
-	 		console.log(processKnight);
+			switch (color) {
+				case Utils.WHITE:
+					const whiteProcessKnight = pieceToProcess(b, whiteKnights[0], 1, Utils.WHITE_KNIGHT, color);
+					console.log(whiteProcessKnight);
+					break;
+				
+				case Utils.BLACK:
+					const blackProcessKnight = pieceToProcess(b, blackKnights[0], 0, Utils.BLACK_KNIGHT, color);
+					console.log(blackProcessKnight);
+					break;
+			}
+			
 	 		break;
 			
 	 	case "rook":
 	 		freeSpot(b);
 	 		
-			const processRook = pieceToProcess(b, rooks[0], 1, Utils.ROOK);
-			console.log(processRook);	
+			switch (color) {
+				case Utils.WHITE:
+					const whiteProcessRook = pieceToProcess(b, whiteRooks[0], 1, Utils.WHITE_ROOK, color);
+					console.log(whiteProcessRook);
+					break;
+				
+				case Utils.BLACK:
+					const blackProcessRook = pieceToProcess(b, blackRooks[1], 0, Utils.BLACK_ROOK, color);
+					console.log(blackProcessRook);
+					break;
+			}
+			
 			break;
 	 		
 	 	case "bishop":
 	 		freeSpot(b);
+	 		
+	 		switch (color) {
+				case Utils.WHITE:
+					const whiteProcessBishop = pieceToProcess(b, whiteBishops[0], 1, Utils.WHITE_BISHOP, color);
+					console.log(whiteProcessBishop);
+					break;
+				
+				case Utils.BLACK:
+					const blackProcessBishop = pieceToProcess(b, blackBishops[1], 0, Utils.BLACK_BISHOP, color);
+					console.log(blackProcessBishop);
+					break;
+			}
 			
-	 		const processBishop = pieceToProcess(b, bishops[0], 1, Utils.BISHOP);
-	 		console.log(processBishop);
 	 		break;
 		
 	 	case "queen":
 	 		freeSpot(b);
+	 		
+	 		switch (color) {
+				case Utils.WHITE:
+					const whiteProcessQueen = pieceToProcess(b, whiteQueen[0], 0, Utils.WHITE_QUEEN, color);
+					console.log(whiteProcessQueen);
+					break;
+				
+				case Utils.BLACK:
+					const blackProcessQueen = pieceToProcess(b, blackQueen[0], 0, Utils.BLACK_QUEEN, color);
+					console.log(blackProcessQueen);
+					break;
+			}
 			
-	 		const processQueen = pieceToProcess(b, queens[0], 0, Utils.QUEEN);
-	 		console.log(processQueen);
 	 		break;
 			
 	 	case "pawn":
-			const n = 3;
-			const processMe = pawns[n];
+			var n = 3;
+			var processMe = [];
 			
-			const processPawn = pieceToProcess(b, processMe, n, Utils.PAWN);
-			console.log(processPawn);
-			
-			const down = [0, 1, 2, 3, 4, 5, 6, 7];				
-			for (var i = 0; i < down.length; i++) {
-				if (n === down[i]) {
-					var movePawn = movePiece(b, processMe, processPawn[0]);
-					// TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it
-				} 
-			}
-				
+			const down = [0, 1, 2, 3, 4, 5, 6, 7];	
 			const up = [8, 9, 10, 11, 12, 13, 14, 15];
-			for (var i = 0; i < up.length; i++) {
-				if (n === up[i]) {
-					var movePawn = movePiece(b, processMe, processPawn[1]);
-					// TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it
-				} 
+
+			switch (color) {
+				case Utils.WHITE:
+					processMe = whitePawns[n];
+					const whiteProcessPawn = pieceToProcess(b, processMe, n, Utils.WHITE_PAWN, color);
+					console.log(whiteProcessPawn);
+					
+					for (var i = 0; i < down.length; i++) {
+						if (n === down[i]) {
+							var movePawn = movePiece(b, processMe, whiteProcessPawn[0]);
+							// TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it					
+						} 
+					}
+								
+					for (var i = 0; i < up.length; i++) {
+						if (n === up[i]) {
+							var movePawn = movePiece(b, processMe, whiteProcessPawn[1]);
+							// TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it
+						} 
+					}
+					
+					break;
+						
+				case Utils.BLACK:
+					processMe = blackPawns[n];
+					const blackProcessPawn = pieceToProcess(b, processMe, n, Utils.BLACK_PAWN, color);
+					console.log(blackProcessPawn);
+							
+					for (var i = 0; i < down.length; i++) {
+						if (n === down[i]) {
+							var movePawn = movePiece(b, processMe, blackProcessPawn[1]);
+							// TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it					
+						} 
+					}
+								
+					for (var i = 0; i < up.length; i++) {
+						if (n === up[i]) {
+							var movePawn = movePiece(b, processMe, blackProcessPawn[0]);
+							// TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it
+						} 
+					}
+					
+					break;
 			}
-				
+			
 			break;
 			
 	 	case "king":
 	 		// TODO: don't move the king into check (aka, danger!) - not an issue for now - due to no team colors, just yet...
-	 		const processKing = pieceToProcess(b, kings[0], 0, Utils.KING);
-	 		console.log(processKing);
+	 		
+	 		switch (color) {
+				case Utils.WHITE:
+					const whiteProcessKing = pieceToProcess(b, whiteKing[0], 0, Utils.WHITE_KING, color);
+					console.log(whiteProcessKing);
+					break;
+				
+				case Utils.BLACK:
+					const blackProcessKing = pieceToProcess(b, blackKing[0], 0, Utils.BLACK_KING, color);
+					console.log(blackProcessKing);
+					break;
+			}
+			
 	 		break;
 	 }
-	 		
+	  
 	return (  
-		<div>
+		<div>			
+			<h3 className="rand">We are processing a <u> {color} {rand}</u></h3>
+				
 			<div className="board">
 				{b.map((row, i) => (
 					<div key={i}>
