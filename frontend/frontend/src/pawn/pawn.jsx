@@ -48,18 +48,11 @@ class pawn extends ChessPiece {
 		super();
 	}
 	
-	getLegalMoves(board, oldPawnLocation) {
+	getLegalMoves(board, oldPawnLocation, pawnColor) {
 		const row = oldPawnLocation[0];
 		const col = oldPawnLocation[1];
 		
-		//
-		// Note: you need to be very careful on what way you want to move your pawn!
-		// for example: if "oldPawnLocation" is any of the pawns in row 1 you MUST call goDown(...), otherwise you MUST call goUp(...) if you dont follow this, the pawns will break!
-		// the fix to this problem is TEAM COLORS! 				
-		//
-				
-		return goDown(board, col, row);
-		//~ return goUp(board, col, row);
+		return (pawnColor === Utils.WHITE) ? goDown(board, col, row) : goUp(board, col, row);
 	}
 	
 	makeMove(move, legalMoves, board) {
