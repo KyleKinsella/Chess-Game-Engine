@@ -31,6 +31,7 @@ class Utils {
 	
 	static NULL = "";
 	static iCanMoveToHere = "#####"; // this is a visual cue for us to see where a piece can move to, we also have the coordinates of where the piece can move to! 
+	static iCanCaptureYou = "$";
 		
 	static WHITE = "white";
 	static BLACK = "black";
