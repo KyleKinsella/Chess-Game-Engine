@@ -7,7 +7,7 @@ import pawn from "../pawn/pawn.jsx";
 import king from "../king/king.jsx";
 
 // TODO: have - "a,b,c,d,e,f,g,h" at the bottom of the board and at the left hand side of the board have - "8 7 6 5 4 3 2 1"
-export function initGameBoard(board, pieces, rows, cols) {
+export function initGameBoard(board, rows, cols) {
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
 			         
@@ -102,7 +102,7 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 			const computeRook = newRookLocations[index];
 			
 			const r = new rook(0, 0, pieceColor, pieceType, false);
-			const legalRookMoves = r.getLegalMoves(moveRook, computeRook);
+			const legalRookMoves = r.getLegalMoves(moveRook, computeRook, pieceColor);
 			
 			// TODO: is a move legal or not !?
 						
@@ -117,7 +117,7 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 			const computeBishop = newBishopLocations[index];
 				
 			const b = new bishop(0, 0, pieceColor, pieceType, false);
-			const legalBishopMoves = b.getLegalMoves(moveBishop, computeBishop);
+			const legalBishopMoves = b.getLegalMoves(moveBishop, computeBishop, pieceColor);
 			
 			// TODO: is a move legal or not !?
 			
@@ -132,7 +132,7 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 			const computeQueen = newQueenLocations[index];
 			
 			const q = new queen(0, 0, pieceColor, pieceType, false);
-			const legalQueenMoves = q.getLegalMoves(moveQueen, computeQueen);
+			const legalQueenMoves = q.getLegalMoves(moveQueen, computeQueen, pieceColor);
 			
 			// TODO: is a move legal or not !?
 			
@@ -172,7 +172,7 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 	}
 }
 
-export function legalMoves(board, newX, newY, move1, move2) {
+export function legalMoves(board, newX, newY, move1, move2, color) {
 
 	const legalMoves = [];
 	
@@ -183,6 +183,30 @@ export function legalMoves(board, newX, newY, move1, move2) {
 				board[newX][newY] = Utils.iCanMoveToHere;
 				legalMoves.push([newX, newY]);
 			} else {
+				switch(color) {
+					case Utils.WHITE:
+						// don't let use capture our own pieces! (not good code for checking each piece, Utils won't let me use the white or black pieces arrays, idk why)...
+						if (board[newX][newY] === Utils.WHITE_PAWN || board[newX][newY] === Utils.WHITE_KNIGHT || board[newX][newY] === Utils.WHITE_ROOK || board[newX][newY] === Utils.WHITE_BISHOP || board[newX][newY] === Utils.WHITE_QUEEN || board[newX][newY] === Utils.WHITE_KING || board[newX][newY] === Utils.WHITE_KNIGHT2 || board[newX][newY] === Utils.WHITE_BISHOP2 || board[newX][newY] === Utils.WHITE_ROOK2) {
+							continue;
+						} else {	
+							board[newX][newY] = Utils.iCanCaptureYou;
+							legalMoves.push([newX, newY]);
+						}
+						
+					break;
+						
+					case Utils.BLACK:
+						// don't let use capture our own pieces! (not good code for checking each piece, Utils won't let me use the white or black pieces arrays, idk why)...
+						if (board[newX][newY] === Utils.BLACK_PAWN || board[newX][newY] === Utils.BLACK_KNIGHT || board[newX][newY] === Utils.BLACK_ROOK || board[newX][newY] === Utils.BLACK_BISHOP || board[newX][newY] === Utils.BLACK_QUEEN || board[newX][newY] === Utils.BLACK_KING || board[newX][newY] === Utils.BLACK_KNIGHT2 || board[newX][newY] === Utils.BLACK_BISHOP2 || board[newX][newY] === Utils.BLACK_ROOK2) {
+							continue;
+						} else {
+							board[newX][newY] = Utils.iCanCaptureYou;
+							legalMoves.push([newX, newY]);
+						}
+						
+					break;
+				}
+						
 				break;
 			}
 													
