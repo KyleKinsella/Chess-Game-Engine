@@ -13,7 +13,7 @@ function App() {
 	//
 	// create the chess game board
 	// 
-	const b = initGameBoard(Utils.board, Utils.pieces, Utils.ROWS, Utils.COLS);
+	const b = initGameBoard(Utils.board, Utils.ROWS, Utils.COLS);
 	
 	// 
 	// find all of the pieces on the board, once the board is created
@@ -39,7 +39,7 @@ function App() {
 	//
 	const values = ["knight", "rook", "bishop", "queen", "pawn", "king"];
 	var rand = values[Math.floor(Math.random() * values.length)];
-	rand = "";
+	//~ rand = "";
 	
 	const colors = [Utils.WHITE, Utils.BLACK];
 	const whiteOrBlack = colors[Math.floor(Math.random() * colors.length)];
@@ -50,12 +50,12 @@ function App() {
 			
 			switch (whiteOrBlack) {
 				case Utils.WHITE:
-					const whiteProcessKnight = pieceToProcess(b, whiteKnights[0], 1, Utils.WHITE_KNIGHT, color);
+					const whiteProcessKnight = pieceToProcess(b, whiteKnights[0], 1, Utils.WHITE_KNIGHT, whiteOrBlack);
 					console.log(whiteProcessKnight);
 					break;
 				
 				case Utils.BLACK:
-					const blackProcessKnight = pieceToProcess(b, blackKnights[0], 0, Utils.BLACK_KNIGHT, color);
+					const blackProcessKnight = pieceToProcess(b, blackKnights[0], 0, Utils.BLACK_KNIGHT, whiteOrBlack);
 					console.log(blackProcessKnight);
 					break;
 			}
@@ -67,12 +67,12 @@ function App() {
 	 		
 			switch (whiteOrBlack) {
 				case Utils.WHITE:
-					const whiteProcessRook = pieceToProcess(b, whiteRooks[0], 1, Utils.WHITE_ROOK, color);
+					const whiteProcessRook = pieceToProcess(b, whiteRooks[0], 1, Utils.WHITE_ROOK, whiteOrBlack);
 					console.log(whiteProcessRook);
 					break;
 				
 				case Utils.BLACK:
-					const blackProcessRook = pieceToProcess(b, blackRooks[1], 0, Utils.BLACK_ROOK, color);
+					const blackProcessRook = pieceToProcess(b, blackRooks[1], 0, Utils.BLACK_ROOK, whiteOrBlack);
 					console.log(blackProcessRook);
 					break;
 			}
@@ -84,12 +84,12 @@ function App() {
 	 		
 	 		switch (whiteOrBlack) {
 				case Utils.WHITE:
-					const whiteProcessBishop = pieceToProcess(b, whiteBishops[0], 1, Utils.WHITE_BISHOP, color);
+					const whiteProcessBishop = pieceToProcess(b, whiteBishops[0], 1, Utils.WHITE_BISHOP, whiteOrBlack);
 					console.log(whiteProcessBishop);
 					break;
 				
 				case Utils.BLACK:
-					const blackProcessBishop = pieceToProcess(b, blackBishops[1], 0, Utils.BLACK_BISHOP, color);
+					const blackProcessBishop = pieceToProcess(b, blackBishops[1], 0, Utils.BLACK_BISHOP, whiteOrBlack);
 					console.log(blackProcessBishop);
 					break;
 			}
@@ -101,12 +101,12 @@ function App() {
 	 		
 	 		switch (whiteOrBlack) {
 				case Utils.WHITE:
-					const whiteProcessQueen = pieceToProcess(b, whiteQueen[0], 0, Utils.WHITE_QUEEN, color);
+					const whiteProcessQueen = pieceToProcess(b, whiteQueen[0], 0, Utils.WHITE_QUEEN, whiteOrBlack);
 					console.log(whiteProcessQueen);
 					break;
 				
 				case Utils.BLACK:
-					const blackProcessQueen = pieceToProcess(b, blackQueen[0], 0, Utils.BLACK_QUEEN, color);
+					const blackProcessQueen = pieceToProcess(b, blackQueen[0], 0, Utils.BLACK_QUEEN, whiteOrBlack);
 					console.log(blackProcessQueen);
 					break;
 			}
@@ -123,7 +123,7 @@ function App() {
 			switch (whiteOrBlack) {
 				case Utils.WHITE:
 					processMe = whitePawns[n];
-					const whiteProcessPawn = pieceToProcess(b, processMe, n, Utils.WHITE_PAWN, color);
+					const whiteProcessPawn = pieceToProcess(b, processMe, n, Utils.WHITE_PAWN, whiteOrBlack);
 					console.log(whiteProcessPawn);
 					
 					for (var i = 0; i < down.length; i++) {
@@ -144,7 +144,7 @@ function App() {
 						
 				case Utils.BLACK:
 					processMe = blackPawns[n];
-					const blackProcessPawn = pieceToProcess(b, processMe, n, Utils.BLACK_PAWN, color);
+					const blackProcessPawn = pieceToProcess(b, processMe, n, Utils.BLACK_PAWN, whiteOrBlack);
 					console.log(blackProcessPawn);
 							
 					for (var i = 0; i < down.length; i++) {
@@ -171,12 +171,12 @@ function App() {
 	 		
 	 		switch (whiteOrBlack) {
 				case Utils.WHITE:
-					const whiteProcessKing = pieceToProcess(b, whiteKing[0], 0, Utils.WHITE_KING, color);
+					const whiteProcessKing = pieceToProcess(b, whiteKing[0], 0, Utils.WHITE_KING, whiteOrBlack);
 					console.log(whiteProcessKing);
 					break;
 				
 				case Utils.BLACK:
-					const blackProcessKing = pieceToProcess(b, blackKing[0], 0, Utils.BLACK_KING, color);
+					const blackProcessKing = pieceToProcess(b, blackKing[0], 0, Utils.BLACK_KING, whiteOrBlack);
 					console.log(blackProcessKing);
 					break;
 			}
@@ -192,7 +192,7 @@ function App() {
 				{b.map((row, i) => (
 					<div key={i}>
 						{row.map((cell, j) => (
-							<div key={j} className={`square ${(i + j) % 2 === 0 ? 'is_white' : 'is_black'} ${(j === 0 || j === 1) ? 'white' : 'black'}`}>
+							<div key={j} className={`square ${(i + j) % 2 === 0 ? 'is_white' : 'is_black'} ${(j === 0 || j === 1) ? 'white' : 'black'} ${(j === 2 || j === 3 || j === 4 || j === 5) ? 'middle' : ''}`}>
 								<span>{cell}</span>
 							</div>
 						))}
