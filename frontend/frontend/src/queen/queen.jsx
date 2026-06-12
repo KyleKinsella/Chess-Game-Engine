@@ -7,7 +7,7 @@ class queen extends ChessPiece {
 		super();
 	}
 	
-	getLegalMoves(board, oldQueenLocation) {
+	getLegalMoves(board, oldQueenLocation, color) {
 		const row = oldQueenLocation[0];
 		const col = oldQueenLocation[1];
 		
@@ -28,7 +28,7 @@ class queen extends ChessPiece {
 			var newX = row + move[0];
 			var newY = col + move[1];
 			
-			const moves = legalMoves(board, newX, newY, move[0], move[1]);
+			const moves = legalMoves(board, newX, newY, move[0], move[1], color);
 			for (var i = 0; i < moves.length; i++) {
 				legal_Moves.push(moves[i]);
 			}
