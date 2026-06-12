@@ -7,7 +7,7 @@ class bishop extends ChessPiece {
 		super();
 	}
 	
-	getLegalMoves(board, oldBishopLocation) {
+	getLegalMoves(board, oldBishopLocation, color) {
 		const row = oldBishopLocation[0];
 		const col = oldBishopLocation[1];
 		
@@ -24,7 +24,7 @@ class bishop extends ChessPiece {
 			var newX = row + move[0];
 			var newY = col + move[1];
 			
-			const moves = legalMoves(board, newX, newY, move[0], move[1]);
+			const moves = legalMoves(board, newX, newY, move[0], move[1], color);
 			for (var i = 0; i < moves.length; i++) {
 				legal_Moves.push(moves[i]);
 			}
