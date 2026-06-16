@@ -6,6 +6,9 @@ import "./main.css";
 function freeSpot(board) {
 	board[4][1] = Utils.NULL;
 	board[1][1] = Utils.NULL;
+	
+	board[2][6] = Utils.NULL
+	board[5][6] = Utils.NULL;
 	return board;
 }
 
@@ -39,7 +42,7 @@ function App() {
 	//
 	const values = ["knight", "rook", "bishop", "queen", "pawn", "king"];
 	var rand = values[Math.floor(Math.random() * values.length)];
-	//~ rand = "";
+	rand = "pawn";
 	
 	const colors = [Utils.WHITE, Utils.BLACK];
 	const whiteOrBlack = colors[Math.floor(Math.random() * colors.length)];
@@ -68,7 +71,7 @@ function App() {
 			switch (whiteOrBlack) {
 				case Utils.WHITE:
 					const whiteProcessRook = pieceToProcess(b, whiteRooks[0], 1, Utils.WHITE_ROOK, whiteOrBlack);
-					console.log(whiteProcessRook);
+					console.log(whiteProcessRook);	
 					break;
 				
 				case Utils.BLACK:
@@ -146,7 +149,7 @@ function App() {
 					processMe = blackPawns[n];
 					const blackProcessPawn = pieceToProcess(b, processMe, n, Utils.BLACK_PAWN, whiteOrBlack);
 					console.log(blackProcessPawn);
-							
+						
 					for (var i = 0; i < down.length; i++) {
 						if (n === down[i]) {
 							var movePawn = movePiece(b, processMe, blackProcessPawn[1]);
