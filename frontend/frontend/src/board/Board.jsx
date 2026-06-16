@@ -87,7 +87,7 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 			const computeKnight = newKnightLocations[index];
 			
 			const k = new knight(0, 0, pieceColor, pieceType, false);
-			const legalKnightMoves = k.getLegalMoves(moveKnight, computeKnight);
+			const legalKnightMoves = k.getLegalMoves(moveKnight, computeKnight, pieceColor);
 			
 			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, newKnightLocations);
 			
@@ -185,7 +185,7 @@ export function legalMoves(board, newX, newY, move1, move2, color) {
 			} else {
 				switch(color) {
 					case Utils.WHITE:
-						// don't let use capture our own pieces! (not good code for checking each piece, Utils won't let me use the white or black pieces arrays, idk why)...
+						// don't capture your own pieces!
 						if (board[newX][newY] === Utils.WHITE_PAWN || board[newX][newY] === Utils.WHITE_KNIGHT || board[newX][newY] === Utils.WHITE_ROOK || board[newX][newY] === Utils.WHITE_BISHOP || board[newX][newY] === Utils.WHITE_QUEEN || board[newX][newY] === Utils.WHITE_KING || board[newX][newY] === Utils.WHITE_KNIGHT2 || board[newX][newY] === Utils.WHITE_BISHOP2 || board[newX][newY] === Utils.WHITE_ROOK2) {
 							continue;
 						} else {	
@@ -196,7 +196,7 @@ export function legalMoves(board, newX, newY, move1, move2, color) {
 					break;
 						
 					case Utils.BLACK:
-						// don't let use capture our own pieces! (not good code for checking each piece, Utils won't let me use the white or black pieces arrays, idk why)...
+						// don't capture your own pieces!
 						if (board[newX][newY] === Utils.BLACK_PAWN || board[newX][newY] === Utils.BLACK_KNIGHT || board[newX][newY] === Utils.BLACK_ROOK || board[newX][newY] === Utils.BLACK_BISHOP || board[newX][newY] === Utils.BLACK_QUEEN || board[newX][newY] === Utils.BLACK_KING || board[newX][newY] === Utils.BLACK_KNIGHT2 || board[newX][newY] === Utils.BLACK_BISHOP2 || board[newX][newY] === Utils.BLACK_ROOK2) {
 							continue;
 						} else {
@@ -206,7 +206,7 @@ export function legalMoves(board, newX, newY, move1, move2, color) {
 						
 					break;
 				}
-						
+				
 				break;
 			}
 													
