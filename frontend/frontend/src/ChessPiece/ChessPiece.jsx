@@ -7,7 +7,7 @@ class ChessPiece {
 		this.isCaptured = isCaptured;
 	}
 	
-	getLegalMoves(board, oldLocation) {throw new Error("Method 'getLegalMoves' must be implemented."); }
+	getLegalMoves(board, oldLocation, color) {throw new Error("Method 'getLegalMoves' must be implemented."); }
 	makeMove(move, legalMoves, board) {} 
 	getCaptured() {}
 }

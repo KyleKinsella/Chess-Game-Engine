@@ -11,15 +11,15 @@ class king extends ChessPiece {
 		const col = oldKingLocation[1];
 		
 		const kingMoves = [
-			[-1, 1],
-			[-1, 0],
-			[-1, -1],
-			[0, -1],
-			[0, 1],
-			[1, -1],
-			[1, 0],				
-			[1, 1],
-			[0, 1]
+			[-1, 1], // up, left
+			[-1, 0], // left
+			[-1, -1], // down, left
+			[0, -1], // down
+			[0, 1], // up
+			[1, -1], // down, right
+			[1, 0],	// right			
+			[1, 1], // up, right
+			[0, 1] // up  
 		];
 		
 		const legalMoves = [];
@@ -28,9 +28,9 @@ class king extends ChessPiece {
 			const newX = row + move[0];
 			const newY = col + move[1];
 			
-			if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {							
-				if (board[newX][newY] === Utils.freeSpace + " ") {
-					board[newX][newY] = "#####" + " ";
+			if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {						
+				if (board[newX][newY] === Utils.NULL) {
+					board[newX][newY] = Utils.iCanMoveToHere;
 					legalMoves.push([newX, newY]);
 				} 
 			}

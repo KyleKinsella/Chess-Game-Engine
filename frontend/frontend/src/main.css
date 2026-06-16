@@ -1,56 +1,57 @@
-.square, #piece {
-    /*
-    width: 130px;
-    height: 130px;
-    background: #cd5454;
-    display: grid;
-    */
-
-    /*
-    margin-left: auto;
-    margin-right: auto;
-    */
-
-    
-    /*
-    text-align: center;
-    font-size: 25px;
-    */
-    
-}
-
-/*
-.board {
-    display: block;
-   margin: auto;
-   width: 500px;
-}
-*/
-
-
-/* .................................................. */
-
+/* OLD */
 .chessboard {
   display: grid;
   grid-template-columns: repeat(8, 100px);
   grid-template-rows: repeat(8, 100px);
   width: 800px;
 }
+/* OLD - looks similar to ".board" below */
 
-.white {
-  background-color: #f0d9b5;
-  width: 100px;
-  height: 100px;
-}
-
-.black {
-  background-color: #b58863;
-  width: 100px;
-  height: 100px;
+/* add more if you want to have same width & height*/
+.square {
+	width: 100px;
+    height: 100px;
 }
 
 .board {
-	width: 50%; /* or any specific width */
+	width: 50%; 
 	margin: auto;
 	font-size: 25px;
+	display: grid;
+	grid-template-columns: repeat(8, 100px);
+}
+
+.square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+}
+
+.is_white {
+	 background-color: #f0d9b5;
+}
+
+.is_black {
+	background-color: #b58863;
+}
+
+.rand {
+	text-align: center;
+}
+
+.white, .black {
+	font-family: Courier, monospace;
+}
+
+.white {
+	color: #fffafa;
+}
+
+.black {
+	color: #000000;
+}
+
+.middle {
+	color: #2A7B9B;
 }
