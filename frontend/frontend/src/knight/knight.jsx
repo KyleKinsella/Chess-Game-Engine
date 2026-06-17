@@ -45,7 +45,7 @@ class knight extends ChessPiece {
 							if (board[newX][newY] === Utils.WHITE_PAWN || board[newX][newY] === Utils.WHITE_KNIGHT || board[newX][newY] === Utils.WHITE_ROOK || board[newX][newY] === Utils.WHITE_BISHOP || board[newX][newY] === Utils.WHITE_QUEEN || board[newX][newY] === Utils.WHITE_KING || board[newX][newY] === Utils.WHITE_KNIGHT2 || board[newX][newY] === Utils.WHITE_BISHOP2 || board[newX][newY] === Utils.WHITE_ROOK2) {
 								continue;
 							} else {	
-								board[newX][newY] = Utils.iCanCaptureYou;
+								//~ board[newX][newY] = Utils.iCanCaptureYou;
 								legalMoves.push([newX, newY]);
 							}
 							
@@ -56,7 +56,7 @@ class knight extends ChessPiece {
 							if (board[newX][newY] === Utils.BLACK_PAWN || board[newX][newY] === Utils.BLACK_KNIGHT || board[newX][newY] === Utils.BLACK_ROOK || board[newX][newY] === Utils.BLACK_BISHOP || board[newX][newY] === Utils.BLACK_QUEEN || board[newX][newY] === Utils.BLACK_KING || board[newX][newY] === Utils.BLACK_KNIGHT2 || board[newX][newY] === Utils.BLACK_BISHOP2 || board[newX][newY] === Utils.BLACK_ROOK2) {
 								continue;
 							} else {
-								board[newX][newY] = Utils.iCanCaptureYou;
+								//~ board[newX][newY] = Utils.iCanCaptureYou;
 								legalMoves.push([newX, newY]);
 							}
 							
