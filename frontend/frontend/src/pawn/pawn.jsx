@@ -6,12 +6,12 @@ function captureBlackPiece(board, col, row, n, m) {
 	
 	// TODO: have a better way of computing the col & row for checking if its a black pawn...
 	if (board[col+3][row+1] === Utils.BLACK_PAWN) {
-		board[col+3][row+1] = Utils.iCanCaptureYou;
+		//~ board[col+3][row+1] = Utils.iCanCaptureYou;
 		moves.push([col+3, row+1]);
 	}
 		
 	if (board[col+1][row+1] === Utils.BLACK_PAWN) {
-		board[col+1][row+1] = Utils.iCanCaptureYou;
+		//~ board[col+1][row+1] = Utils.iCanCaptureYou;
 		moves.push([col+1, row+1]);
 	}
 	
@@ -49,12 +49,12 @@ function captureWhitePiece(board, col, row) {
 	
 	// TODO: have a better way of computing the col & row for checking if its a white pawn...
 	if (board[col-4][row] === Utils.WHITE_PAWN) {
-		board[col-4][row] = Utils.iCanCaptureYou;
+		//~ board[col-4][row] = Utils.iCanCaptureYou;
 		moves.push([col-4, row]);
 	}
 	
 	if (board[col-2][row] === Utils.WHITE_PAWN) {
-		board[col-2][row] = Utils.iCanCaptureYou;
+		//~ board[col-2][row] = Utils.iCanCaptureYou;
 		moves.push([col-2, row]);
 	}
 	
