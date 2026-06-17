@@ -1,5 +1,6 @@
 import ChessPiece from "../ChessPiece/ChessPiece.jsx";
 import Utils from ".././utils.jsx";
+import { detectCapture } from "../board/Board.jsx";
 
 class knight extends ChessPiece {
 	constructor () {
@@ -10,7 +11,7 @@ class knight extends ChessPiece {
 	// you mentioned to only pass in the board, i belive that we should pass in the oldlocation of the knight that we want to find where that knight can move to, we should not need the board for this i believe....
 	// this is javascripts way of over-riding the parent function of "getLegalMoves(...)".
 	//
-	getLegalMoves(board, oldKnightLocation, color) {	
+	getLegalMoves(board, oldKnightLocation, color, piece) {	
 		const row = oldKnightLocation[0];
 		const col = oldKnightLocation[1];
 		
@@ -41,22 +42,30 @@ class knight extends ChessPiece {
 				} else {
 					switch(color) {
 						case Utils.WHITE:
-							// don't let use capture our own pieces! (not good code for checking each piece, Utils won't let me use the white or black pieces arrays, idk why)...
+							// don't capture your own pieces!
 							if (board[newX][newY] === Utils.WHITE_PAWN || board[newX][newY] === Utils.WHITE_KNIGHT || board[newX][newY] === Utils.WHITE_ROOK || board[newX][newY] === Utils.WHITE_BISHOP || board[newX][newY] === Utils.WHITE_QUEEN || board[newX][newY] === Utils.WHITE_KING || board[newX][newY] === Utils.WHITE_KNIGHT2 || board[newX][newY] === Utils.WHITE_BISHOP2 || board[newX][newY] === Utils.WHITE_ROOK2) {
 								continue;
 							} else {	
 								//~ board[newX][newY] = Utils.iCanCaptureYou;
+								if (detectCapture(piece)) {
+									alert("you have been captured...");
+								}
+								
 								legalMoves.push([newX, newY]);
 							}
-							
+						
 						break;
-							
+						
 						case Utils.BLACK:
-							// don't let use capture our own pieces! (not good code for checking each piece, Utils won't let me use the white or black pieces arrays, idk why)...
+							// don't capture your own pieces!
 							if (board[newX][newY] === Utils.BLACK_PAWN || board[newX][newY] === Utils.BLACK_KNIGHT || board[newX][newY] === Utils.BLACK_ROOK || board[newX][newY] === Utils.BLACK_BISHOP || board[newX][newY] === Utils.BLACK_QUEEN || board[newX][newY] === Utils.BLACK_KING || board[newX][newY] === Utils.BLACK_KNIGHT2 || board[newX][newY] === Utils.BLACK_BISHOP2 || board[newX][newY] === Utils.BLACK_ROOK2) {
 								continue;
 							} else {
 								//~ board[newX][newY] = Utils.iCanCaptureYou;
+								if (detectCapture(piece)) {
+									alert("you have been captured...");
+								}
+
 								legalMoves.push([newX, newY]);
 							}
 							
