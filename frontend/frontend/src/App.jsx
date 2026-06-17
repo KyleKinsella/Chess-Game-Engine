@@ -42,7 +42,7 @@ function App() {
 	//
 	const values = ["knight", "rook", "bishop", "queen", "pawn", "king"];
 	var rand = values[Math.floor(Math.random() * values.length)];
-	rand = "pawn";
+	rand = "bishop";
 	
 	const colors = [Utils.WHITE, Utils.BLACK];
 	const whiteOrBlack = colors[Math.floor(Math.random() * colors.length)];
@@ -89,6 +89,10 @@ function App() {
 				case Utils.WHITE:
 					const whiteProcessBishop = pieceToProcess(b, whiteBishops[0], 1, Utils.WHITE_BISHOP, whiteOrBlack);
 					console.log(whiteProcessBishop);
+					
+					//~ var mv = movePiece(b, whiteBishops[0], whiteProcessBishop[6]);
+					//~ console.log(mv);
+					
 					break;
 				
 				case Utils.BLACK:
