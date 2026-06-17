@@ -77,6 +77,9 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 	const randomElement = updatedFreeSpaces[Math.floor(Math.random() * updatedFreeSpaces.length)];
 	// randomElement is for testing purposes only! // 
 	
+	const bk = findPieceInBoard(board, Utils.BLACK_KNIGHT);
+	const black_pawns = findPieceInBoard(board, Utils.BLACK_PAWN);
+	
 	switch (pieceType) {
 		case Utils.WHITE_KNIGHT:
 		case Utils.BLACK_KNIGHT:
@@ -109,15 +112,18 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 			return legalRookMoves;
 						
 		case Utils.WHITE_BISHOP:
-		case Utils.BLACK_BISHOP:	
+		case Utils.BLACK_BISHOP:				
 			const moveBishop = movePiece(board, oldPieceLocation, randomElement);	
-				
+			
+			//~ const moveBishop = movePiece(board, oldPieceLocation, bk[1]);	
+			//~ const moveBishop = movePiece(board, oldPieceLocation, black_pawns[3]);	
+			
 			const newBishopLocations = findPieceInBoard(moveBishop, pieceType);
 			
 			const computeBishop = newBishopLocations[index];
 				
 			const b = new bishop(0, 0, pieceColor, pieceType, false);
-			const legalBishopMoves = b.getLegalMoves(moveBishop, computeBishop, pieceColor);
+			const legalBishopMoves = b.getLegalMoves(moveBishop, computeBishop, pieceColor, pieceType);
 			
 			// TODO: is a move legal or not !?
 			
@@ -172,8 +178,37 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 	}
 }
 
-export function legalMoves(board, newX, newY, move1, move2, color) {
+function capturePiece(board, newX, newY, pieceToProcess) {	
+	const whitePieces = [
+		Utils.WHITE_PAWN,
+		Utils.WHITE_ROOK,
+		Utils.WHITE_KNIGHT,
+		Utils.WHITE_BISHOP,
+		Utils.WHITE_QUEEN,
+		Utils.WHITE_KING
+	];
+	
+	const blackPieces = [
+		Utils.BLACK_PAWN,
+		Utils.BLACK_ROOK,
+		Utils.BLACK_KNIGHT,
+		Utils.BLACK_BISHOP,
+		Utils.BLACK_QUEEN,
+		Utils.BLACK_KING
+	];
+	
+	var capture = false;
+	for (const white of whitePieces) {
+		for (const black of blackPieces) {
+			if (pieceToProcess === white || pieceToProcess === black) {
+				capture = true;
+			}
+		}
+	}
+	return capture;
+}
 
+export function legalMoves(board, newX, newY, move1, move2, color, pieceToProcess) {
 	const legalMoves = [];
 	
 	// i am not using the value of i here, i know LOL.......
@@ -189,7 +224,12 @@ export function legalMoves(board, newX, newY, move1, move2, color) {
 						if (board[newX][newY] === Utils.WHITE_PAWN || board[newX][newY] === Utils.WHITE_KNIGHT || board[newX][newY] === Utils.WHITE_ROOK || board[newX][newY] === Utils.WHITE_BISHOP || board[newX][newY] === Utils.WHITE_QUEEN || board[newX][newY] === Utils.WHITE_KING || board[newX][newY] === Utils.WHITE_KNIGHT2 || board[newX][newY] === Utils.WHITE_BISHOP2 || board[newX][newY] === Utils.WHITE_ROOK2) {
 							continue;
 						} else {	
-							board[newX][newY] = Utils.iCanCaptureYou;
+							//~ board[newX][newY] = Utils.iCanCaptureYou;
+							const capture = capturePiece(board, newX, newY, pieceToProcess);
+							if (capture) {
+								alert("you have been captured...");
+							}
+							
 							legalMoves.push([newX, newY]);
 						}
 						
@@ -200,7 +240,12 @@ export function legalMoves(board, newX, newY, move1, move2, color) {
 						if (board[newX][newY] === Utils.BLACK_PAWN || board[newX][newY] === Utils.BLACK_KNIGHT || board[newX][newY] === Utils.BLACK_ROOK || board[newX][newY] === Utils.BLACK_BISHOP || board[newX][newY] === Utils.BLACK_QUEEN || board[newX][newY] === Utils.BLACK_KING || board[newX][newY] === Utils.BLACK_KNIGHT2 || board[newX][newY] === Utils.BLACK_BISHOP2 || board[newX][newY] === Utils.BLACK_ROOK2) {
 							continue;
 						} else {
-							board[newX][newY] = Utils.iCanCaptureYou;
+							//~ board[newX][newY] = Utils.iCanCaptureYou;
+							const capture = capturePiece(board, newX, newY, pieceToProcess);
+							if (capture) {
+								alert("you have been captured...");
+							}
+
 							legalMoves.push([newX, newY]);
 						}
 						
