@@ -209,12 +209,14 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 		
 		case Utils.WHITE_PAWN:		
 		case Utils.BLACK_PAWN:
-			const pawns = findPieceInBoard(board, pieceType);
+			//~ const pawns = findPieceInBoard(board, pieceType);
+			//~ console.log("pawns:", pawns);
 			
-			const computePawn = pawns[index];
+			//~ const computePawn = pawns[index];
+			//~ console.log("computing pawn:", computePawn);
 			
 			const p = new pawn(0, 0, pieceColor, pieceType, false);
-			var legalPawnMoves = p.getLegalMoves(board, computePawn, pieceColor);
+			var legalPawnMoves = p.getLegalMoves(board, oldPieceLocation, pieceColor);
 			
 			// TODO: is a move legal or not !?
 			
@@ -242,33 +244,21 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 }
 
 export function detectCapture(piece) {	
-	const whitePieces = [
-		Utils.WHITE_PAWN,
-		Utils.WHITE_ROOK,
-		Utils.WHITE_KNIGHT,
-		Utils.WHITE_BISHOP,
-		Utils.WHITE_QUEEN,
-		Utils.WHITE_KING
-	];
-	
-	const blackPieces = [
-		Utils.BLACK_PAWN,
-		Utils.BLACK_ROOK,
-		Utils.BLACK_KNIGHT,
-		Utils.BLACK_BISHOP,
-		Utils.BLACK_QUEEN,
-		Utils.BLACK_KING
-	];
-	
 	var capture = false;
-	for (const white of whitePieces) {
-		for (const black of blackPieces) {
+	for (const white of Utils.white_pieces) {
+		for (const black of Utils.black_pieces) {
 			if (piece === white || piece === black) {
 				capture = true;
 			}
 		}
 	}
 	return capture;
+}
+
+function notify(piece) {
+	if (detectCapture(piece)) {
+		alert("you have been captured...");
+	}
 }
 
 export function legalMoves(board, newX, newY, move1, move2, color, piece) {
@@ -287,11 +277,8 @@ export function legalMoves(board, newX, newY, move1, move2, color, piece) {
 						if (board[newX][newY] === Utils.WHITE_PAWN || board[newX][newY] === Utils.WHITE_KNIGHT || board[newX][newY] === Utils.WHITE_ROOK || board[newX][newY] === Utils.WHITE_BISHOP || board[newX][newY] === Utils.WHITE_QUEEN || board[newX][newY] === Utils.WHITE_KING || board[newX][newY] === Utils.WHITE_KNIGHT2 || board[newX][newY] === Utils.WHITE_BISHOP2 || board[newX][newY] === Utils.WHITE_ROOK2) {
 							continue;
 						} else {	
-							//~ board[newX][newY] = Utils.iCanCaptureYou;
-							if (detectCapture(piece)) {
-								alert("you have been captured...");
-							}
-							
+							board[newX][newY] = Utils.iCanCaptureYou;
+							//~ notify(piece);
 							legalMoves.push([newX, newY]);
 						}
 						
@@ -302,11 +289,8 @@ export function legalMoves(board, newX, newY, move1, move2, color, piece) {
 						if (board[newX][newY] === Utils.BLACK_PAWN || board[newX][newY] === Utils.BLACK_KNIGHT || board[newX][newY] === Utils.BLACK_ROOK || board[newX][newY] === Utils.BLACK_BISHOP || board[newX][newY] === Utils.BLACK_QUEEN || board[newX][newY] === Utils.BLACK_KING || board[newX][newY] === Utils.BLACK_KNIGHT2 || board[newX][newY] === Utils.BLACK_BISHOP2 || board[newX][newY] === Utils.BLACK_ROOK2) {
 							continue;
 						} else {
-							//~ board[newX][newY] = Utils.iCanCaptureYou;
-							if (detectCapture(piece)) {
-								alert("you have been captured...");
-							}
-
+							board[newX][newY] = Utils.iCanCaptureYou;
+							//~ notify(piece);
 							legalMoves.push([newX, newY]);
 						}
 						
