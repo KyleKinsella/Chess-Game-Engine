@@ -59,59 +59,59 @@ function App() {
 	
 	const white = Utils.WHITE;
 	const black = Utils.BLACK;
-	
+		
 	switch (selectedPiece) {
 		case Utils.WHITE_ROOK:
-			freeSpot(b);
+			//~ freeSpot(b);
 			
-			const whiteProcessRook = pieceToProcess(b, whiteRooks[0], 1, Utils.WHITE_ROOK, white);
-			console.log(whiteProcessRook);	
+			const whiteProcessRook = pieceToProcess(b, whiteRooks[0], 0, Utils.WHITE_ROOK, white);
+			console.log(whiteProcessRook);
 			break;
-		
+			
 		case Utils.BLACK_ROOK:
-			freeSpot(b);
+			//~ freeSpot(b);
 			
 			const blackProcessRook = pieceToProcess(b, blackRooks[1], 0, Utils.BLACK_ROOK, black);
 			console.log(blackProcessRook);
 			break;
 		
 		case Utils.WHITE_KNIGHT:
-			freeSpot(b);
+			//~ freeSpot(b);
 			
-			const whiteProcessKnight = pieceToProcess(b, whiteKnights[0], 1, Utils.WHITE_KNIGHT, white);
+			const whiteProcessKnight = pieceToProcess(b, whiteKnights[0], 0, Utils.WHITE_KNIGHT, white);
 			console.log(whiteProcessKnight);
 			break;
 
 		case Utils.BLACK_KNIGHT:
-			freeSpot(b);
+			//~ freeSpot(b);
 			
 			const blackProcessKnight = pieceToProcess(b, blackKnights[0], 0, Utils.BLACK_KNIGHT, black);
 			console.log(blackProcessKnight);
 			break;
 		
 		case Utils.WHITE_BISHOP:
-			freeSpot(b);
+			//~ freeSpot(b);
 			
-			const whiteProcessBishop = pieceToProcess(b, whiteBishops[0], 1, Utils.WHITE_BISHOP, white);
+			const whiteProcessBishop = pieceToProcess(b, whiteBishops[0], 0, Utils.WHITE_BISHOP, white);
 			console.log(whiteProcessBishop);
 			break;
 		
 		case Utils.BLACK_BISHOP:
-			freeSpot(b);
+			//~ freeSpot(b);
 			
 			const blackProcessBishop = pieceToProcess(b, blackBishops[1], 0, Utils.BLACK_BISHOP, black);
 			console.log(blackProcessBishop);
 			break;
 				
 		case Utils.WHITE_QUEEN:
-			freeSpot(b);
+			//~ freeSpot(b);
 			
 			const whiteProcessQueen = pieceToProcess(b, whiteQueen[0], 0, Utils.WHITE_QUEEN, white);
 			console.log(whiteProcessQueen);
 			break;
 			
 		case Utils.BLACK_QUEEN:
-			freeSpot(b);
+			//~ freeSpot(b);
 			
 			const blackProcessQueen = pieceToProcess(b, blackQueen[0], 0, Utils.BLACK_QUEEN, black);
 			console.log(blackProcessQueen);
@@ -127,7 +127,7 @@ function App() {
 			
 			for (var i = 0; i < down1.length; i++) {
 				if (whiteN === down1[i]) {
-					var movePawn = movePiece(b, processMe1, whiteProcessPawn[0]);
+					//~ var movePawn = movePiece(b, processMe1, whiteProcessPawn[0]);
 					// TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it					
 				} 
 			}
@@ -144,7 +144,7 @@ function App() {
 				
 			for (var i = 0; i < down.length; i++) {
 				if (blackN === down[i]) {
-					var movePawn = movePiece(b, processMe2, blackProcessPawn[1]);
+					//~ var movePawn = movePiece(b, processMe2, blackProcessPawn[1]);
 					//~ // TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it					
 				} 
 			}
@@ -164,9 +164,13 @@ function App() {
 	}
 	
 	return (  
-		<div>			
+		<div>	
+			{/*
 			<h3 className="rand">We are processing a {selectedPiece}</h3>
-						
+			*/}
+			
+			<br/><br/>
+					
 			<div className="board" id="myDiv">
 				{b.map((row, i) => (
 					<div key={i}>
