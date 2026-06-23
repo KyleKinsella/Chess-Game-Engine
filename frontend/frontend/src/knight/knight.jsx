@@ -1,16 +1,12 @@
 import ChessPiece from "../ChessPiece/ChessPiece.jsx";
 import Utils from ".././utils.jsx";
-import { detectCapture } from "../board/Board.jsx";
+import { detectCapture, notify } from "../board/Board.jsx";
 
 class knight extends ChessPiece {
 	constructor () {
 		super();
 	}
-
-	//
-	// you mentioned to only pass in the board, i belive that we should pass in the oldlocation of the knight that we want to find where that knight can move to, we should not need the board for this i believe....
-	// this is javascripts way of over-riding the parent function of "getLegalMoves(...)".
-	//
+	
 	getLegalMoves(board, oldKnightLocation, color, piece) {	
 		const row = oldKnightLocation[0];
 		const col = oldKnightLocation[1];
@@ -30,13 +26,11 @@ class knight extends ChessPiece {
 		const legalMoves = [];
 
 		for (const move of knightMoves) {
-
 			const newX = row + move[0];
 			const newY = col + move[1];
 			
-			// TODO: you cannot move to a postion that is occupied by another piece!
 			if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
-				if (board[newX][newY] === Utils.NULL) {		
+				if (board[newX][newY] === Utils.NULL ) {	
 					board[newX][newY] = Utils.iCanMoveToHere;
 					legalMoves.push([newX, newY]);
 				} else {
@@ -46,11 +40,8 @@ class knight extends ChessPiece {
 							if (board[newX][newY] === Utils.WHITE_PAWN || board[newX][newY] === Utils.WHITE_KNIGHT || board[newX][newY] === Utils.WHITE_ROOK || board[newX][newY] === Utils.WHITE_BISHOP || board[newX][newY] === Utils.WHITE_QUEEN || board[newX][newY] === Utils.WHITE_KING || board[newX][newY] === Utils.WHITE_KNIGHT2 || board[newX][newY] === Utils.WHITE_BISHOP2 || board[newX][newY] === Utils.WHITE_ROOK2) {
 								continue;
 							} else {	
-								board[newX][newY] = Utils.iCanCaptureYou;
-								if (detectCapture(piece)) {
-									//~ alert("you have been captured...");
-								}
-								
+								board[newX][newY] = Utils.iCanMoveToHere;
+								//~ notify(piece);
 								legalMoves.push([newX, newY]);
 							}
 						
@@ -61,34 +52,28 @@ class knight extends ChessPiece {
 							if (board[newX][newY] === Utils.BLACK_PAWN || board[newX][newY] === Utils.BLACK_KNIGHT || board[newX][newY] === Utils.BLACK_ROOK || board[newX][newY] === Utils.BLACK_BISHOP || board[newX][newY] === Utils.BLACK_QUEEN || board[newX][newY] === Utils.BLACK_KING || board[newX][newY] === Utils.BLACK_KNIGHT2 || board[newX][newY] === Utils.BLACK_BISHOP2 || board[newX][newY] === Utils.BLACK_ROOK2) {
 								continue;
 							} else {
-								board[newX][newY] = Utils.iCanCaptureYou;
-								if (detectCapture(piece)) {
-									//~ alert("you have been captured...");
-								}
-
+								board[newX][newY] = Utils.iCanMoveToHere;
+								//~ notify(piece);
 								legalMoves.push([newX, newY]);
 							}
 							
 						break;
 					}
+					
+					// This poses a lot of problems, when it comes to moving a piece and then re-computing that pieces legal moves!
+					break;
 				}
 			}
 		}
 		return legalMoves;
 	}
-
-	//
-	// i think we should pass in the legal moves, in order to find out if a given move is legal or not...
-	// TODO: process board...
-	//
+	
 	makeMove(move, legalMoves, board) {	
-		
 		for (const mv of legalMoves) {
 			if (move === mv) {
 				return true;
 			}
-		}
-		
+		}		
 		return false;
 	}
 	
