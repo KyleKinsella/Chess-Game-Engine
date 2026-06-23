@@ -20,8 +20,8 @@ export function initGameBoard(board, rows, cols) {
 			// BUT, if you have removed all pawns off of the board and you try and process a pawn (when rand = pawn, in App.jsx) the project will break. 
 			//
 			if (i === 1) {
-				//~ board[j][i] = Utils.NULL;
-				board[j][i] = Utils.WHITE_PAWN;
+				board[j][i] = Utils.NULL;
+				//~ board[j][i] = Utils.WHITE_PAWN;
 			}
 			
 			if (i === 2 || i === 3 || i === 4 || i === 5) {
@@ -29,8 +29,8 @@ export function initGameBoard(board, rows, cols) {
             }
                 
 			if (i === 6) {
-				//~ board[j][i] = Utils.NULL;
-				board[j][i] = Utils.BLACK_PAWN;
+				board[j][i] = Utils.NULL;
+				//~ board[j][i] = Utils.BLACK_PAWN;
 			}
 			
 			if (i === 7) {
@@ -75,106 +75,30 @@ export function movePiece(board, oldLoc, newLoc) {
 	return board;
 }
 
-export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceColor) {
-	const updatedFreeSpaces = findPieceInBoard(board, Utils.NULL);
-	const randomElement = updatedFreeSpaces[Math.floor(Math.random() * updatedFreeSpaces.length)];
-	// randomElement is for testing purposes only! // 
-	
-	const blackRooks = findPieceInBoard(board, Utils.BLACK_ROOK);
-	const whiteRooks = findPieceInBoard(board, Utils.WHITE_ROOK);
-	
-	const blackKnights = findPieceInBoard(board, Utils.BLACK_KNIGHT);
-	const whiteKnights = findPieceInBoard(board, Utils.WHITE_KNIGHT);
-	
-	const blackBishops = findPieceInBoard(board, Utils.BLACK_BISHOP);
-	const whiteBishops = findPieceInBoard(board, Utils.WHITE_BISHOP);
-	
-	const blackQueen = findPieceInBoard(board, Utils.BLACK_QUEEN);
-	const whiteQueen = findPieceInBoard(board, Utils.WHITE_QUEEN);
-	
-	const blackPawns = findPieceInBoard(board, Utils.BLACK_PAWN);
-	const whitePawns = findPieceInBoard(board, Utils.WHITE_PAWN);
-	
+export function pieceToProcess(board, oldPieceLocation, pieceType, pieceColor) {
 	switch (pieceType) {
 		case Utils.WHITE_KNIGHT:
 		case Utils.BLACK_KNIGHT:
-			//~ const moveKnight = movePiece(board, oldPieceLocation, randomElement);
-			
-			//
-			// TODO: have a better way of moving pieces around the board
-			// AND
-			// only move a piece if the move is legal!
-			// 
-			var moveKnight;
-			if (pieceColor === Utils.WHITE) {
-				moveKnight = movePiece(board, oldPieceLocation, blackKnights[1]);	
-			} else {
-				moveKnight = movePiece(board, oldPieceLocation, whiteKnights[1]);	
-			}
-			
-			const newKnightLocations = findPieceInBoard(moveKnight, pieceType);
-			
-			const computeKnight = newKnightLocations[index];
-			
 			const k = new knight(0, 0, pieceColor, pieceType, false);
-			const legalKnightMoves = k.getLegalMoves(moveKnight, computeKnight, pieceColor, pieceType);
+			const legalKnightMoves = k.getLegalMoves(board, oldPieceLocation, pieceColor, pieceType);
 			
-			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, newKnightLocations);
+			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, board);
 			
 			return legalKnightMoves;
 			
 		case Utils.WHITE_ROOK:
 		case Utils.BLACK_ROOK:
-			//~ const moveRook = movePiece(board, oldPieceLocation, randomElement);
-			
-			//
-			// TODO: have a better way of moving pieces around the board
-			// AND
-			// only move a piece if the move is legal!
-			// 
-			var moveRook;
-			if (pieceColor === Utils.WHITE) {
-				moveRook = movePiece(board, oldPieceLocation, blackPawns[1]);	
-			} else {
-				moveRook = movePiece(board, oldPieceLocation, whitePawns[1]);	
-			}
-			
-			const newRookLocations = findPieceInBoard(moveRook, pieceType);
-			
-			const computeRook = newRookLocations[index];
-			
 			const r = new rook(0, 0, pieceColor, pieceType, false);
-			const legalRookMoves = r.getLegalMoves(moveRook, computeRook, pieceColor, pieceType);
+			const legalRookMoves = r.getLegalMoves(board, oldPieceLocation, pieceColor, pieceType);
 			
 			// TODO: is a move legal or not !?
-						
+			
 			return legalRookMoves;
-						
+			
 		case Utils.WHITE_BISHOP:
-		case Utils.BLACK_BISHOP:				
-			//~ const moveBishop = movePiece(board, oldPieceLocation, randomElement);	
-			
-			//
-			// TODO: have a better way of moving pieces around the board
-			// AND
-			// only move a piece if the move is legal!
-			// 
-			var moveBishop;
-			if (pieceColor === Utils.WHITE) {
-				moveBishop = movePiece(board, oldPieceLocation, blackKnights[1]);	
-			} else {
-				moveBishop = movePiece(board, oldPieceLocation, whitePawns[3]);	
-			}
-			
-			//~ const moveBishop = movePiece(board, oldPieceLocation, bk[1]);	
-			//~ const moveBishop = movePiece(board, oldPieceLocation, black_pawns[3]);	
-			
-			const newBishopLocations = findPieceInBoard(moveBishop, pieceType);
-			
-			const computeBishop = newBishopLocations[index];
-				
+		case Utils.BLACK_BISHOP:					
 			const b = new bishop(0, 0, pieceColor, pieceType, false);
-			const legalBishopMoves = b.getLegalMoves(moveBishop, computeBishop, pieceColor, pieceType);
+			const legalBishopMoves = b.getLegalMoves(board, oldPieceLocation, pieceColor, pieceType);
 			
 			// TODO: is a move legal or not !?
 			
@@ -182,26 +106,8 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 			
 		case Utils.WHITE_QUEEN:		
 		case Utils.BLACK_QUEEN:				
-			//~ const moveQueen = movePiece(board, oldPieceLocation, randomElement);
-			
-			//
-			// TODO: have a better way of moving pieces around the board
-			// AND
-			// only move a piece if the move is legal!
-			// 
-			var moveQueen;
-			if (pieceColor === Utils.WHITE) {
-				moveQueen = movePiece(board, oldPieceLocation, blackPawns[1]);
-			} else {
-				moveQueen = movePiece(board, oldPieceLocation, whitePawns[1]);	
-			}
-			
-			const newQueenLocations = findPieceInBoard(moveQueen, pieceType);
-			
-			const computeQueen = newQueenLocations[index];
-			
 			const q = new queen(0, 0, pieceColor, pieceType, false);
-			const legalQueenMoves = q.getLegalMoves(moveQueen, computeQueen, pieceColor, pieceType);
+			const legalQueenMoves = q.getLegalMoves(board, oldPieceLocation, pieceColor, pieceType);
 			
 			// TODO: is a move legal or not !?
 			
@@ -209,14 +115,8 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 		
 		case Utils.WHITE_PAWN:		
 		case Utils.BLACK_PAWN:
-			//~ const pawns = findPieceInBoard(board, pieceType);
-			//~ console.log("pawns:", pawns);
-			
-			//~ const computePawn = pawns[index];
-			//~ console.log("computing pawn:", computePawn);
-			
 			const p = new pawn(0, 0, pieceColor, pieceType, false);
-			var legalPawnMoves = p.getLegalMoves(board, oldPieceLocation, pieceColor);
+			const legalPawnMoves = p.getLegalMoves(board, oldPieceLocation, pieceColor);
 			
 			// TODO: is a move legal or not !?
 			
@@ -224,14 +124,8 @@ export function pieceToProcess(board, oldPieceLocation, index, pieceType, pieceC
 		
 		case Utils.WHITE_KING:			
 		case Utils.BLACK_KING:
-			const moveKing = movePiece(board, oldPieceLocation, randomElement);
-			
-			const newKingLocations = findPieceInBoard(moveKing, pieceType);
-			
-			const computeKing = newKingLocations[index];
-			
 			const ki = new king(0, 0, pieceColor, pieceType, false);
-			const legalKingMoves = ki.getLegalMoves(moveKing, computeKing);
+			const legalKingMoves = ki.getLegalMoves(board, oldPieceLocation);
 			
 			// TODO: is a move legal or not !?
 			
@@ -255,7 +149,7 @@ export function detectCapture(piece) {
 	return capture;
 }
 
-function notify(piece) {
+export function notify(piece) {
 	if (detectCapture(piece)) {
 		alert("you have been captured...");
 	}
@@ -269,7 +163,7 @@ export function legalMoves(board, newX, newY, move1, move2, color, piece) {
 		if (newX >= 0 && newX < Utils.ROWS && newY >= 0 && newY < Utils.COLS) {
 			if (board[newX][newY] === Utils.NULL) {
 				board[newX][newY] = Utils.iCanMoveToHere;
-				legalMoves.push([newX, newY]);
+				legalMoves.push([newX, newY]);					
 			} else {
 				switch(color) {
 					case Utils.WHITE:
@@ -297,12 +191,13 @@ export function legalMoves(board, newX, newY, move1, move2, color, piece) {
 					break;
 				}
 				
+				// This poses a lot of problems, when it comes to moving a piece and then re-computing that pieces legal moves!
 				break;
 			}
 													
 			newX += move1;
 			newY += move2;
-		}
+		} 
 	}
 	return legalMoves;
 }

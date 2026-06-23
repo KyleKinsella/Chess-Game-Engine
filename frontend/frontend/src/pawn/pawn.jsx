@@ -38,7 +38,7 @@ function goDown(board, col, row) {
 	const goDown = [0, -1];
 	const goDownTwice = 2;
 	
-	const newRow = col + goDown[0]+goDownTwice+1; // this brings me down!
+	const newRow = col + goDown[0]+goDownTwice; // this brings me down!
 	const newCol = row + goDown[1]+1; // this brings me to the other column! (this will be incredibly useful for when we get to capturing pieces)
 			
 	if (goDownTwice === 2) {
@@ -81,7 +81,7 @@ function goUp(board, col, row) {
 	const goUp = [0, 1];
 	const goUpTwice = 2;
 	
-	const newRow = col + goUp[0]+goUpTwice-4; // this brings me up!
+	const newRow = col + goUp[0]+goUpTwice-3; // this brings me up!
 	const newCol = row + goUp[0]; // this brings me to the other column! (this will be incredibly useful for when we get to capturing pieces)
 	
 	if (goUpTwice === 2) {
