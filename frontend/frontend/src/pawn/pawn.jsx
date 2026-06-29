@@ -1,8 +1,23 @@
 import Utils from "../utils.jsx";
 import ChessPiece from "../ChessPiece/ChessPiece.jsx";
 
-function captureBlackPiece(board, col, row, n, m) {
+function captureBlackPiece(board, col, row) {
 	const moves = [];
+	
+	//~ const xy = row + col;
+	//~ const yx = col + row;
+	
+	//~ if (xy + yx > 8) {
+		//~ return moves;
+	//~ }
+	
+	//~ if (board[xy][yx] === Utils.BLACK_PAWN || board[xy-2][yx] === Utils.BLACK_PAWN) {
+		//~ board[xy][yx] = Utils.iCanCaptureYou;
+		//~ board[xy-2][yx] = Utils.iCanCaptureYou;
+		
+		//~ moves.push([xy, yx]);
+		//~ moves.push([xy-2, yx]);
+	//~ }
 	
 	// TODO: have a better way of computing the col & row for checking if its a black pawn...
 	if (board[col+3][row+1] === Utils.BLACK_PAWN) {
@@ -23,7 +38,7 @@ function goDown(board, col, row) {
 	const goDown = [0, -1];
 	const goDownTwice = 2;
 	
-	const newRow = col + goDown[0]+goDownTwice+1; // this brings me down!
+	const newRow = col + goDown[0]+goDownTwice; // this brings me down!
 	const newCol = row + goDown[1]+1; // this brings me to the other column! (this will be incredibly useful for when we get to capturing pieces)
 			
 	if (goDownTwice === 2) {
@@ -36,10 +51,10 @@ function goDown(board, col, row) {
 		legalMoves.push([newCol, newRow]);	
 	}
 	
-	const moves = captureBlackPiece(board, col, row);
-	for (var i = 0; i < moves.length; i++) {
-		legalMoves.push(moves[i]);
-	}
+	//~ const moves = captureBlackPiece(board, col, row);
+	//~ for (var i = 0; i < moves.length; i++) {
+		//~ legalMoves.push(moves[i]);
+	//~ }
 	
 	return legalMoves;
 }
@@ -66,7 +81,7 @@ function goUp(board, col, row) {
 	const goUp = [0, 1];
 	const goUpTwice = 2;
 	
-	const newRow = col + goUp[0]+goUpTwice-4; // this brings me up!
+	const newRow = col + goUp[0]+goUpTwice-3; // this brings me up!
 	const newCol = row + goUp[0]; // this brings me to the other column! (this will be incredibly useful for when we get to capturing pieces)
 	
 	if (goUpTwice === 2) {
@@ -79,10 +94,10 @@ function goUp(board, col, row) {
 		legalMoves.push([newCol, newRow]);	
 	} 
 	
-	const moves = captureWhitePiece(board, col, row);
-	for (var i = 0; i < moves.length; i++) {
-		legalMoves.push(moves[i]);
-	}
+	//~ const moves = captureWhitePiece(board, col, row);
+	//~ for (var i = 0; i < moves.length; i++) {
+		//~ legalMoves.push(moves[i]);
+	//~ }
 		
 	return legalMoves;
 } 
@@ -104,17 +119,18 @@ class pawn extends ChessPiece {
 		const row = oldPawnLocation[0];
 		const col = oldPawnLocation[1];
 		
-		if (pawnColor === Utils.WHITE) {
-			board[2][4] = Utils.BLACK_PAWN;
-			board[4][4] = Utils.BLACK_PAWN;
-			return goDown(board, col, row);
-		} else {
-			board[2][3] = Utils.WHITE_PAWN;
-			board[4][3] = Utils.WHITE_PAWN;
-			return goUp(board, col, row);
-		}
+		//~ if (pawnColor === Utils.WHITE) {			
+			//~ board[2][4] = Utils.BLACK_PAWN;
+			//~ board[3][4] = Utils.BLACK_PAWN;
+			//~ board[4][4] = Utils.BLACK_PAWN;
+			//~ return goDown(board, col, row);
+		//~ } else {
+			//~ board[2][3] = Utils.WHITE_PAWN;
+			//~ board[4][3] = Utils.WHITE_PAWN;
+			//~ return goUp(board, col, row);
+		//~ }
 		
-		//~ return (pawnColor === Utils.WHITE) ? goDown(board, col, row) : goUp(board, col, row);
+		return (pawnColor === Utils.WHITE) ? goDown(board, col, row) : goUp(board, col, row);
 	}
 	
 	makeMove(move, legalMoves, board) {

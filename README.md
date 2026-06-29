@@ -1,5 +1,7 @@
 # Chess Game & Engine
 
+# FUCK THIS FUCKING SHIT PROJECT! NOT DOING IT ANYMORE, CBA, TO MANY FUCKING ISSUES, OVER AND OVER AGAIN!!!!!!!!
+
 # Project Contributors & Brains Behind the Project
 Christopher Byrne | Kyle Kinsella  
 
