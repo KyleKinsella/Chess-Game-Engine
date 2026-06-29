@@ -48,6 +48,7 @@ function App() {
 	
 	useEffect(() => {
 		const clickDiv = (text) => {			
+			//~ console.log("text", text);
 			setSelectedPiece(text.srcElement.innerText);
 		};
 		
@@ -62,108 +63,127 @@ function App() {
 	const white = Utils.WHITE;
 	const black = Utils.BLACK;
 	
-	switch (selectedPiece) {
-		case Utils.WHITE_ROOK:
-			freeSpot(b);
-			
-			var whiteRook = pieceToProcess(b, whiteRooks[0], Utils.WHITE_ROOK, white);
-			console.log(whiteRook);
-			break;
-						
-		case Utils.BLACK_ROOK:
-			freeSpot(b);
-			
-			const blackRook = pieceToProcess(b, blackRooks[0], Utils.BLACK_ROOK, black);
-			console.log(blackRook);
-			break;
+	//~ var i = 0;
+	
+	//~ while (i != 10) {
+		//~ i += 1;
 		
-		case Utils.WHITE_KNIGHT:
-			freeSpot(b);
-			
-			const whiteKnight = pieceToProcess(b, whiteKnights[0], Utils.WHITE_KNIGHT, white);
-			console.log(whiteKnight);
-			break;
-
-		case Utils.BLACK_KNIGHT:
-			freeSpot(b);
-			
-			const blackKnight = pieceToProcess(b, blackKnights[0], Utils.BLACK_KNIGHT, black);
-			console.log(blackKnight);
-			break;
+		//~ if (i === 10) {
+			//~ break;
+		//~ }
 		
-		case Utils.WHITE_BISHOP:
-			freeSpot(b);
-			
-			const whiteBishop = pieceToProcess(b, whiteBishops[0], Utils.WHITE_BISHOP, white);
-			console.log(whiteBishop);
-			break;
-		
-		case Utils.BLACK_BISHOP:
-			freeSpot(b);
-			
-			const blackBishop = pieceToProcess(b, blackBishops[0], Utils.BLACK_BISHOP, black);
-			console.log(blackBishop);
-			break;
-			
-		case Utils.WHITE_QUEEN:
-			freeSpot(b);
-			
-			const wQueen = pieceToProcess(b, whiteQueen[0], Utils.WHITE_QUEEN, white);
-			console.log(wQueen);
-			break;
-			
-		case Utils.BLACK_QUEEN:
-			freeSpot(b);
-			
-			const bQueen = pieceToProcess(b, blackQueen[0], Utils.BLACK_QUEEN, black);
-			console.log(bQueen);
-			break;
-			
-		case Utils.WHITE_PAWN:
-			const down1 = [0, 1, 2, 3, 4, 5, 6, 7];
-			const whiteN = 3;
-			const processMe1 = whitePawns[whiteN];
-							
-			const whitePawn = pieceToProcess(b, processMe1, Utils.WHITE_PAWN, white);
-			console.log(whitePawn);
-			
-			for (var i = 0; i < down1.length; i++) {
-				if (whiteN === down1[i]) {
-					//~ var movePawn = movePiece(b, processMe1, whiteProcessPawn[0]);
-					// TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it					
-				} 
-			}
-			
-			break;
-		
-		case Utils.BLACK_PAWN:
-			const down = [0, 1, 2, 3, 4, 5, 6, 7];				
-			const blackN = 3;
-			const processMe2 = blackPawns[blackN];
-			
-			const blackPawn = pieceToProcess(b, processMe2, Utils.BLACK_PAWN, black);
-			console.log(blackPawn);
+		switch (selectedPiece) {
+			case Utils.WHITE_ROOK:						
+			case Utils.iCanMoveToHere:
+			case Utils.iCanCaptureYou:
+				//~ freeSpot(b);
 				
-			for (var i = 0; i < down.length; i++) {
-				if (blackN === down[i]) {
-					//~ var movePawn = movePiece(b, processMe2, blackProcessPawn[1]);
-					//~ // TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it					
-				} 
-			}
-						
-			break;
+				var whiteRook = pieceToProcess(b, whiteRooks[0], selectedPiece, Utils.WHITE_ROOK, white);
+				console.log(whiteRook);
+				//~ alert(whiteRook[4].length);
+				break;
+							
+			case Utils.BLACK_ROOK:
+				//~ freeSpot(b);
+				
+				const blackRook = pieceToProcess(b, blackRooks[0], Utils.BLACK_ROOK, black);
+				console.log(blackRook);
+				break;
 			
-		// TODO: don't move the king into check (aka, danger!)...
-		case Utils.WHITE_KING:
-			const wKing = pieceToProcess(b, whiteKing[0], Utils.WHITE_KING, white);
-			console.log(wKing);
-			break;
+			case Utils.WHITE_KNIGHT:
+				//~ freeSpot(b);
+				
+				const whiteKnight = pieceToProcess(b, whiteKnights[0], Utils.WHITE_KNIGHT, white);
+				console.log(whiteKnight);
+				break;
+
+			case Utils.BLACK_KNIGHT:
+				//~ freeSpot(b);
+				
+				const blackKnight = pieceToProcess(b, blackKnights[0], Utils.BLACK_KNIGHT, black);
+				console.log(blackKnight);
+				break;
+			
+			case Utils.WHITE_BISHOP:
+				//~ freeSpot(b);
+				
+				const whiteBishop = pieceToProcess(b, whiteBishops[0], selectedPiece, Utils.WHITE_BISHOP, white);
+				console.log(whiteBishop);
+				break;
+			
+			case Utils.BLACK_BISHOP:
+				//~ freeSpot(b);
+				
+				const blackBishop = pieceToProcess(b, blackBishops[0], Utils.BLACK_BISHOP, black);
+				console.log(blackBishop);
+				break;
+				
+			case Utils.WHITE_QUEEN:
+				//~ freeSpot(b);
+				
+				const wQueen = pieceToProcess(b, whiteQueen[0], Utils.WHITE_QUEEN, white);
+				console.log(wQueen);
+				break;
+				
+			case Utils.BLACK_QUEEN:
+				//~ freeSpot(b);
+				
+				const bQueen = pieceToProcess(b, blackQueen[0], Utils.BLACK_QUEEN, black);
+				console.log(bQueen);
+				break;
+				
+			case Utils.WHITE_PAWN:
+				const down1 = [0, 1, 2, 3, 4, 5, 6, 7];
+				const whiteN = 3;
+				const processMe1 = whitePawns[whiteN];
+								
+				const whitePawn = pieceToProcess(b, processMe1, Utils.WHITE_PAWN, white);
+				console.log(whitePawn);
+				
+				for (var i = 0; i < down1.length; i++) {
+					if (whiteN === down1[i]) {
+						//~ var movePawn = movePiece(b, processMe1, whitePawn[0]);
+						// TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it					
+					} 
+				}
+				
+				break;
+			
+			case Utils.BLACK_PAWN:
+				const down = [0, 1, 2, 3, 4, 5, 6, 7];				
+				const blackN = 3;
+				const processMe2 = blackPawns[blackN];
+				
+				const blackPawn = pieceToProcess(b, processMe2, Utils.BLACK_PAWN, black);
+				console.log(blackPawn);
+					
+				for (var i = 0; i < down.length; i++) {
+					if (blackN === down[i]) {
+						//~ var movePawn = movePiece(b, processMe2, blackPawn[1]);
+						//~ // TODO: moving your pawn to its legal move, then re-computing your legal moves (this actually works)! i just need a better way to compute it					
+					} 
+				}
+							
+				break;
+				
+			// TODO: don't move the king into check (aka, danger!)...
+			case Utils.WHITE_KING:
+				const wKing = pieceToProcess(b, whiteKing[0], Utils.WHITE_KING, white);
+				console.log(wKing);
+				break;
+			
+			case Utils.BLACK_KING:
+				const bKing = pieceToProcess(b, blackKing[0], Utils.BLACK_KING, black);
+				console.log(bKing);
+				break;
+		}
 		
-		case Utils.BLACK_KING:
-			const bKing = pieceToProcess(b, blackKing[0], Utils.BLACK_KING, black);
-			console.log(bKing);
-			break;
-	}
+		//~ i++;
+		
+		//~ if (i === 10) {
+			//~ break;
+		//~ }
+	//~ }
 	
 	return (  
 		<div>	

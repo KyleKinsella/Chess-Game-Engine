@@ -34,7 +34,7 @@ class knight extends ChessPiece {
 					board[newX][newY] = Utils.iCanMoveToHere;
 					legalMoves.push([newX, newY]);
 				} else {
-					switch(color) {
+					switch (color) {
 						case Utils.WHITE:
 							// don't capture your own pieces!
 							if (board[newX][newY] === Utils.WHITE_PAWN || board[newX][newY] === Utils.WHITE_KNIGHT || board[newX][newY] === Utils.WHITE_ROOK || board[newX][newY] === Utils.WHITE_BISHOP || board[newX][newY] === Utils.WHITE_QUEEN || board[newX][newY] === Utils.WHITE_KING || board[newX][newY] === Utils.WHITE_KNIGHT2 || board[newX][newY] === Utils.WHITE_BISHOP2 || board[newX][newY] === Utils.WHITE_ROOK2) {

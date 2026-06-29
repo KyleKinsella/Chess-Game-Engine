@@ -13,6 +13,7 @@ export function initGameBoard(board, rows, cols) {
 			         
 			if (i === 0) {
 				board[j][i] = Utils.white_pieces[j];
+				//~ board[i][j] = Utils.white_pieces[j];
 			}
 
 			//
@@ -21,20 +22,24 @@ export function initGameBoard(board, rows, cols) {
 			//
 			if (i === 1) {
 				board[j][i] = Utils.NULL;
+				//~ board[i][j] = Utils.NULL;
 				//~ board[j][i] = Utils.WHITE_PAWN;
 			}
 			
 			if (i === 2 || i === 3 || i === 4 || i === 5) {
 				board[j][i] = Utils.NULL;
+				//~ board[i][j] = Utils.NULL;
             }
                 
 			if (i === 6) {
 				board[j][i] = Utils.NULL;
+				//~ board[i][j] = Utils.NULL;
 				//~ board[j][i] = Utils.BLACK_PAWN;
 			}
 			
 			if (i === 7) {
 				board[j][i] = Utils.black_pieces[j];
+				//~ board[i][j] = Utils.black_pieces[j];
 			}
         }
     }   
@@ -75,7 +80,30 @@ export function movePiece(board, oldLoc, newLoc) {
 	return board;
 }
 
-export function pieceToProcess(board, oldPieceLocation, pieceType, pieceColor) {
+function recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, r, legalRookMoves) {
+	const rand = legalRookMoves[Math.floor(Math.random() * legalRookMoves.length)];
+	//~ const moveRook = movePiece(board, oldPieceLocation, legalRookMoves[6]);
+	const moveRook = movePiece(board, oldPieceLocation, legalRookMoves[6]);
+
+	//~ console.table(moveRook);
+
+	const newRookLocations = findPieceInBoard(moveRook, pieceType);
+	const computeRook = newRookLocations[1];
+
+	var legalRookMoves = r.getLegalMoves(moveRook, computeRook, pieceColor, pieceType);
+	//~ alert("re-computed the following moves:" + legalRookMoves);
+	
+	//~ if (board[0][7] === Utils.WHITE_ROOK && board[2][7] === Utils.BLACK_BISHOP) {
+		//~ return;
+		
+		//~ return legalRookMoves;
+	//~ }
+	
+	//~ return legalRookMoves;	
+	//~ return [rand, moveRook, newRookLocations, computeRook, legalRookMoves];
+}
+
+export function pieceToProcess(board, oldPieceLocation, selectedPiece, pieceType, pieceColor) {
 	switch (pieceType) {
 		case Utils.WHITE_KNIGHT:
 		case Utils.BLACK_KNIGHT:
@@ -89,7 +117,12 @@ export function pieceToProcess(board, oldPieceLocation, pieceType, pieceColor) {
 		case Utils.WHITE_ROOK:
 		case Utils.BLACK_ROOK:
 			const r = new rook(0, 0, pieceColor, pieceType, false);
-			const legalRookMoves = r.getLegalMoves(board, oldPieceLocation, pieceColor, pieceType);
+			var legalRookMoves = r.getLegalMoves(board, oldPieceLocation, pieceColor, pieceType);
+			
+			if (selectedPiece === Utils.iCanMoveToHere || selectedPiece === Utils.iCanCaptureYou) {	
+				legalRookMoves = recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, r, legalRookMoves);
+				console.log("legalRookMoves are:", legalRookMoves);
+			}
 			
 			// TODO: is a move legal or not !?
 			
@@ -149,9 +182,9 @@ export function detectCapture(piece) {
 	return capture;
 }
 
-export function notify(piece) {
+export function notify(piece, pieceCaptured) {
 	if (detectCapture(piece)) {
-		alert("you have been captured...");
+		alert("A '" + pieceCaptured + "' has been captured.");
 	}
 }
 
@@ -165,39 +198,50 @@ export function legalMoves(board, newX, newY, move1, move2, color, piece) {
 				board[newX][newY] = Utils.iCanMoveToHere;
 				legalMoves.push([newX, newY]);					
 			} else {
-				switch(color) {
+				switch (color) {
 					case Utils.WHITE:
 						// don't capture your own pieces!
 						if (board[newX][newY] === Utils.WHITE_PAWN || board[newX][newY] === Utils.WHITE_KNIGHT || board[newX][newY] === Utils.WHITE_ROOK || board[newX][newY] === Utils.WHITE_BISHOP || board[newX][newY] === Utils.WHITE_QUEEN || board[newX][newY] === Utils.WHITE_KING || board[newX][newY] === Utils.WHITE_KNIGHT2 || board[newX][newY] === Utils.WHITE_BISHOP2 || board[newX][newY] === Utils.WHITE_ROOK2) {
-							continue;
+							continue;		
 						} else {	
 							board[newX][newY] = Utils.iCanCaptureYou;
-							//~ notify(piece);
+							
+							// A piece has been captured
+							//~ notify(piece, board[newX][newY]);
+							
 							legalMoves.push([newX, newY]);
 						}
 						
 					break;
-						
+					
 					case Utils.BLACK:
 						// don't capture your own pieces!
 						if (board[newX][newY] === Utils.BLACK_PAWN || board[newX][newY] === Utils.BLACK_KNIGHT || board[newX][newY] === Utils.BLACK_ROOK || board[newX][newY] === Utils.BLACK_BISHOP || board[newX][newY] === Utils.BLACK_QUEEN || board[newX][newY] === Utils.BLACK_KING || board[newX][newY] === Utils.BLACK_KNIGHT2 || board[newX][newY] === Utils.BLACK_BISHOP2 || board[newX][newY] === Utils.BLACK_ROOK2) {
 							continue;
 						} else {
 							board[newX][newY] = Utils.iCanCaptureYou;
-							//~ notify(piece);
+							
+							// A piece has been captured
+							//~ notify(piece, board[newX][newY]);
+							
 							legalMoves.push([newX, newY]);
 						}
-						
+					
 					break;
 				}
-				
+					
+				//
+				// If you don't break and the rook lands at postion [0,7] (col, row), the code breaks!
+				// If you break the rook will not re-compute the index [0,0] (col, row), no matter WHAT!
+				//
 				// This poses a lot of problems, when it comes to moving a piece and then re-computing that pieces legal moves!
 				break;
 			}
-													
+								
 			newX += move1;
 			newY += move2;
 		} 
-	}
+	}		
+	
 	return legalMoves;
 }
