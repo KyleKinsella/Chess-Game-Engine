@@ -7,7 +7,6 @@ class rook extends ChessPiece {
 		super();
 	}
 	
-	//~ moved
 	getLegalMoves(board, oldRookLocation, color, pieceType) {
 		const row = oldRookLocation[0];
 		const col = oldRookLocation[1];
@@ -22,30 +21,11 @@ class rook extends ChessPiece {
 		const legal_Moves = [];
 				
 		for (const move of rookMoves) {
+			const newX = row + move[0];
+			const newY = col + move[1];
 			
-			 //~ const moves = legalMoves(
-				//~ board,
-				//~ row + move[0],
-				//~ col + move[1],
-				//~ move[0],
-				//~ move[1],
-				//~ color,
-				//~ pieceType
-			//~ );
-
-			//~ console.log("direction", move, "moves:", moves, "\n\n");
-
-			//~ legal_Moves.push(...moves);
-			
-			var newX = row + move[0];
-			var newY = col + move[1];
-		
-			//~ moved
 			const moves = legalMoves(board, newX, newY, move[0], move[1], color, pieceType);
 			for (var i = 0; i < moves.length; i++) {
-			
-				//~ console.log(moves[i]);
-			
 				legal_Moves.push(moves[i]);
 			}
 		}
