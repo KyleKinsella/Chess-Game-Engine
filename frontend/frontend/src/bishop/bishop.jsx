@@ -21,8 +21,8 @@ class bishop extends ChessPiece {
 		const legal_Moves = [];
 			
 		for (const move of bishopMoves) {
-			var newX = row + move[0];
-			var newY = col + move[1];
+			const newX = row + move[0];
+			const newY = col + move[1];
 			
 			const moves = legalMoves(board, newX, newY, move[0], move[1], color, pieceType);
 			for (var i = 0; i < moves.length; i++) {
