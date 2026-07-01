@@ -47,8 +47,7 @@ function App() {
 	const [selectedPiece, setSelectedPiece] = useState("");
 	
 	useEffect(() => {
-		const clickDiv = (text) => {			
-			//~ console.log("text", text);
+		const clickDiv = (text) => {		
 			setSelectedPiece(text.srcElement.innerText);
 		};
 		
@@ -64,27 +63,23 @@ function App() {
 	const black = Utils.BLACK;
 	
 	switch (selectedPiece) {
-		case Utils.WHITE_ROOK:						
+		case Utils.WHITE_ROOK:		
 		case Utils.iCanMoveToHere:
-		case Utils.iCanCaptureYou:
+		case Utils.iCanCaptureYou:			
 			//~ freeSpot(b);
 			
-			var whiteRook = pieceToProcess(b, whiteRooks[0], selectedPiece, Utils.WHITE_ROOK, white);
+			const whiteRook = pieceToProcess(b, whiteRooks[0], selectedPiece, Utils.WHITE_ROOK, white);
 			console.log(whiteRook);
 			break;
 						
 		case Utils.BLACK_ROOK:
-		//~ case Utils.iCanMoveToHere:
-		//~ case Utils.iCanCaptureYou:
 			//~ freeSpot(b);
 			
 			const blackRook = pieceToProcess(b, blackRooks[0], selectedPiece, Utils.BLACK_ROOK, black);
 			console.log(blackRook);
 			break;
 		
-		case Utils.WHITE_KNIGHT:
-		//~ case Utils.iCanMoveToHere:
-		//~ case Utils.iCanCaptureYou:
+		case Utils.WHITE_KNIGHT:	
 			//~ freeSpot(b);
 			
 			const whiteKnight = pieceToProcess(b, whiteKnights[0], selectedPiece, Utils.WHITE_KNIGHT, white);
@@ -92,17 +87,13 @@ function App() {
 			break;
 
 		case Utils.BLACK_KNIGHT:
-		//~ case Utils.iCanMoveToHere:
-		//~ case Utils.iCanCaptureYou:
 			//~ freeSpot(b);
 			
 			const blackKnight = pieceToProcess(b, blackKnights[0], selectedPiece, Utils.BLACK_KNIGHT, black);
 			console.log(blackKnight);
 			break;
 		
-		case Utils.WHITE_BISHOP:
-		//~ case Utils.iCanMoveToHere:
-		//~ case Utils.iCanCaptureYou:
+		case Utils.WHITE_BISHOP:	
 			//~ freeSpot(b);
 			
 			const whiteBishop = pieceToProcess(b, whiteBishops[0], selectedPiece, Utils.WHITE_BISHOP, white);
@@ -110,8 +101,6 @@ function App() {
 			break;
 		
 		case Utils.BLACK_BISHOP:
-		//~ case Utils.iCanMoveToHere:
-		//~ case Utils.iCanCaptureYou:
 			//~ freeSpot(b);
 			
 			const blackBishop = pieceToProcess(b, blackBishops[0], selectedPiece, Utils.BLACK_BISHOP, black);
@@ -119,8 +108,6 @@ function App() {
 			break;
 			
 		case Utils.WHITE_QUEEN:
-		//~ case Utils.iCanMoveToHere:
-		//~ case Utils.iCanCaptureYou:
 			//~ freeSpot(b);
 			
 			const wQueen = pieceToProcess(b, whiteQueen[0], selectedPiece, Utils.WHITE_QUEEN, white);
@@ -128,10 +115,8 @@ function App() {
 			break;
 			
 		case Utils.BLACK_QUEEN:
-		//~ case Utils.iCanMoveToHere:
-		//~ case Utils.iCanCaptureYou:
 			//~ freeSpot(b);
-			
+				
 			const bQueen = pieceToProcess(b, blackQueen[0], selectedPiece, Utils.BLACK_QUEEN, black);
 			console.log(bQueen);
 			break;
@@ -181,11 +166,10 @@ function App() {
 			console.log(bKing);
 			break;
 	}
-			
+		
 	return (  
 		<div>	
 			<h3 className="rand">We are processing a {selectedPiece}</h3> 
-			
 			<br/>
 						
 			<div className="board" id="myDiv">
