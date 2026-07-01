@@ -69,20 +69,31 @@ export function movePiece(board, oldLoc, newLoc) {
 	return board;
 }
 
+// 
+// This function is not very optimal... (this is not good, for speed reasons...), it works perfectly for now, but this will be changed later on!
+//
 function cleanBoard(board) {
     for (var i = 0; i < board.length; i++) {
         for (var j = 0; j < board[i].length; j++) {
-            if (board[i][j] === Utils.iCanMoveToHere || board[i][j] === Utils.iCanCaptureYou) {
-                board[i][j] = Utils.NULL;
+            if (board[j][i] === Utils.iCanMoveToHere || board[j][i] === Utils.iCanCaptureYou) {
+                board[j][i] = Utils.NULL;
             }
         }
     }
     return board;
 }
 
-function recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, obj, legalPieceMoves) {
-	const rand = legalPieceMoves[Math.floor(Math.random() * legalPieceMoves.length)];
-	const movePc = movePiece(board, oldPieceLocation, rand);
+function dontMoveToRandomSpotAnymore(legalPieceMoves) {
+	const moves = [];
+	for (var i = 0; i < legalPieceMoves.length; i++) {
+		moves.push("\n" + legalPieceMoves[i]);
+	}
+	return moves;
+}
+
+function recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, obj, whereDoYouWishToMoveTo) {
+	const strToArray = JSON.parse("[" + whereDoYouWishToMoveTo + "]");
+	const movePc = movePiece(board, oldPieceLocation, strToArray);
 	
 	const newPieceLocations = findPieceInBoard(movePc, pieceType);
 	var computePiece = newPieceLocations[1];
@@ -95,6 +106,11 @@ function recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, piec
 	return obj.getLegalMoves(cleanUp, computePiece, pieceColor, pieceType);
 }
 
+function userMovesPiece(legalPieceMoves) {
+	// not a great idea, but it works for now, Lol !
+	return prompt("What index would you like to move to?\n\nPick one of the following indexes:\n" + dontMoveToRandomSpotAnymore(legalPieceMoves));
+}
+
 export function pieceToProcess(board, oldPieceLocation, selectedPiece, pieceType, pieceColor) {
 	switch (pieceType) {
 		case Utils.WHITE_KNIGHT:
@@ -103,7 +119,8 @@ export function pieceToProcess(board, oldPieceLocation, selectedPiece, pieceType
 			var legalKnightMoves = k.getLegalMoves(board, oldPieceLocation, pieceColor, pieceType);
 			
 			if (selectedPiece === Utils.iCanMoveToHere || selectedPiece === Utils.iCanCaptureYou) {	
-				legalKnightMoves = recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, k, legalKnightMoves);
+				const whereDoYouWishToMoveTo = userMovesPiece(legalKnightMoves);
+				legalKnightMoves = recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, k, whereDoYouWishToMoveTo);
 			}
 			
 			const isValid = k.makeMove(legalKnightMoves[1], legalKnightMoves, board);
@@ -115,8 +132,10 @@ export function pieceToProcess(board, oldPieceLocation, selectedPiece, pieceType
 			const r = new rook(0, 0, pieceColor, pieceType, false);
 			var legalRookMoves = r.getLegalMoves(board, oldPieceLocation, pieceColor, pieceType);
 			
+			// TODO: Game-Loop, for doing this each time we want to process/move a rook piece and for any other piece!
 			if (selectedPiece === Utils.iCanMoveToHere || selectedPiece === Utils.iCanCaptureYou) {	
-				legalRookMoves = recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, r, legalRookMoves);
+				const whereDoYouWishToMoveTo = userMovesPiece(legalRookMoves);
+				legalRookMoves = recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, r, whereDoYouWishToMoveTo);	
 			}
 			
 			// TODO: is a move legal or not !?
@@ -129,7 +148,8 @@ export function pieceToProcess(board, oldPieceLocation, selectedPiece, pieceType
 			var legalBishopMoves = b.getLegalMoves(board, oldPieceLocation, pieceColor, pieceType);
 			
 			if (selectedPiece === Utils.iCanMoveToHere || selectedPiece === Utils.iCanCaptureYou) {	
-				legalBishopMoves = recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, b, legalBishopMoves);
+				const whereDoYouWishToMoveTo = userMovesPiece(legalBishopMoves);
+				legalBishopMoves = recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, b, whereDoYouWishToMoveTo);
 			}
 			
 			// TODO: is a move legal or not !?
@@ -142,7 +162,8 @@ export function pieceToProcess(board, oldPieceLocation, selectedPiece, pieceType
 			var legalQueenMoves = q.getLegalMoves(board, oldPieceLocation, pieceColor, pieceType);
 			
 			if (selectedPiece === Utils.iCanMoveToHere || selectedPiece === Utils.iCanCaptureYou) {	
-				legalQueenMoves = recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, q, legalQueenMoves);
+				const whereDoYouWishToMoveTo = userMovesPiece(legalQueenMoves);
+				legalQueenMoves = recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, q, whereDoYouWishToMoveTo);
 			}
 			
 			// TODO: is a move legal or not !?
@@ -232,7 +253,7 @@ export function legalMoves(board, newX, newY, move1, move2, color, piece) {
 					
 					break;
 				}
-				
+								
 				break;
 			}
 								
