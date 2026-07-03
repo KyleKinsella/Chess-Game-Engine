@@ -33,22 +33,22 @@ function captureBlackPiece(board, col, row) {
 	return moves;
 }
 
-function goDown(board, col, row) {
+function goDown(board, col, row, moved) {
 	const legalMoves = [];
 	const goDown = [0, -1];
-	const goDownTwice = 2;
 	
-	const newRow = col + goDown[0]+goDownTwice; // this brings me down!
+	const newRow = col + goDown[0]+2; // this brings me down!
 	const newCol = row + goDown[1]+1; // this brings me to the other column! (this will be incredibly useful for when we get to capturing pieces)
-			
-	if (goDownTwice === 2) {
+		
+	if (!moved) {
 		board[newCol][newRow-1] = Utils.iCanMoveToHere;
 		legalMoves.push([newCol, newRow-1]);
-	}
-	
-	if (board[newCol][newRow] === Utils.NULL) {
+			
 		board[newCol][newRow] = Utils.iCanMoveToHere;
-		legalMoves.push([newCol, newRow]);	
+		legalMoves.push([newCol, newRow]);
+	} else {
+		board[newCol][newRow-1] = Utils.iCanMoveToHere;
+		legalMoves.push([newCol, newRow-1]);
 	}
 	
 	//~ const moves = captureBlackPiece(board, col, row);
@@ -76,23 +76,23 @@ function captureWhitePiece(board, col, row) {
 	return moves;
 }
 
-function goUp(board, col, row) {
+function goUp(board, col, row, moved) {
 	const legalMoves = [];
 	const goUp = [0, 1];
-	const goUpTwice = 2;
 	
-	const newRow = col + goUp[0]+goUpTwice-3; // this brings me up!
+	const newRow = col + goUp[0]+2-3; // this brings me up!
 	const newCol = row + goUp[0]; // this brings me to the other column! (this will be incredibly useful for when we get to capturing pieces)
 	
-	if (goUpTwice === 2) {
+	if (!moved) {
 		board[newCol][newRow-1] = Utils.iCanMoveToHere;
 		legalMoves.push([newCol, newRow-1]);
-	} 
-	
-	if (board[newCol][newRow] === Utils.NULL) {
+				
 		board[newCol][newRow] = Utils.iCanMoveToHere;
 		legalMoves.push([newCol, newRow]);	
-	} 
+	} else {
+		board[newCol][newRow] = Utils.iCanMoveToHere;
+		legalMoves.push([newCol, newRow]);
+	}
 	
 	//~ const moves = captureWhitePiece(board, col, row);
 	//~ for (var i = 0; i < moves.length; i++) {
@@ -115,7 +115,7 @@ class pawn extends ChessPiece {
 	// 3. if i have not moved my pawn at all, but the other team has moved into one of my spots (one of my legal moves), i cant move forward, 2 spots, i can only go forward 1 spot.
 	//	  BUT, if the other teams piece moves directly in front of my pawn, i cant go anywhere because im blocked...
 	//
-	getLegalMoves(board, oldPawnLocation, pawnColor) {
+	getLegalMoves(board, oldPawnLocation, pawnColor, moved) {
 		const row = oldPawnLocation[0];
 		const col = oldPawnLocation[1];
 		
@@ -130,7 +130,7 @@ class pawn extends ChessPiece {
 			//~ return goUp(board, col, row);
 		//~ }
 		
-		return (pawnColor === Utils.WHITE) ? goDown(board, col, row) : goUp(board, col, row);
+		return (pawnColor === Utils.WHITE) ? goDown(board, col, row, moved) : goUp(board, col, row, moved);
 	}
 	
 	makeMove(move, legalMoves, board) {
