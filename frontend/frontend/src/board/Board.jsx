@@ -16,8 +16,8 @@ export function initGameBoard(board, rows, cols) {
 			}
 			
 			if (i === 1) {
-				//~ board[j][i] = Utils.NULL;
-				board[j][i] = Utils.WHITE_PAWN;
+				board[j][i] = Utils.NULL;
+				//~ board[j][i] = Utils.WHITE_PAWN;
 			}
 			
 			if (i === 2 || i === 3 || i === 4 || i === 5) {
@@ -25,8 +25,8 @@ export function initGameBoard(board, rows, cols) {
             }
                 
 			if (i === 6) {
-				//~ board[j][i] = Utils.NULL;
-				board[j][i] = Utils.BLACK_PAWN;
+				board[j][i] = Utils.NULL;
+				//~ board[j][i] = Utils.BLACK_PAWN;
 			}
 			
 			if (i === 7) {
@@ -96,6 +96,7 @@ function dontMoveToRandomSpotAnymore(legalPieceMoves) {
 function recomputeLegalMovesAfterMoving(board, oldPieceLocation, pieceType, pieceColor, obj, whereDoYouWishToMoveTo, moved) {
 	const strToArray = JSON.parse("[" + whereDoYouWishToMoveTo + "]");
 	const movePc = movePiece(board, oldPieceLocation, strToArray);
+	console.log(movePc);
 	
 	const newPieceLocations = findPieceInBoard(movePc, pieceType);
 	var computePiece = newPieceLocations[1];
